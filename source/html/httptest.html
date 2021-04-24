@@ -1,0 +1,336 @@
+<html>
+<head>
+<title>HTTP POST/GET接口调试工具</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link href="./css/bootstrap3.5min.css" rel="stylesheet" type="text/css" />
+<link href="./css/mainmin.css" rel="stylesheet" type="text/css" />
+<style>
+#form1help input{ width:95%;}
+#form1help select{ width:95%;}
+#form1help textarea{ width:95%;}
+</style>
+</head>
+<body>
+<div id="collapseOne" class="in collapse bs-docs-example">
+    <div class="panel">
+        <form id="form1help" class="form-horizontal" action="/" method="post">
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                URL地址
+	            </label>
+	            <div class="col-sm-10">
+	                <input class="form-control" id="txt_url" name="txt_url" type="text" value=""
+	                    placeholder="请求URL地址，例如：http://java.interface" />
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                请求方式
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_httptype" name="txt_httptype">
+	                    <option value="GET" >GET方式</option>
+	                    <option value="POST" >POST方式</option>
+	                </select>
+	            </div>
+	            <label class="col-sm-2 control-label">
+	                ContentType
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_contype" name="txt_contype">
+	                    <option value="text/html" >text/html</option>
+	                    <option value="application/x-www-form-urlencoded" >
+	                        application/x-www-form-urlencoded</option>
+	                    <option value="application/json" >
+	                        application/json</option>
+	                    <option value="text/json" >text/json</option>
+	                </select>
+	            </div>
+	        </div>
+	        <!--
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                设定Header
+	            </label>
+	            <div class="col-sm-10">
+	                <textarea class="form-control" id="txt_header" name="txt_header" rows="5" style="max-height: 150px;"
+	                    placeholder="Key:Value格式，每行一个，多个请换行"></textarea>
+	            </div>
+	        </div>
+	        -->
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                请求参数
+	            </label>
+	            <div class="col-sm-10">
+	                <textarea class="form-control" id="txt_reqdata" name="txt_reqdata" rows="5" style="max-height: 150px;"
+	                    placeholder="请填写数据，例如： k1:v1 
+	                   k2:v2"></textarea>
+	            </div>
+	        </div>
+	        <!--
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                HTTP版本
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_httpver" name="txt_httpver">
+	                    <option value="0" selected>不设置</option>
+	                    <option value="2" >HTTP/1.1</option>
+	                    <option value="1" >HTTP/1.0</option>
+	                </select>
+	            </div>
+	            <label class="col-sm-2 control-label">
+	                超时时间
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_outtime" name="txt_outtime">
+	                    <option value="15" selected>15秒</option>
+	                    <option value="30" >30秒</option>
+	                    <option value="45" >45秒</option>
+	                    <option value="60" >60秒</option>
+	                    <option value="100" >100秒</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                ContentType
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_contype" name="txt_contype">
+	                    <option value="text/html" >text/html</option>
+	                    <option value="application/x-www-form-urlencoded" >
+	                        application/x-www-form-urlencoded</option>
+	                    <option value="application/json" >
+	                        application/json</option>
+	                    <option value="text/json" >text/json</option>
+	                </select>
+	            </div>
+	            
+	            <label class="col-sm-2 control-label">
+	                编码方式
+	            </label>
+	            <div class="col-sm-3">
+	                <select class="form-control" id="txt_code" name="txt_code">
+	                    <option value="">自动识别</option>
+	                    <option value="Default" >Default</option>
+	                    <option value="UTF-8" >UTF-8</option>
+	                    <option value="GBK" >GBK</option>
+	                    <option value="GB2312" >GB2312</option>
+	                    <option value="ASCII" >ASCII</option>
+	                    <option value="Unicode" >Unicode</option>
+	                </select>
+	            </div>
+	            
+	            <label class="col-sm-2 control-label">
+	                Host
+	            </label>
+	            <div class="col-sm-3">
+	                <input class="form-control" id="txt_host" name="txt_host" value=""
+	                    type="text" placeholder="请输入Host标头，例如：www.jsons.cn" autocomplete="off"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                UserAgent
+	            </label>
+	            <div class="col-sm-10">
+	                <select class="form-control" id="txt_useragent" name="txt_useragent">
+	                    <option value="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)" >
+	                        Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)</option>
+	                    <option value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/60.0.3112.90 Safari/537.36"
+	                        >
+	                        Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90
+	                        Safari/537.36</option>
+	                    <option value="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0"
+	                        >
+	                        Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0</option>
+	                    <option value="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)" >
+	                        Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.0)</option>
+	                    <option value="Opera/9.27 (Windows NT 5.2; U; zh-cn)" >
+	                        Opera/9.27 (Windows NT 5.2; U; zh-cn)</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                自定义UserAgent
+	            </label>
+	            <div class="col-sm-10">
+	                <input class="form-control" id="txt_setuseragent" name="txt_setuseragent" value=""
+	                    type="text" placeholder="请输入自定义UserAgent，当填写时优先使用自定义UserAgent" autocomplete="off"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                Referer
+	            </label>
+	            <div class="col-sm-10">
+	                <input class="form-control" id="txt_referer" name="txt_referer" value=""
+	                    type="text" placeholder="自定义来源网站，例如：http://www.jsons.cn" autocomplete="off"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                代理IP
+	            </label>
+	            <div class="col-sm-10">
+	                <input class="form-control" id="txt_dlip" name="txt_dlip" value=""
+	                    type="text" placeholder="代理IP，例如：8.8.8.8:8080，请确保使用的代理可用，不使用时为空即可" autocomplete="off"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                设定Header
+	            </label>
+	            <div class="col-sm-10">
+	                <textarea class="form-control" id="txt_header" name="txt_header" rows="5" style="max-height: 150px;"
+	                    placeholder="Key:Value格式，每行一个，多个请换行"></textarea>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                Post数据
+	            </label>
+	            <div class="col-sm-10">
+	                <textarea class="form-control" id="txt_postdata" name="txt_postdata" rows="5" style="max-height: 150px;"
+	                    placeholder="请填写POST数据，例如：k1=v1&k2=v2"></textarea>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	                Cookie
+	            </label>
+	            <div class="col-sm-10">
+	                <textarea class="form-control" id="txt_cookie" name="txt_cookie" rows="5" style="max-height: 150px;"
+	                    placeholder="请填写请求时要发送的Cookie，例如：k1=v1;k2=v2"></textarea>
+	            </div>
+	        </div>
+	        -->
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	            </label>
+	            <div class="col-sm-10">
+	                <a class="btn btn-success" onclick="gethttpstr()">Http模拟请求</a>
+	                <a href="" class="btn btn-danger">重置</a>
+	            </div>
+	        </div>
+	        <div class="form-group" >
+	            <label class="col-sm-2 control-label">
+	            </label>
+	            <div id="res_httpcode">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">
+	            </label>
+	            <div id="GetURL">
+	            </div>
+	        </div>
+        </form>
+    </div>
+</div>
+
+<iframe id="responseDiv" style="width:100%;height:50%"></iframe>
+
+<script src="./js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="./js/bootstrap3.5min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	 
+   function gethttpstr() {
+      var txt_url = $("#txt_url").val();
+      var txt_reqdata = $("#txt_reqdata").val();
+      var txt_httptype = $("#txt_httptype").val();
+      
+      var getParam = "";
+      
+      var formData = new FormData();
+			//这里将每一行继续按逗号、制表符拆分：split(/[符号1、符号2]/)
+			var pairs = txt_reqdata.split(/[\n]/);
+			for (var j = 0; j< pairs.length; j++) {
+				console.info(pairs[j]);
+				//每个键值
+				var param = pairs[j].split(":");
+				formData.append(param[0], param[1]);
+				getParam+=param[0]+"=";
+				getParam+=param[1]+"&";
+			}
+			
+   		if (txt_httptype == 'GET') {
+	      $.ajax({
+	          url: txt_url+'?'+getParam,
+	          data: {},
+	          type: txt_httptype,
+	          contentType: 'multipart/form-data',//这里
+	          processData: false,//这两个一定设置为false
+	          success: function (r) {
+	              console.info(r);
+	          },error: function(xhr, exception){
+		            /*if( xhr.status === 0)
+		                console.info('Error : ' + xhr.status + 'You are not connected.');
+		            else if( xhr.status == "201")
+		                console.info('Error : ' + xhr.status + '\nServer error.');
+		            else if( xhr.status == "404")
+		                console.info('Error : ' + xhr.status + '\nPage note found');
+		            else if( xhr.status == "500")
+		                 console.info('Internal Server Error [500].');
+		            else if (exception === 'parsererror') 
+		                console.info('Error : ' + xhr.status + '\nImpossible to parse result.');
+		            else if (exception === 'timeout')
+		                console.info('Error : ' + xhr.status + '\nRequest timeout.');
+		            else
+		                console.info('Error .\n' + xhr.responseText);*/
+		            $('#res_httpcode').html('响应状态：'+xhr.status);
+		        }
+	      });
+   			$('#GetURL').html('请求URL: ' + txt_url+'?'+getParam);
+	      window.frames['responseDiv'].src = txt_url+'?'+getParam;   
+	      /*window.open(txt_url+'?'+getParam);*/
+	      
+   		}else if(txt_httptype == 'POST'){
+   			
+	      $.ajax({
+	          url: txt_url,
+	          data: formData,
+	          type: txt_httptype,
+	          contentType: false,//这里
+	          processData: false,//这两个一定设置为false
+	          success: function (r) {
+	              console.info(r);
+	          },error: function(xhr, exception){
+		            /*if( xhr.status === 0)
+		                console.info('Error : ' + xhr.status + 'You are not connected.');
+		            else if( xhr.status == "201")
+		                console.info('Error : ' + xhr.status + '\nServer error.');
+		            else if( xhr.status == "404")
+		                console.info('Error : ' + xhr.status + '\nPage note found');
+		            else if( xhr.status == "500")
+		                 console.info('Internal Server Error [500].');
+		            else if (exception === 'parsererror') 
+		                console.info('Error : ' + xhr.status + '\nImpossible to parse result.');
+		            else if (exception === 'timeout')
+		                console.info('Error : ' + xhr.status + '\nRequest timeout.');
+		            else
+		                console.info('Error .\n' + xhr.responseText);*/
+		            $('#res_httpcode').html('响应状态：'+xhr.status);
+		        }
+	      });
+	      
+	      /*在iframe中提交post请求*/
+	      $('iframe').contents()[0].write("<form action='"+txt_url+"' method=post name=formPost style='display:none'>");
+				for (var j = 0; j< pairs.length; j++) {
+						//每个键值
+						var param = pairs[j].split(":");
+						$('iframe').contents()[0].write("<input type=hidden name='"+param[0]+"' value='"+param[1]+"'/>");
+				}
+				$('iframe').contents()[0].write("</form>");
+				$('iframe').contents()[0].formPost.submit();
+   		}
+   }
+</script>
+
+</body>
+</html>
