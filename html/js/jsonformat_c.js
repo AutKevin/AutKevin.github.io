@@ -1,4 +1,4 @@
-﻿window.SINGLE_TAB = "  ";
+window.SINGLE_TAB = "  ";
 window.ImgCollapsed = "./img/Collapsed.gif";
 window.ImgExpanded = "./img/Expanded.gif";
 window.QuoteKeys = true;
