@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>CE查找基址</title>
+    <link href="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/"/>
+    <url>/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/</url>
+    
+    <content type="html"><![CDATA[<h2 id="CE"><a href="#CE" class="headerlink" title="CE"></a>CE</h2><h3 id="官网下载"><a href="#官网下载" class="headerlink" title="官网下载"></a>官网下载</h3><p><a href="https://www.cheatengine.org/downloads.php">https://www.cheatengine.org/downloads.php</a></p><h3 id="查找精确值"><a href="#查找精确值" class="headerlink" title="查找精确值"></a>查找精确值</h3><p>先根据阳光值去First Scan，然后消耗游戏阳光值Next Scan，最后筛选出阳光值地址。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-15-22.png" alt="Snipaste_2021-03-22_01-15-22"></p><h3 id="查找偏移量"><a href="#查找偏移量" class="headerlink" title="查找偏移量"></a>查找偏移量</h3><h4 id="查找偏移量和上一个地址"><a href="#查找偏移量和上一个地址" class="headerlink" title="查找偏移量和上一个地址"></a>查找偏移量和上一个地址</h4><p>点击Find out what accesses this address，找出什么访问了这个地址。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-18-02.png" alt="Snipaste_2021-03-22_01-15-22"></p><p>随便点击一个汇编指令，点击More information显示可能的地址为27CBAC88，记录偏移量0x5578。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-25-48.png" alt="Snipaste_2021-03-22_01-15-22"></p><h4 id="检索地址"><a href="#检索地址" class="headerlink" title="检索地址"></a>检索地址</h4><p>把上一个地址复制出来27CBAC88，然后去检索，双击添加前十个后F5查看。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-33-08.png" alt="Snipaste_2021-03-22_01-15-22"></p><h4 id="查找正确的地址"><a href="#查找正确的地址" class="headerlink" title="查找正确的地址"></a>查找正确的地址</h4><p>找到<strong>大量mov和cmp</strong>命令的，并且<strong>偏移量全部统一</strong>的。复制地址02A0B288，记录偏移量0x868。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-41-47.png" alt="Snipaste_2021-03-22_01-15-22"></p><h3 id="查到基址"><a href="#查到基址" class="headerlink" title="查到基址"></a>查到基址</h3><p>持续查找地址，记录偏移量知道发现绿色地址，检索02A0B288地址时发现出现<strong>绿色的地址</strong>（即为基址），全部双击加入后F5查看，发现偏移量和地址为同一个值，所以这个007794F8即为基址。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_01-50-43.png" alt="Snipaste_2021-03-22_01-15-22"></p><h4 id="Notepad记录全部偏移量"><a href="#Notepad记录全部偏移量" class="headerlink" title="Notepad记录全部偏移量"></a>Notepad记录全部偏移量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">  地址      偏移量<br>27CBAC88    5578<br>02A0B288    0868<br>007794F8  <span class="hljs-comment">#最后一个为基址</span><br></code></pre></td></tr></table></figure><h4 id="检验是基址偏移"><a href="#检验是基址偏移" class="headerlink" title="检验是基址偏移"></a>检验是基址偏移</h4><p>点击Add Address Manually -&gt; 勾选Pointer -&gt; Add Offset添加偏移，然后从下往上输入（记录也是，从最后记录的开始输）。然后更改这个值，发现更改后游戏数值即可变化。</p><p><img src="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/Snipaste_2021-03-22_02-00-02.png" alt="Snipaste_2021-03-22_01-15-22"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CE</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>HTML工具</title>
+    <link href="/2021/04/24/HTML%E5%B7%A5%E5%85%B7/"/>
+    <url>/2021/04/24/HTML%E5%B7%A5%E5%85%B7/</url>
+    
+    <content type="html"><![CDATA[<ul><li><p><a href="https://autkevin.github.io/html/JsonExportExcel.html">JsonExportExcel</a></p></li><li><p><a href="https://autkevin.github.io/html/JsonFormat.html">JsonFormat</a></p></li><li><p><a href="https://autkevin.github.io/html/comparetext.html">CompareText</a></p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>在线工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
