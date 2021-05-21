@@ -880,7 +880,7 @@ links:
     }
     - {
       title: "52zt.info",
-      intro: "52zt.info",
+      intro: "博客站点",
       link: "http://www.52zt.info/",
       avatar: "/img/favicon.png"
     }
@@ -890,6 +890,19 @@ links:
       link: "https://github.com/AutKevin",
       avatar: "/img/favicon.png"
     }
+    - {
+      title: "Bandwagonhost",
+      intro: "VPS",
+      link: "https://bandwagonhost.com/aff.php?aff=62182&gid=1",
+      avatar: "/img/favicon.png"
+    }
+    - {
+      title: "Vultr",
+      intro: "VPS",
+      link: "https://www.vultr.com/?ref=8702136",
+      avatar: "/img/favicon.png"
+    }
+
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
