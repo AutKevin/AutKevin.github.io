@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>浏览器通过协议调用应用</title>
+    <link href="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/"/>
+    <url>/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="查看协议和文件类型的默认应用"><a href="#查看协议和文件类型的默认应用" class="headerlink" title="查看协议和文件类型的默认应用"></a>查看协议和文件类型的默认应用</h2><p>Win + I -&gt; 应用 -&gt; 默认应用，按协议指定默认应用。<br><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525145447189-322717285.png" alt="image"><br>可以看到有些程序自定义协议在里面，并且可以设置打开此协议的程序，但是并没有发现可以新增协议。只能通过注册表来解决。<br><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525145619019-1811153384.png" alt="image"></p><h2 id="自定义浏览器协议"><a href="#自定义浏览器协议" class="headerlink" title="自定义浏览器协议"></a>自定义浏览器协议</h2><p>chrome浏览器用到了自定义浏览器协议这一标准。自定义浏览器协议允许在浏览器中使用protocol://url<br>的形式进行调用本地程序。包括在网页上拉起百度云网盘、或者拉起QQ等等，都属于自定义浏览器协议。</p><h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>在通过浏览器调用外部程序时，浏览器会在我们本地的注册表中查找协议所对应的注册表，并获取实际要调用的程序路径进行调用。<br>例如</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">rtsp:<span class="hljs-regexp">//</span>callback/?id=opaqueInternalAccesssObj<br></code></pre></td></tr></table></figure><p>rtsp://为我们自定义的浏览器协议，后面的callback/?id=opaqueInternalAccessObj则为实际传入的参数</p><h2 id="注册表解析"><a href="#注册表解析" class="headerlink" title="注册表解析"></a>注册表解析</h2><p>新建一个rtsp.reg文件，输入如下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">Windows Registry Editor Version 5.00<br><br>[HKEY_CLASSES_ROOT\rtsp]<br>@=<span class="hljs-string">&quot;RTSPLoader Plugin&quot;</span><br><span class="hljs-string">&quot;URL Protocol&quot;</span>=<span class="hljs-string">&quot;C:\\Program Files\\VideoLAN\\VLC\\vlc.exe&quot;</span><br><br>[HKEY_CLASSES_ROOT\rtsp\shell]<br><br>[HKEY_CLASSES_ROOT\rtsp\shell\open]<br><br>[HKEY_CLASSES_ROOT\rtsp\shell\open\<span class="hljs-built_in">command</span>]<br>@=<span class="hljs-string">&quot;C:\\Program Files\\VideoLAN\\VLC\\vlc.exe %1&quot;</span><br></code></pre></td></tr></table></figure><p>双击运行后在浏览器中输入rtsp://后会提示是否打开RTSPLoader Plugin(实则是打开Windows Shell)。</p><h3 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h3><ol><li><p>[HKEY_CLASSES_ROOT] 是应用程序运行时必须的信息，[HKEY_CLASSES_ROOT\rtsp]表示在该注册表目录下生成了一个rtsp的应用程序运行时必须的信息。<br>@=为该应用程序默认名称，用来显示程序名称，不填则为exe名称。<br>URL Protocol=为该协议所要调用的程序地址。</p></li><li><p>[HKEY_CLASSES_ROOT\rtsp\shell]在rtsp\下生成shell目录。</p></li><li><p>[HKEY_CLASSES_ROOT\rtsp\shell\open]在rtsp\shell\下生成open目录。</p></li><li><p>[HKEY_CLASSES_ROOT\rtsp\shell\open\command]在rtsp\shell\open\下生成command目录，@=在command目录下新建一个默认值为协议调用程序的实际路径。%1代表rtsp://后面跟的参数。</p></li></ol><h2 id="注册表效果"><a href="#注册表效果" class="headerlink" title="注册表效果"></a>注册表效果</h2><p>输入地址： 计算机\HKEY_CLASSES_ROOT\rtsp，可以看到调用rtsp的程序名设置，和调用rtsp协议的默认程序(URL Protocol)</p><p><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525144519114-1220165044.png" alt="image"></p><p>最终执行命令及参数</p><p><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525144500800-914229097.png" alt="image"></p><p>点击页面的rtsp超链接，提示用VLC media player打开。</p><p><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525145038916-131635117.png" alt="image"><br><img src="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/1208477-20210525144937946-155745317.png" alt="image"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CE查找基址</title>
     <link href="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/"/>
     <url>/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/</url>
