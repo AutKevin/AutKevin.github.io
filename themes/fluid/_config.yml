@@ -902,6 +902,14 @@ links:
       link: "https://www.vultr.com/?ref=8702136",
       avatar: "/img/favicon.png"
     }
+    - {
+      title: "优惠卷",
+      intro: "淘宝天猫优惠卷",
+      link: "http://www.52zt.info/taobao/coupon.php",
+      avatar: "/img/favicon.png"
+    }
+
+
 
 
   # 当成员头像加载失败时，替换为指定图片
