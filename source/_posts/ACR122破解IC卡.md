@@ -2,7 +2,7 @@
 title: ACR122破解IC卡
 date: 2021-07-22 16:17:29
 categories: 破解
-tags: 破解,IC卡
+tags: [破解,IC卡]
 ---
 
 ## 安装驱动
