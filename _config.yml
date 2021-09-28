@@ -103,7 +103,7 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://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@github.com/AutKevin/AutKevin.github.io.git
+  repo: https://<token>@github.com/AutKevin/AutKevin.github.io.git
   branch: master
 
 # 看板娘
