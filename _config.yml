@@ -104,7 +104,7 @@ theme: fluid
 deploy:
   type: git
   repo: https://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@github.com/AutKevin/AutKevin.github.io.git
-	branch: master
+  branch: master
 
 # 看板娘
 live2d:
