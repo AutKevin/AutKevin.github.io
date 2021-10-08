@@ -40,3 +40,9 @@ https://域名
 依然使用V2rayN，但是要使用高版本[V2rayN v4.20](https://github.com/2dust/v2rayN/releases)，V2rayN还需要单独下载内核[v2ray-core v4.42.2](https://github.com/v2fly/v2ray-core/releases)。
 
 ![image-20210928161626546](搭建Trojan服务器/image-20210928161626546.png)
+
+## 遇到的问题
+
+用的好好的，突然不行了（但是Trojan的管理web依然可以访问登录）。
+
+![image-20211008222742934](搭建Trojan服务器/image-20211008222742934.png)
