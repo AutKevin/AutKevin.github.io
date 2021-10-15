@@ -43,6 +43,10 @@ https://域名
 
 ## 遇到的问题
 
-用的好好的，突然不行了（但是Trojan的管理web依然可以访问登录）。
+用的好好的，突然不能翻墙了（Trojan的管理web依然可以访问登录、SSH可以直接连接），除此之外都正常（排除域名污染、IP被墙）。
 
 ![image-20211008222742934](搭建Trojan服务器/image-20211008222742934.png)
+
+再次测试，Trojan服务端无任何反应，服务端日志中没有打印任何东西，查看[搬瓦工GFW检测](https://kiwivm.64clouds.com/main-exec.php?mode=blacklistcheck)，发现IP Blocked（应该是TCP阻断/干扰，443端口可以访问web但是不能翻墙）。
+
+![image-20211015150351360](搭建Trojan服务器/image-20211015150351360.png)
