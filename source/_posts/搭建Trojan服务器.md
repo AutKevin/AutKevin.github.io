@@ -1,7 +1,7 @@
 ---
 title: 搭建Trojan服务器
 date: 2021-09-27 16:42:10
-categories: Torjan
+categories: VPN
 tags: [VPN,Torjan]
 ---
 
