@@ -18,7 +18,7 @@
   <meta name="author" content="AUTKevin">
   <meta name="keywords" content="">
   
-  <title>搭建Trojan服务器 - AEOLIAN</title>
+  <title>DNF私服 - AEOLIAN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="搭建Trojan服务器">
+            <span class="h2" id="subtitle" title="DNF私服">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-27 16:42" pubdate>
-        2021年9月27日 下午
+      <time datetime="2022-07-21 02:17" pubdate>
+        2022年7月21日 凌晨
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      498 字
+      488 字
     </span>
   
 
@@ -237,28 +237,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">搭建Trojan服务器</h1>
+            <h1 style="display: none">DNF私服</h1>
             
             <div class="markdown-body">
-              <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>系统：CentOS7</p>
-<p>官网：<a target="_blank" rel="noopener" href="https://github.com/Jrohy/trojan">https://github.com/Jrohy/trojan</a></p>
-<h2 id="一键安装"><a href="#一键安装" class="headerlink" title="一键安装"></a>一键安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">安装/更新</span><br>source &lt;(curl -sL https://git.io/trojan-install)<br><br><span class="hljs-meta">#</span><span class="bash">卸载</span><br>source &lt;(curl -sL https://git.io/trojan-install) --remove<br><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#trojan管理</span></span><br>trojan<br></code></pre></td></tr></table></figure>
-<p>安装过程中输入域名，自动生成证书。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20210927173218010.png" srcset="/img/loading.gif" lazyload alt="image-20210927173218010"></p>
-<h2 id="Torjan-Web端"><a href="#Torjan-Web端" class="headerlink" title="Torjan Web端"></a>Torjan Web端</h2><p>https://域名</p>
-<p>输入刚才设置的web的admin密码，进入后可以用web管理用户。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20210927173355184.png" srcset="/img/loading.gif" lazyload alt="image-20210927173355184"></p>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>依然使用V2rayN，但是要使用高版本<a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">V2rayN v4.20</a>，V2rayN还需要单独下载内核<a target="_blank" rel="noopener" href="https://github.com/v2fly/v2ray-core/releases">v2ray-core v4.42.2</a>。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20210928161626546.png" srcset="/img/loading.gif" lazyload alt="image-20210928161626546"></p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="tcp干扰"><a href="#tcp干扰" class="headerlink" title="tcp干扰"></a>tcp干扰</h3><p>用的好好的，突然不能翻墙了（Trojan的管理web依然可以访问登录、SSH可以直接连接），除此之外都正常（排除域名污染、IP被墙）。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211008222742934.png" srcset="/img/loading.gif" lazyload alt="image-20211008222742934"></p>
-<p>再次测试，Trojan服务端无任何反应，服务端日志中没有打印任何东西，查看<a target="_blank" rel="noopener" href="https://kiwivm.64clouds.com/main-exec.php?mode=blacklistcheck">搬瓦工GFW检测</a>，发现IP Blocked（应该是TCP阻断/干扰，443端口可以访问web但是不能翻墙）。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211015150351360.png" srcset="/img/loading.gif" lazyload alt="image-20211015150351360"></p>
-<p>下载<a target="_blank" rel="noopener" href="https://elifulkerson.com/projects/tcping.php">TCPing</a>，用tcping ip 443验证一下，果然不行。</p>
-<p><img src="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211015152057157.png" srcset="/img/loading.gif" lazyload alt="image-20211015152057157"></p>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>Goflyway的WS+CDN模式 和 V2ray 的WS+CDN模式。</p>
-<h2 id="GFW"><a href="#GFW" class="headerlink" title="GFW"></a>GFW</h2><h3 id="TCP封锁-阻断"><a href="#TCP封锁-阻断" class="headerlink" title="TCP封锁(阻断)"></a><strong>TCP封锁(阻断)</strong></h3><p>服务器 IP 被TCP封锁(阻断)后，依然可以正常的<strong>向海外代理服务器发送数据</strong>（客户端连接服务端），但是海外代理服务器上的代理服务端在<strong>向你返回数据</strong>的时候，肯定是要经过墙的，而墙发现发送者IP(代理服务器)在黑名单中，于是就会<strong>阻断、拦截</strong>，这样你的<strong>客户端就收不到来自服务端的返回数据</strong>了（SSR上表现为：超时或空连）。</p>
-<p>而目前的代理软件基本都是使用 TCP 协议传输的，而TCP协议要传输数据，则先要进行握手环节，而握手自然要有来有回，所以当<strong>墙对海外代理服务器回程TCP阻断</strong>的时候，就会导致<strong>代理客户端与服务端无法完成握手</strong>，自然也无法使用代理了。</p>
+              <h2 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h2><p>随便买一个带云服务器</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720232357708.png" srcset="/img/loading.gif" lazyload alt="image-20220720232357708"></p>
+<p>安装好环境，这里使用CentOS6.5</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720232503113.png" srcset="/img/loading.gif" lazyload alt="image-20220720232503113"></p>
+<h2 id="部署服务端"><a href="#部署服务端" class="headerlink" title="部署服务端"></a>部署服务端</h2><h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p>把dof和dof.tar.gz(这个文件会把很多系统文件覆盖)两个文件传到根目录/下面</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720233057574.png" srcset="/img/loading.gif" lazyload alt="image-20220720233057574"></p>
+<h3 id="安装服务端"><a href="#安装服务端" class="headerlink" title="安装服务端"></a>安装服务端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /<br>chmod 777 dof<br>./dof<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720234045149.png" srcset="/img/loading.gif" lazyload alt="image-20220720234045149"></p>
+<p>搭建完成，可以看的出来用的是xampp(Apache + MySQL + PHP + Perl)环境，安装完成后会自动重启。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720234345195.png" srcset="/img/loading.gif" lazyload alt="image-20220720234345195"></p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>进入/home/neople/game/cfg下面，找到cain01…cain05，更改这5个文件里面的IP配置。因为每个文件要改8处IP，要改5个文件，所以推荐下载下来改完后再上传覆盖。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /home/neople/game/cfg<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720234655129.png" srcset="/img/loading.gif" lazyload alt="image-20220720234655129"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi cain01.cfg<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720235302685.png" srcset="/img/loading.gif" lazyload alt="image-20220720235302685"></p>
+<h3 id="运行服务端"><a href="#运行服务端" class="headerlink" title="运行服务端"></a>运行服务端</h3><p>更改配置后，进入到~目录下，运行服务端.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./run  <span class="hljs-comment">#服务端程序开始运行</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220720235745841.png" srcset="/img/loading.gif" lazyload alt="image-20220720235745841"></p>
+<p>服务端程序开始运行。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721003329057.png" srcset="/img/loading.gif" lazyload alt="image-20220721003329057"></p>
+<p>要等很久很久才能出现五个编码，等了近二十分钟（可能是因为1核1G的服务器不行）。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004223577.png" srcset="/img/loading.gif" lazyload alt="image-20220721004223577"></p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="解压客户端"><a href="#解压客户端" class="headerlink" title="解压客户端"></a>解压客户端</h3><p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721003758774.png" srcset="/img/loading.gif" lazyload alt="image-20220721003758774"></p>
+<p>解压客户端后如下</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004403017.png" srcset="/img/loading.gif" lazyload alt="image-20220721004403017"></p>
+<h3 id="Win10补丁"><a href="#Win10补丁" class="headerlink" title="Win10补丁"></a>Win10补丁</h3><p>然后解压win10补丁覆盖到客户端目录下面，不然win10下面不能玩。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004316839.png" srcset="/img/loading.gif" lazyload alt="image-20220721004316839"></p>
+<h3 id="修改game-ini"><a href="#修改game-ini" class="headerlink" title="修改game.ini"></a>修改game.ini</h3><p>把Server和DBIP改为公网IP即可.</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004556858.png" srcset="/img/loading.gif" lazyload alt="image-20220721004556858"></p>
+<h3 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h3><p>点击地下城与勇士.exe启动游戏，点击左上角可以先注册账号。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004450406.png" srcset="/img/loading.gif" lazyload alt="image-20220721004450406"></p>
+<h3 id="进入游戏"><a href="#进入游戏" class="headerlink" title="进入游戏"></a>进入游戏</h3><p>服务器列表为空，点击变更伺服器。</p>
+<p><img src="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220721004812420.png" srcset="/img/loading.gif" lazyload alt="image-20220721004812420"></p>
+<p>社区服为灰色，连续输入两次./stop，再输入一次./run，出现五国就可以了。</p>
+<h2 id="服务器更新"><a href="#服务器更新" class="headerlink" title="服务器更新"></a>服务器更新</h2><p>一共需要两个文件，一个是Script.pvf，一个是黑岩客户端文件。<br>1）先把黑岩客户端文件解压覆盖到原来客户端的文件里面，把Script.pvf也覆盖到客户端文件里。<br>2）把Script.pvf文件上传到服务端/home/neople/game下面。连上服务器，连续输入两次./stop，关闭服务器程序，再./run将启动服务。</p>
 
             </div>
             <hr>
@@ -268,7 +288,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/VPN/">VPN</a>
+                      <a class="hover-with-bg" href="/categories/game/">game</a>
                     
                   </div>
                 
@@ -276,9 +296,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/VPN/">VPN</a>
+                      <a class="hover-with-bg" href="/tags/game/">game</a>
                     
-                      <a class="hover-with-bg" href="/tags/Torjan/">Torjan</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/">伺服器</a>
                     
                   </div>
                 
@@ -295,18 +315,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">V2ray+ws+tls+cdn搭建服务器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/22/ACR122%E7%A0%B4%E8%A7%A3IC%E5%8D%A1/">
-                        <span class="hidden-mobile">ACR122破解IC卡</span>
+                      <a href="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="hidden-mobile">V2ray+ws+tls+cdn搭建服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
