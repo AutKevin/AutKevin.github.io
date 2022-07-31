@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.9k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      24
        分钟
     </span>
   
@@ -291,12 +291,18 @@
 
 <p>/root/full-grasscutter-3.0-Beta.9是元神服务端解压后的文件夹，：后面/var/grasscutter是容器目录。</p>
 <p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724171352563.png" srcset="/img/loading.gif" lazyload alt="image-20220724171352563"></p>
-<h4 id="docker容器操作"><a href="#docker容器操作" class="headerlink" title="docker容器操作"></a>docker容器操作</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看docker镜像(运行中的)</span><br>docker ps<br><span class="hljs-comment">#查询容器(所有的)</span><br>docker container ls -all<br><br><span class="hljs-comment">#进入容器</span><br>docker <span class="hljs-built_in">exec</span> -it CONTAINERID /bin/bash<br><br><span class="hljs-comment">#闭所有容器</span><br>docker stop $(docker ps -a -q)<br><br><span class="hljs-comment">#关闭单个容器</span><br>docker stop &lt;CONTAINER ID&gt;<br><br><span class="hljs-comment">#删除所有容器</span><br>docker rm $(docker ps -a -q)<br><br><span class="hljs-comment">#删除单个容器</span><br>docker rm &lt;CONTAINER ID&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="docker容器操作"><a href="#docker容器操作" class="headerlink" title="docker容器操作"></a>docker容器操作</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看docker镜像(运行中的)</span><br>docker ps<br><span class="hljs-comment">#查询容器(所有的)</span><br>docker container ls -all<br><br><span class="hljs-comment">#启动单个容器</span><br>docker start &lt;CONTAINER ID&gt;<br><br><span class="hljs-comment">#进入容器</span><br>docker <span class="hljs-built_in">exec</span> -it CONTAINERID /bin/bash<br><br><span class="hljs-comment">#闭所有容器</span><br>docker stop $(docker ps -a -q)<br><br><span class="hljs-comment">#关闭单个容器</span><br>docker stop &lt;CONTAINER ID&gt;<br><br><span class="hljs-comment">#删除所有容器</span><br>docker rm $(docker ps -a -q)<br><br><span class="hljs-comment">#删除单个容器</span><br>docker rm &lt;CONTAINER ID&gt;<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="测试服务端"><a href="#测试服务端" class="headerlink" title="测试服务端"></a>测试服务端</h3><p><strong>在服务器内使用浏览器</strong>输入 <code>&quot;服务器IP地址&quot;+端口号9001</code> 即可查看运行状态</p>
 <p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724171526062.png" srcset="/img/loading.gif" lazyload alt="image-20220724171526062"></p>
+<h3 id="安装plugin"><a href="#安装plugin" class="headerlink" title="安装plugin"></a>安装plugin</h3><p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220731175041822.png" srcset="/img/loading.gif" lazyload alt="image-20220731175041822"></p>
+<p>将插件拖拽到物理机的/root/full-grasscutter-3.0-Beta.9/plugins下面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 将物理机文件夹中的文件复制到容器里指定文件夹的位置</span><br>docker cp /root/full-grasscutter-3.0-Beta.9/plugins grasscutter:/var/grasscutter/plugins<br>docker <span class="hljs-built_in">exec</span> -it grasscutter /bin/bash            <span class="hljs-comment"># 进入grasscutter容器</span><br><span class="hljs-built_in">cd</span> /var/grasscutter                                  <span class="hljs-comment"># 进入刚刚复制进去的文件夹</span><br><span class="hljs-comment"># 退出docker，重启容器，也可以在docker容器内部启动grasscutter文件java -jar grasscutter.jar</span><br>docker stop grasscutter<br>docker start grasscutter<br></code></pre></td></tr></table></figure>
+
+<h4 id="Grasscutter-Tools"><a href="#Grasscutter-Tools" class="headerlink" title="Grasscutter Tools"></a>Grasscutter Tools</h4><p>修改服务器地址，<a href="https://10.10.10.66:444，点击查询，右侧服务器状态-&gt;远程执行插件显示对号说明成功。">https://10.10.10.66:444，点击查询，右侧服务器状态-&gt;远程执行插件显示对号说明成功。</a></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220731175801766.png" srcset="/img/loading.gif" lazyload alt="image-20220731175801766"></p>
 <h2 id="进入割草机环境"><a href="#进入割草机环境" class="headerlink" title="进入割草机环境"></a>进入割草机环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#进入docker容器</span><br>docker <span class="hljs-built_in">exec</span> -it grasscutter /bin/bash<br>supervisorctl<br><span class="hljs-built_in">fg</span> grasscutter<br></code></pre></td></tr></table></figure>
 
 <p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724172135934.png" srcset="/img/loading.gif" lazyload alt="image-20220724172135934"></p>
