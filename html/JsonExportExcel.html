@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="UTF-8" /> 
+  <title>json转Excel在线工具</title>
+  <meta name="robots" content="index,follow">
+  <meta property="og:description" content="json在线转换Excel" />	
+  <meta name="description" content="json在线转换Excel" />
+  <meta name="keywords" content="秋夜雨巷,json转换,json文件转Excel,json转Excel" />
+  <meta name="description" itemprop="description" content="json在线转换Excel" />
+  <script src="js/JsonExportExcel.min.js"></script> 
+ <style>
+	input[type=text], textarea {
+		-webkit-transition: all 0.30s ease-in-out;
+		-moz-transition: all 0.30s ease-in-out;
+		-ms-transition: all 0.30s ease-in-out;
+		-o-transition: all 0.30s ease-in-out;
+		outline: none;
+		padding: 3px 0px 3px 3px;
+		margin: 5px 1px 3px 0px;
+		border: 1px solid #ddd;
+		width:80%;
+		display:block;
+		margin:0 auto;
+	}
+
+	input[type=text]:focus, textarea:focus {
+		box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+		padding: 3px 0px 3px 3px;
+		margin: 5px 1px 3px 0px;
+		border: 1px solid rgba(81, 203, 238, 1);
+		width:80%;
+		display:block;
+		margin:0 auto;
+	}
+	.center{
+		display:block;
+		margin:0 auto;
+	}
+	.flex-bottom-contentcenter{  /*位于屏幕下面,且内容居中*/
+		position: absolute;
+		bottom: 20px;
+		width: 100%;
+		text-align: center;
+	}
+</style> 
+<script>
+function getExcel(){
+	var jsonStr = document.getElementById("jsonStr").value;
+	var jsonObj = eval ("(" + jsonStr + ")");
+	var option={};
+	option.fileName = 'Excel'
+	option.datas=[
+	/*{
+		sheetData:[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}],
+		sheetName:'sheet',
+		sheetFilter:['one','two'],  //显示指定的json字段
+		sheetHeader:['Header1','Header2']
+	},*/
+	{
+		sheetName:'jsonToexcel',
+		sheetData:jsonObj,
+		sheetHeader:['关注微信公众号aeolian获取更多工具']
+	}
+	];
+	var toExcel=new ExportJsonExcel(option);
+	toExcel.saveExcel();
+}
+</script> 
+</head> 
+<body> 
+  <div style="display:block;"> 
+   <textarea cols="100" rows="18" name="textarea" placeholder="请输入json数组,例如[{one:'一行一列',two:'一行二列'},{one:'二行一列',two:'二行二列'}]" id="jsonStr"></textarea> 
+   <br /> 
+   <button class="center" onclick="getExcel()">点击下载表格</button> 
+  </div> 
+  <!-- 屏幕最下面,内容居中 --> 
+  <div class="flex-bottom-contentcenter"> 
+   <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+   <!-- 横向广告位728*90 --> 
+   <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-1787014117384921" data-ad-slot="1138634077"></ins> 
+   <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
+   <!-- 横向广告位 end --> 
+  </div>  
+</body>
+</html>

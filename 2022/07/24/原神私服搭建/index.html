@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="AUTKevin">
+  <meta name="keywords" content="">
+  
+  <title>原神私服 - AEOLIAN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"autkevin.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Aeolian</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="原神私服">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-24 15:58" pubdate>
+        2022年7月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">原神私服</h1>
+            
+            <div class="markdown-body">
+              <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><strong>基本原理：</strong></p>
+<p>【客户端】- 通过其他的代理相关软件，在本地抓包拦截原神客户端发向官方服务器的网络请求，并转而发送向自建的服务器（可以搭建在本地机器）</p>
+<p>【服务端】- 接收客户端发来的请求并模拟原版返回值，由于可以自定义数据，故而实现了自由度极高的私服功能。类似的东西还有很多，Grasscutter只是其中的一个。</p>
+<h2 id="Linux服务器"><a href="#Linux服务器" class="headerlink" title="Linux服务器"></a>Linux服务器</h2><p>服务器版本：CentOS7</p>
+<h3 id="更换源"><a href="#更换源" class="headerlink" title="更换源"></a>更换源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#挂载阿里云yum源</span><br>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo<br><span class="hljs-comment">#清理yum</span><br>yum clean all<br></code></pre></td></tr></table></figure>
+
+<h3 id="关闭防火墙和selinux"><a href="#关闭防火墙和selinux" class="headerlink" title="关闭防火墙和selinux"></a>关闭防火墙和selinux</h3><p><strong>如果购买的是服务器，需要到服务商防火墙配置界面（如腾讯云），设置防火墙策略！！！<br>逐步开放8080端口、22102端口、444端口、9001端口</strong></p>
+<h4 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl stop firewalld.service<br></code></pre></td></tr></table></figure>
+
+<p><strong>设置防火墙开机不自启</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">disable</span> firewalld.service<br></code></pre></td></tr></table></figure>
+
+<p>查看防火墙状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --state<br></code></pre></td></tr></table></figure>
+
+<h4 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /etc/selinux/config<br></code></pre></td></tr></table></figure>
+
+<p><strong>把SELINUX=enable</strong><br><strong>改成SELINUX=disabled</strong></p>
+<p>重启服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">reboot<br></code></pre></td></tr></table></figure>
+
+<p><strong>开机查看selinux状态（disable为关闭）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sestatus<br></code></pre></td></tr></table></figure>
+
+<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y yum-utils device-mapper-persistent-data lvm2<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724161420953.png" srcset="/img/loading.gif" lazyload alt="image-20220724161420953"></p>
+<h3 id="添加Docker镜像源"><a href="#添加Docker镜像源" class="headerlink" title="添加Docker镜像源"></a>添加Docker镜像源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724161538235.png" srcset="/img/loading.gif" lazyload alt="image-20220724161538235"></p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install docker-ce docker-ce-cli containerd.io<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724162200607.png" srcset="/img/loading.gif" lazyload alt="image-20220724162200607"></p>
+<h3 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a>启动Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl start docker<br></code></pre></td></tr></table></figure>
+
+<h2 id="部署原神服务端"><a href="#部署原神服务端" class="headerlink" title="部署原神服务端"></a>部署原神服务端</h2><h3 id="拉取grasscutter镜像"><a href="#拉取grasscutter镜像" class="headerlink" title="拉取grasscutter镜像"></a>拉取grasscutter镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#需要先启动docker</span><br>docker pull evendevil66/grasscutter<br><span class="hljs-comment">#查看是否拉取成功</span><br>docker images<br></code></pre></td></tr></table></figure>
+
+<p>可以使用<strong>docker images</strong> 查看是否拉取成功</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724163025083.png" srcset="/img/loading.gif" lazyload alt="image-20220724163025083"></p>
+<h3 id="部署服务端到docker"><a href="#部署服务端到docker" class="headerlink" title="部署服务端到docker"></a>部署服务端到docker</h3><p>下载元神服务端，上传并解压到 <code>/root</code>，使用 <code>ls /root</code>可以看到目录下已经多了 <code>full-grasscutter-&quot;version&quot;</code>文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#根据压缩文件类型安装unzip</span><br>yum install unzip<br><span class="hljs-built_in">cd</span> /root<br><span class="hljs-comment">#解压</span><br>unzip full-grasscutter-3.0-Beta.9.rar<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724170419249.png" srcset="/img/loading.gif" lazyload alt="image-20220724170419249"></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724171644271.png" srcset="/img/loading.gif" lazyload alt="image-20220724171644271"></p>
+<h3 id="更改config-json"><a href="#更改config-json" class="headerlink" title="更改config.json"></a>更改config.json</h3><p>打开服务端目录下的 <code>congfig.json</code> 编辑里面的 <code>accessAddress</code>默认是127.0.0.1 <strong>更改为服务器的IP地址（共2处要更改）</strong></p>
+<p>注意那个443一定要改成444端口!!!</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724170938615.png" srcset="/img/loading.gif" lazyload alt="image-20220724170938615"></p>
+<h3 id="以docker运行上传的原神服务端"><a href="#以docker运行上传的原神服务端" class="headerlink" title="以docker运行上传的原神服务端"></a>以docker运行上传的原神服务端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#运行容器</span><br>docker run -dit \<br>-v /root/full-grasscutter-3.0-Beta.9:/var/grasscutter \<br>-p 444:444 \<br>-p 444:444/udp  \<br>-p 22102:22102 \<br>-p 22102:22102/udp \<br>-p 8080:8080 \<br>-p 8080:8080/udp \<br>-p 9001:9001 \<br>-p 9001:9001/udp \<br>--name grasscutter \<br>-v /sys/fs/cgroup:/sys/fs/cgroup \<br>--restart always \<br>--privileged=<span class="hljs-literal">true</span> evendevil66/grasscutter /usr/sbin/init<br><br><span class="hljs-comment">#查询容器(所有的)</span><br>docker container ls -all<br><span class="hljs-comment">#删除当前容器</span><br>docker container rm mycentos<br></code></pre></td></tr></table></figure>
+
+<p>/root/full-grasscutter-3.0-Beta.9是元神服务端解压后的文件夹，：后面/var/grasscutter是容器目录。</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724171352563.png" srcset="/img/loading.gif" lazyload alt="image-20220724171352563"></p>
+<h4 id="docker容器操作"><a href="#docker容器操作" class="headerlink" title="docker容器操作"></a>docker容器操作</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看docker镜像(运行中的)</span><br>docker ps<br><span class="hljs-comment">#查询容器(所有的)</span><br>docker container ls -all<br><br><span class="hljs-comment">#启动单个容器</span><br>docker start &lt;CONTAINER ID&gt;<br><br><span class="hljs-comment">#进入容器</span><br>docker <span class="hljs-built_in">exec</span> -it CONTAINERID /bin/bash<br><br><span class="hljs-comment">#闭所有容器</span><br>docker stop $(docker ps -a -q)<br><br><span class="hljs-comment">#关闭单个容器</span><br>docker stop &lt;CONTAINER ID&gt;<br><br><span class="hljs-comment">#删除所有容器</span><br>docker rm $(docker ps -a -q)<br><br><span class="hljs-comment">#删除单个容器</span><br>docker rm &lt;CONTAINER ID&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="测试服务端"><a href="#测试服务端" class="headerlink" title="测试服务端"></a>测试服务端</h3><p><strong>在服务器内使用浏览器</strong>输入 <code>&quot;服务器IP地址&quot;+端口号9001</code> 即可查看运行状态</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724171526062.png" srcset="/img/loading.gif" lazyload alt="image-20220724171526062"></p>
+<h3 id="安装plugin"><a href="#安装plugin" class="headerlink" title="安装plugin"></a>安装plugin</h3><p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220731175041822.png" srcset="/img/loading.gif" lazyload alt="image-20220731175041822"></p>
+<p>将插件拖拽到物理机的/root/full-grasscutter-3.0-Beta.9/plugins下面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 将物理机文件夹中的文件复制到容器里指定文件夹的位置</span><br>docker cp /root/full-grasscutter-3.0-Beta.9/plugins grasscutter:/var/grasscutter/plugins<br>docker <span class="hljs-built_in">exec</span> -it grasscutter /bin/bash            <span class="hljs-comment"># 进入grasscutter容器</span><br><span class="hljs-built_in">cd</span> /var/grasscutter                                  <span class="hljs-comment"># 进入刚刚复制进去的文件夹</span><br><span class="hljs-comment"># 退出docker，重启容器，也可以在docker容器内部启动grasscutter文件java -jar grasscutter.jar</span><br>docker stop grasscutter<br>docker start grasscutter<br></code></pre></td></tr></table></figure>
+
+<h4 id="Grasscutter-Tools"><a href="#Grasscutter-Tools" class="headerlink" title="Grasscutter Tools"></a>Grasscutter Tools</h4><p>修改服务器地址，<a href="https://10.10.10.66:444，点击查询，右侧服务器状态-&gt;远程执行插件显示对号说明成功。">https://10.10.10.66:444，点击查询，右侧服务器状态-&gt;远程执行插件显示对号说明成功。</a></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220731175801766.png" srcset="/img/loading.gif" lazyload alt="image-20220731175801766"></p>
+<h2 id="进入割草机环境"><a href="#进入割草机环境" class="headerlink" title="进入割草机环境"></a>进入割草机环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#进入docker容器</span><br>docker <span class="hljs-built_in">exec</span> -it grasscutter /bin/bash<br>supervisorctl<br><span class="hljs-built_in">fg</span> grasscutter<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724172135934.png" srcset="/img/loading.gif" lazyload alt="image-20220724172135934"></p>
+<p><strong>完成以上操作就可以开始创建账号了</strong></p>
+<h3 id="创建账号"><a href="#创建账号" class="headerlink" title="创建账号"></a>创建账号</h3><p>,默认不可以自动注册，需要使用 <code>account</code> 指令在控制台创建账号才可以登录；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">创建方法如下：<br>语法：`account create 登录账号 UID`<br>例如：`account create autumn 123456`<br></code></pre></td></tr></table></figure>
+
+<p>也可以更改配置允许不存在的账号自动注册（不建议开启）。</p>
+<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>config.json</p>
+<p>卡池配置文件为 <code>.\data\Banners.json</code> ，其中</p>
+<ul>
+<li><code>gachaType=200,scheduleId=893</code> 的为常驻池</li>
+<li><code>gachaType=301,scheduleId=903</code> 的为角色 UP 池 (多 UP: 增加 <code>gachaType</code> 为 302,303,304… 的成员即可)</li>
+<li><code>gachaType=400,scheduleId=913</code> 的为武器 UP 池</li>
+</ul>
+<p>多卡池：增加 <code>gachaType</code> 为非以上四个值的成员即可，注意客户端只识别以上四个 <code>gachaType</code> 值，添加的其他卡池不会显示类型</p>
+<p>本站整合包默认为万达桃三 UP 及前两者专武 (专武封面为前者，是客户端内置资源，无法修改)</p>
+<p><code>rateUpItems1</code> 为 UP 五星，<code>rateUpItems2</code> 为 UP 四星，对应 id 在 <code>Handbook_CHS.txt</code> 中可以找到</p>
+<p>需修改 <code>prefabPath</code> <code>previewPrefabPath</code> <code>titlePath</code> 中的 <code>A0**</code> 为对应的卡池 id（在 <code>卡池顺序.xlsx </code>中）</p>
+<p><code>costItem</code> 为抽卡耗费的货币名称，<code>223</code> 为纠缠之缘，<code>224</code> 为相遇之缘（修改可能会引发 bug）</p>
+<p><code>sortId</code> 为卡池排序，越大越靠前</p>
+<p><code>beginTime</code> <code>endTime</code> 为卡池开始 / 结束的 10 位时间戳</p>
+<p><code>softPity</code> 最少几次出 <code>hardPity</code> 最多几次出 <code>eventChance</code> 歪的概率 % ，如果没有这三个成员自己加上即可</p>
+<p><code>bannerType</code> 为 <code>STANDARD</code> 表示常驻池，<code>EVENT</code> 表示角色 UP 池，<code>WEAPON</code> 表示武器 UP 池 (这个参数貌似只是看的)</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="444不通"><a href="#444不通" class="headerlink" title="444不通"></a>444不通</h3><p>因为客户端不能直接改配置文件，所以只能改代理，把请求原神服务器的ip:端口重定向到私服的IP:端口。私服的端口为444。</p>
+<p>telnet IP 444发现不通，服务器中telent IP 444不通，但是telnet 127.0.0.1 444居然是通的。</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724224914838.png" srcset="/img/loading.gif" lazyload alt="image-20220724224914838"></p>
+<h4 id="查看端口号情况"><a href="#查看端口号情况" class="headerlink" title="查看端口号情况"></a>查看端口号情况</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看端口号情况</span><br>netstat -nplt<br></code></pre></td></tr></table></figure>
+
+<p>服务器的几个端口都处于监听状态</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724224956024.png" srcset="/img/loading.gif" lazyload alt="image-20220724224956024"></p>
+<h4 id="查看转发列表"><a href="#查看转发列表" class="headerlink" title="查看转发列表"></a>查看转发列表</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看转发列表</span><br>iptables -t nat -nL<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724225144664.png" srcset="/img/loading.gif" lazyload alt="image-20220724225144664"></p>
+<h4 id="查看内核转发状态"><a href="#查看内核转发状态" class="headerlink" title="查看内核转发状态"></a>查看内核转发状态</h4><p>确保ipv4处于开启状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看内核转发状态</span><br>sysctl net.ipv4.ip_forward<br><span class="hljs-comment">#开启内核转发</span><br><span class="hljs-built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward<br>sysctl -p<br></code></pre></td></tr></table></figure>
+
+<h4 id="进入docker容器"><a href="#进入docker容器" class="headerlink" title="进入docker容器"></a>进入docker容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#进入容器</span><br>docker <span class="hljs-built_in">exec</span> -it CONTAINERID /bin/bash<br><span class="hljs-comment">#退出容器</span><br><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="查看端口号情况-1"><a href="#查看端口号情况-1" class="headerlink" title="查看端口号情况"></a>查看端口号情况</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看监听的tcp端口情况</span><br>netstat -nplt<br><span class="hljs-comment">#查看监听的udp端口情况</span><br>netstat -nplu<br></code></pre></td></tr></table></figure>
+
+<p>docker处于监听状态的端口，tcp有9001和8080，udp有22102，唯独没有444端口。</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724232444934.png" srcset="/img/loading.gif" lazyload alt="image-20220724232444934"></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724232924142.png" srcset="/img/loading.gif" lazyload alt="image-20220724232924142"></p>
+<p>发现是前面解压后config.json文件没把443改为444，直接进入容器中vi /var/grasscutter/config.json更改后重启即可。</p>
+<h3 id="客户端代理方式"><a href="#客户端代理方式" class="headerlink" title="客户端代理方式"></a>客户端代理方式</h3><h4 id="flidder拦截重定向"><a href="#flidder拦截重定向" class="headerlink" title="flidder拦截重定向"></a>flidder拦截重定向</h4><p>打开Fiddler，菜单栏 Tool -&gt; options -&gt; https</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724234426687.png" srcset="/img/loading.gif" lazyload alt="image-20220724234426687"></p>
+<p>切换到 connections，把端口改成8181，按 OK 保存设置</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724234515849.png" srcset="/img/loading.gif" lazyload alt="image-20220724234515849"></p>
+<p>系统代理中出现8181代理端口即为成功。</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724234959610.png" srcset="/img/loading.gif" lazyload alt="image-20220724234959610"></p>
+<p>主界面选 Fiddler Script ，清空原来的脚本，粘贴如下内容。脚本中的 oS.host 后面改为服务器的IP地址，最后点左上角SaveScript</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724234715944.png" srcset="/img/loading.gif" lazyload alt="image-20220724234715944"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/* Original script by NicknameGG, modified for Grasscutter by contributors. */</span><br><span class="hljs-keyword">import</span> System;<br><span class="hljs-keyword">import</span> System.Windows.Forms;<br><span class="hljs-keyword">import</span> Fiddler;<br><span class="hljs-keyword">import</span> System.Text.RegularExpressions;<br> <br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Handlers</span></span><br><span class="hljs-class"></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">static</span> function <span class="hljs-title">OnBeforeRequest</span><span class="hljs-params">(oS: Session)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(oS.host.EndsWith(<span class="hljs-string">&quot;.yuanshen.com&quot;</span>) || oS.host.EndsWith(<span class="hljs-string">&quot;.hoyoverse.com&quot;</span>) || oS.host.EndsWith(<span class="hljs-string">&quot;.mihoyo.com&quot;</span>)) &#123;<br>            oS.host = <span class="hljs-string">&quot;10.10.10.66:444&quot;</span>; <span class="hljs-comment">// This can also be replaced with another IP address.（输入域名也可）</span><br>        &#125;<br>        <span class="hljs-keyword">if</span>(oS.uriContains(<span class="hljs-string">&quot;http://uspider.yuanshen.com:8888/log&quot;</span>))&#123;<br>            oS.oRequest.FailSession(<span class="hljs-number">200</span>, <span class="hljs-string">&quot;Blocked&quot;</span>, <span class="hljs-string">&quot;haha&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h4 id="直接用Genshin代理助手"><a href="#直接用Genshin代理助手" class="headerlink" title="直接用Genshin代理助手"></a>直接用Genshin代理助手</h4><p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724235633021.png" srcset="/img/loading.gif" lazyload alt="image-20220724235633021"></p>
+<h3 id="客户端成功进入界面"><a href="#客户端成功进入界面" class="headerlink" title="客户端成功进入界面"></a>客户端成功进入界面</h3><p><strong>如果使用的是 国服客户端，启动后有弹窗 (仅 Win) 且登录页面标题为 <code>HOYOVERSE</code> 而不是 <code>miHoYo</code> 即代表成功连接私服；</strong></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220724233609106.png" srcset="/img/loading.gif" lazyload alt="image-20220724233609106"></p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220725001738819.png" srcset="/img/loading.gif" lazyload alt="image-20220725001738819"></p>
+<p>使用命令获得90级刻晴</p>
+<p><img src="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/image-20220725002034722.png" srcset="/img/loading.gif" lazyload alt="image-20220725002034722"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/game/">game</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/game/">game</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/">伺服器</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Trojan搭建服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">
+                        <span class="hidden-mobile">DNF私服</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-love"></i> <a href="https://github.com/AutKevin" target="_blank" rel="nofollow noopener"><span>Aeolian</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":140,"height":300},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.7}});</script></body>
+</html>

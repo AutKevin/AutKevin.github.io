@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="AUTKevin">
+  <meta name="keywords" content="">
+  
+  <title>V2ray+ws+tls+cdn搭建服务器 - AEOLIAN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"autkevin.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Aeolian</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="V2ray+ws+tls+cdn搭建服务器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-15 16:42" pubdate>
+        2021年10月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">V2ray+ws+tls+cdn搭建服务器</h1>
+            
+            <div class="markdown-body">
+              <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>系统：CentOS7</p>
+<p>WEB Server：Nginx</p>
+<p>域名：namecheap（付费域名）/Freenom（免费域名，申请SSL证书须注意不能使用acme）</p>
+<p>CND：Cloudflare</p>
+<h2 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h2><p><a target="_blank" rel="noopener" href="https://bandwagonhost.com/aff.php?aff=62182&gid=1">Bandwagonhost</a>购买VPS服务器并记录<strong>公网IP</strong>、<strong>SSH端口号</strong>及<strong>用户名密码</strong>。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027182429521.png" srcset="/img/loading.gif" lazyload alt="image-20211027182429521"></p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p><a target="_blank" rel="noopener" href="https://www.namecheap.com/">Namecheap.com</a>官网购买域名，购买后<a target="_blank" rel="noopener" href="https://www.namecheap.com/">配置域名指定到VPS的公网IP</a>（这里不配置的话，Cloudflare无法添加站点）。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027182000562.png" srcset="/img/loading.gif" lazyload alt="image-20211027182000562"></p>
+<h2 id="Cloudflare配置"><a href="#Cloudflare配置" class="headerlink" title="Cloudflare配置"></a>Cloudflare配置</h2><h3 id="添加域名站点"><a href="#添加域名站点" class="headerlink" title="添加域名站点"></a>添加域名站点</h3><p>进入<a target="_blank" rel="noopener" href="https://www.cloudflare.com/">Cloudflare</a>官网，点击添加站点，输入申请的二级域名，Cloudflare会自动读取域名指向的公网IP并在CF上配置好A Record，这里一定要<strong>关掉Proxy</strong>，让小云朵变成灰色，不然待会TLS证书会申请失败。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027200003508.png" srcset="/img/loading.gif" lazyload alt="image-20211027200003508"></p>
+<p>点击继续，按照要求把原本的域名DNS Server改为Cloudflare的DNS Server。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">elsa.ns.cloudflare.com<br>javier.ns.cloudflare.com<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027184257352.png" srcset="/img/loading.gif" lazyload alt="image-20211027184257352"></p>
+<p>去域名供应商官网，更改DNS NAMESERVERS为Cloudflare的。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027185038138.png" srcset="/img/loading.gif" lazyload alt="image-20211027185038138"></p>
+<p>配置完成后去Cloudflare点击完成，检查名称服务器，这里需要等待十几分钟。</p>
+<h3 id="whois"><a href="#whois" class="headerlink" title="whois"></a>whois</h3><p>下载链接：<a target="_blank" rel="noopener" href="https://nirsoft.net/utils/whoiscl.zip">http://nirsoft.net/utils/whoiscl.zip</a></p>
+<p>下载解压后，把WhoisCL.exe改名为 whois.exe 并复制到 C:\Windows\System32\目录下即可。</p>
+<p>whois 域名，查看申请的域名。</p>
+<p>未配置Cloudflare前，whois所有的信息。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027185954107.png" srcset="/img/loading.gif" lazyload alt="image-20211027185954107"></p>
+<p>使用cloudflare后，Name Server会变成Cloudflare的。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211029111737416.png" srcset="/img/loading.gif" lazyload alt="image-20211029111737416"></p>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install yum-utils<br></code></pre></td></tr></table></figure>
+
+<h3 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 进入到yum源目录</span><br>cd /etc/yum.repos.d/<br><span class="hljs-meta">#</span><span class="bash"> 编辑nginx的yum源</span><br>vi nginx.repo<br></code></pre></td></tr></table></figure>
+
+<p>添加<a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">源信息</a> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">[nginx-stable]<br><span class="hljs-comment">#软件仓库的名称</span><br>name=nginx stable repo<br><span class="hljs-comment">#源的镜像服务器地址</span><br>baseurl=http://nginx.org/packages/centos/<span class="hljs-variable">$releasever</span>/<span class="hljs-variable">$basearch</span>/<br><span class="hljs-comment">#是否启用此源 1:启用 0:禁用</span><br>enabled=1<br><span class="hljs-comment">#是否gpg验证 1:是 0:否</span><br>gpgcheck=0<br><span class="hljs-comment">#gpg验证key</span><br>gpgkey=https://nginx.org/keys/nginx_signing.key<br><br>[nginx-mainline]<br>name=nginx mainline repo<br>baseurl=http://nginx.org/packages/mainline/centos/<span class="hljs-variable">$releasever</span>/<span class="hljs-variable">$basearch</span>/<br>enabled=0<br>gpgcheck=1<br>gpgkey=https://nginx.org/keys/nginx_signing.key<br></code></pre></td></tr></table></figure>
+
+<h3 id="Nginx常用命令"><a href="#Nginx常用命令" class="headerlink" title="Nginx常用命令"></a>Nginx常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">查看源是否添加成功</span><br>yum search nginx<br><br><span class="hljs-meta">#</span><span class="bash">安装nginx</span><br>yum install nginx -y<br><br><span class="hljs-meta">#</span><span class="bash">安装完后，查看</span><br>rpm -qa | grep nginx <br><br><span class="hljs-meta">#</span><span class="bash">启动nginx</span><br>systemctl start nginx<br><br><span class="hljs-meta">#</span><span class="bash">加入开机启动</span><br>systemctl enable nginx<br><br><span class="hljs-meta">#</span><span class="bash">查看nginx的状态</span><br>systemctl status nginx<br></code></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>启动成功后浏览器输入IP:80即可访问nigix</p>
+<p>lsof -i:80可查看80端口被那个进程占用。</p>
+<h2 id="安装TLS证书"><a href="#安装TLS证书" class="headerlink" title="安装TLS证书"></a>安装TLS证书</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 安装必备软件包</span><br>yum install socat<br><span class="hljs-meta">#</span><span class="bash"> 安装acme.sh</span><br>curl  https://get.acme.sh | sh<br>source ~/.bashrc #执行后无反应<br><span class="hljs-meta">#</span><span class="bash"> 停止nginx</span><br>systemctl stop nginx<br></code></pre></td></tr></table></figure>
+
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><p><a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/ZeroSSL.com-CA">acme使用ZeroSSL的CA证书</a>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 用邮箱注册zerossl账号</span><br>acme.sh  --register-account  -m EMAIL@example.com --server zerossl<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi">获取CloudFlare API Key</a>，获取<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/profile/api-tokens">Global API Key</a>。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027191421089.png" srcset="/img/loading.gif" lazyload alt="image-20211027191421089"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 设置Cloudflare的API Key</span><br>export CF_Key=&quot;ccxxxxxxxxxxxxxxxxxxxb&quot;<br>export CF_Email=&quot;xxxx@sss.com&quot;<br></code></pre></td></tr></table></figure>
+
+<p>生成证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">acme.sh --server zerossl --issue  -d  YOURDOMAIN.COM --dns dns_cf<br></code></pre></td></tr></table></figure>
+
+<p>证书生成成功</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027191649288.png" srcset="/img/loading.gif" lazyload alt="image-20211027191649288"></p>
+<p>安装证书， 默认生成的证书都放在安装目录下: ~/.acme.sh/, 不要直接使用此目录下的文件， 正确的使用方法是使用 –installcert 命令,并指定目标位置, 然后证书文件会被copy到相应的位置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">安装证书</span><br>sudo ~/.acme.sh/acme.sh --installcert -d MYDOMAIN --fullchainpath /etc/crt/autumn.crt --keypath /etc/crt/autumn.key<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置CF加密模式"><a href="#配置CF加密模式" class="headerlink" title="配置CF加密模式"></a>配置CF加密模式</h3><p>申请配置好之后，因为用CF做代理，所以要把SSL/TLS加密模式设为完全模式，<strong>端到端加密，使用服务器上的自签名证书</strong>。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211030094847083.png" srcset="/img/loading.gif" lazyload alt="image-20211030094847083"></p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>生成证书时，如果出现如下问题，原因是zerossl不再支持免费域名更换，需要更换为付费域名。<img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211018155705467.png" srcset="/img/loading.gif" lazyload alt="image-20211018155705467"></p>
+<p>生成证书时如果遇到下面这个问题，需要去/root/.acme.sh下面把生成指定的证书删除干净。<img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211029110026132.png" srcset="/img/loading.gif" lazyload alt="image-20211029110026132"></p>
+<h2 id="V2ray"><a href="#V2ray" class="headerlink" title="V2ray"></a>V2ray</h2><h3 id="安装V2ray"><a href="#安装V2ray" class="headerlink" title="安装V2ray"></a>安装V2ray</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum -y install wget<br>wget --no-check-certificate -O v2ray.sh https://git.io/v2ray.sh<br>chmod +x v2ray.sh <br>./v2ray.sh 2&gt;&amp;1 | tee v2ray.log<br></code></pre></td></tr></table></figure>
+
+<p>选择ws+tls</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027201106804.png" srcset="/img/loading.gif" lazyload alt="image-20211027201106804"></p>
+<p>脚本会自动安装以下文件： /usr/bin/v2ray/v2ray：V2Ray 程序；</p>
+<p>/usr/bin/v2ray/v2ctl：V2Ray 工具；</p>
+<p>/etc/v2ray/config.json：配置文件；</p>
+<p>/usr/bin/v2ray/geoip.dat：IP 数据文件</p>
+<p>/usr/bin/v2ray/geosite.dat：域名数据文件</p>
+<h3 id="修改V2ray配置"><a href="#修改V2ray配置" class="headerlink" title="修改V2ray配置"></a>修改V2ray配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /etc/v2ray/config.json<br></code></pre></td></tr></table></figure>
+
+<p>内容如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;log&quot;</span>: &#123;<br>	<span class="hljs-attr">&quot;access&quot;</span>: <span class="hljs-string">&quot;/var/log/v2ray/access.log&quot;</span>,<br>	<span class="hljs-attr">&quot;error&quot;</span>: <span class="hljs-string">&quot;/var/log/v2ray/error.log&quot;</span>,<br>	<span class="hljs-attr">&quot;loglevel&quot;</span>: <span class="hljs-string">&quot;warning&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;inbounds&quot;</span>: [<br>    &#123;<br>      &quot;port&quot;: 10000,  #端口和nginx代理的端口一致<br>      &quot;listen&quot;:&quot;127.0.0.1&quot;,  #只监听 127.0.0.1，避免除本机外的机器探测到端口,如果要所有机器检测到可以写0.0.0.0<br>      &quot;protocol&quot;: &quot;vmess&quot;,<br>      &quot;settings&quot;: &#123;<br>        &quot;clients&quot;: [<br>          &#123;<br>            &quot;id&quot;: &quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;, #uuid<br>            &quot;alterId&quot;: 64   #和客户端保持一致<br>          &#125;<br>        ]<br>      &#125;,<br>      &quot;streamSettings&quot;: &#123;<br>        &quot;network&quot;: &quot;ws&quot;,<br>        &quot;wsSettings&quot;: &#123;<br>        &quot;path&quot;: &quot;/video/&quot;       #注意：和Nginx中配置一致，两个斜杠不能省略<br>        &#125;<br>      &#125;<br>    &#125;<br>  ],<br>  &quot;outbounds&quot;: [<br>    &#123;<br>      <span class="hljs-attr">&quot;protocol&quot;</span>: <span class="hljs-string">&quot;freedom&quot;</span>,<br>      <span class="hljs-attr">&quot;settings&quot;</span>: &#123;&#125;<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="v2ray常用命令"><a href="#v2ray常用命令" class="headerlink" title="v2ray常用命令"></a>v2ray常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">v2ray info //查看 V2Ray 配置信息<br>v2ray config //修改 V2Ray 配置<br>v2ray link //生成 V2Ray 配置文件链接<br>v2ray infolink //生成 V2Ray 配置信息链接<br>v2ray qr //生成 V2Ray 配置二维码链接<br>v2ray ss //修改 Shadowsocks 配置<br>v2ray ssinfo //查看 Shadowsocks 配置信息<br>v2ray ssqr //生成 Shadowsocks 配置二维码链接<br>v2ray status //查看 V2Ray 运行状态<br>v2ray start //启动 V2Ray<br>v2ray stop //停止 V2Ray<br>v2ray restart //重启 V2Ray<br>v2ray <span class="hljs-built_in">log</span> //查看 V2Ray 运行日志<br>v2ray update //更新 V2Ray<br>v2ray update.sh //更新 V2Ray 管理脚本<br>v2ray uninstall //卸载 V2Ray<br></code></pre></td></tr></table></figure>
+
+<h2 id="Nginx配置TLS和V2ray"><a href="#Nginx配置TLS和V2ray" class="headerlink" title="Nginx配置TLS和V2ray"></a>Nginx配置TLS和V2ray</h2><p>为Nginx配置tls证书和V2ray代理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /etc/nginx/nginx.conf<br></code></pre></td></tr></table></figure>
+
+<p>内容如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs json">#pid 需要mkdir /usr/local/nginx/logs -p 否则不能开机自启<br>#pid /usr/local/nginx/logs/nginx.pid;   #yum安装的不需要<br><br>http &#123;<br>	server &#123;<br>	  listen  443 ssl;<br>	  #如果systemctl status nginx.service报错nginx: [warn] the &quot;ssl&quot; directive is deprecated, use the &quot;listen ... ssl&quot; directive instead,需要删除ssl on<br>	  ssl on;    <br>	  ssl_certificate       /etc/crt/autumn.crt;   #这里根据安装的证书路径填写,非fullchain路径<br>	  ssl_certificate_key   /etc/crt/autumn.key;   #这里根据安装的证书路径填写<br>	  ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;<br>	  ssl_ciphers           HIGH:!aNULL:!MD5;<br>	  server_name           DOMAIN;     #域名<br>		location /video/ &#123;    #与V2Ray服务端 配置中的 path 保持一致<br>		proxy_redirect off;<br>		proxy_pass http://127.0.0.1:10000;  #这个端口和服务端保持一致<br>		proxy_http_version 1.1;<br>		proxy_set_header Upgrade $http_upgrade;<br>		proxy_set_header Connection &quot;upgrade&quot;;<br>		proxy_set_header Host $http_host;<br><br>		# Show realip in v2ray access.log<br>		proxy_set_header X-Real-IP $remote_addr;<br>		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后启动nginx即可，如果IP被Ban了记得把Cloudflare的Proxy打开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#启动nginx</span><br>systemctl start nginx<br>v2ray url<br></code></pre></td></tr></table></figure>
+
+<p>配置完后先检查配置文件有无问题.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#检查配置文件，出现nginx: invalid option: &quot;/etc/nginx/nginx.conf&quot;问题依然可以启动nginx</span><br>nginx -t /etc/nginx/nginx.conf<br><br><span class="hljs-comment">#查看端口调用情况</span><br>lsof -i:443<br><br><span class="hljs-comment">#使用指定的配置文件而不是conf目录下的nginx.conf</span><br><span class="hljs-comment"># nginx -c &lt;path_to_config&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查找服务的日志</span><br>lsof -p 进程ID|grep <span class="hljs-built_in">log</span><br><br><span class="hljs-comment">#查看nginx的error日志</span><br><span class="hljs-comment">#104: Connection reset by peer连接重置是正常情况</span><br>tail -f /var/<span class="hljs-built_in">log</span>/nginx/error.log<br><br><span class="hljs-comment">#查看nginx的access日志</span><br><span class="hljs-comment">#代理成功后连接时会带有101状态码(Switching Protocols，切换协议)</span><br><span class="hljs-comment">#成功示例: &quot;GET /video/ HTTP/1.1&quot; 101 0 &quot;-&quot; &quot;Go-http-client/1.1&quot;</span><br>tail -f /var/<span class="hljs-built_in">log</span>/nginx/access.log<br><br><span class="hljs-comment">#查看v2ray的access日志</span><br><span class="hljs-comment">#代理成功后,nginx会把请求转发给v2ray</span><br><span class="hljs-comment">#成功示例: tcp:61.YOUR.IP.ADDRRESS:30862 accepted tcp:www.baidu.com:443</span><br>tail -f /var/<span class="hljs-built_in">log</span>/v2ray/access.log<br><br><span class="hljs-comment">#查看v2ray的error日志</span><br><span class="hljs-comment">#v2ray.com/core/app/proxyman/inbound: connection ends连接关闭时正常情况</span><br>tail -f /var/<span class="hljs-built_in">log</span>/v2ray/error.log<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/VPN/">VPN</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/VPN/">VPN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/V2ray/">V2ray</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DNF私服</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="hidden-mobile">搭建Trojan服务器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-love"></i> <a href="https://github.com/AutKevin" target="_blank" rel="nofollow noopener"><span>Aeolian</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":140,"height":300},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.7}});</script></body>
+</html>

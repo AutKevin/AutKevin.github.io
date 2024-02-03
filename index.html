@@ -1,0 +1,906 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="AUTKevin">
+  <meta name="keywords" content="">
+  
+  <title>AEOLIAN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"autkevin.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Aeolian</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title=" 若不趁起风时扬帆，船是不会前进的。 —东野圭吾《分身》">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          Trojan搭建服务器
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          
+          
+            
+          
+          环境系统：CentOS7
+WEB Server：Nginx
+域名：namecheap（付费域名）
+CND：Cloudflare
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-03 13:15" pubdate>
+              2024-02-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/VPN/">VPN</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/VPN/">VPN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/" target="_self">
+          原神私服
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/" target="_self">
+          
+          
+            
+          
+          原理基本原理：
+【客户端】- 通过其他的代理相关软件，在本地抓包拦截原神客户端发向官方服务器的网络请求，并转而发送向自建的服务器（可以搭建在本地机器）
+【服务端】- 接收客户端发来的请求并模拟原版返回值，由于可以自定义数据，故而实现了自由度极高的私服功能。类似的东西还有很多，Grasscutter只是其中的一个。
+Linux服务器服务器版本：CentOS7
+更换源1234#挂载阿里云yum源wge
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-24 15:58" pubdate>
+              2022-07-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/game/">game</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/game/">game</a>
+            
+              <a href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/">伺服器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/" target="_self">
+          DNF私服
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/21/DNF%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/" target="_self">
+          
+          
+            
+          
+          购买服务器随便买一个带云服务器
+
+安装好环境，这里使用CentOS6.5
+
+部署服务端上传文件把dof和dof.tar.gz(这个文件会把很多系统文件覆盖)两个文件传到根目录/下面
+
+安装服务端123cd /chmod 777 dof./dof
+
+
+搭建完成，可以看的出来用的是xampp(Apache + MySQL + PHP + Perl)环境，安装完成后会自动重启。
+
+修改配置文件进入/ho
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-21 02:17" pubdate>
+              2022-07-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/game/">game</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/game/">game</a>
+            
+              <a href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/">伺服器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          V2ray+ws+tls+cdn搭建服务器
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          
+          
+            
+          
+          环境系统：CentOS7
+WEB Server：Nginx
+域名：namecheap（付费域名）/Freenom（免费域名，申请SSL证书须注意不能使用acme）
+CND：Cloudflare
+购买服务器Bandwagonhost购买VPS服务器并记录公网IP、SSH端口号及用户名密码。
+
+购买域名Namecheap.com官网购买域名，购买后配置域名指定到VPS的公网IP（这里不配置的话，Clo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-15 16:42" pubdate>
+              2021-10-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/VPN/">VPN</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/VPN/">VPN</a>
+            
+              <a href="/tags/V2ray/">V2ray</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          搭建Trojan服务器
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/27/%E6%90%AD%E5%BB%BATrojan%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          
+          
+            
+          
+          环境系统：CentOS7
+官网：https://github.com/Jrohy/trojan
+一键安装12345678#安装/更新source &lt;(curl -sL https://git.io/trojan-install)#卸载source &lt;(curl -sL https://git.io/trojan-install) --remove##trojan管理trojan
+安装过
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-27 16:42" pubdate>
+              2021-09-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/VPN/">VPN</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/VPN/">VPN</a>
+            
+              <a href="/tags/Torjan/">Torjan</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/22/ACR122%E7%A0%B4%E8%A7%A3IC%E5%8D%A1/" target="_self">
+          ACR122破解IC卡
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/22/ACR122%E7%A0%B4%E8%A7%A3IC%E5%8D%A1/" target="_self">
+          
+          
+            
+          
+          安装驱动安装驱动版本ACR122U驱动V1.1.5
+
+安装完后把读卡器拔掉重连，计算机管理 -》设备管理 中出现读卡器型号即为成功。
+
+UID克隆工具破解IC卡
+破解并导出dump把卡放上去，点击开始破解，出现破解完成即可。
+
+破解成功之后，卡的dump数据就已经被导出了。
+
+dump导入白卡打开UID卡克隆软件.exe
+
+连接读卡器 -&gt; 连接卡片 -&gt; 导入文件(选择刚才破解时导出
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-22 16:17" pubdate>
+              2021-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A0%B4%E8%A7%A3/">破解</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a>
+            
+              <a href="/tags/IC%E5%8D%A1/">IC卡</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/03/Nginx-ffmpeg-java-hls-videojs%E5%AE%9E%E7%8E%B0RTSP%E8%BD%ACHLS/" target="_self">
+          Nginx+ffmpeg+java+hls+videojs实现RTSP转HLS
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/03/Nginx-ffmpeg-java-hls-videojs%E5%AE%9E%E7%8E%B0RTSP%E8%BD%ACHLS/" target="_self">
+          
+          
+            
+          
+          安装Nginx和nginx-rtmp-module安装make等命令123yum -y install gcc automake autoconf libtool makeyum install wgetyum install unzip
+
+下载nginx-rtmp-module1234mkdir ~/module     # 创建下载module的文件夹cd ~/modulewget https
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-03 14:26" pubdate>
+              2021-06-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%A7%86%E9%A2%91%E6%B5%81/">视频流</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%A7%86%E9%A2%91%E6%B5%81/">视频流</a>
+            
+              <a href="/tags/rtsp/">rtsp</a>
+            
+              <a href="/tags/rtmp/">rtmp</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/" target="_self">
+          浏览器通过协议调用应用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/25/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%80%9A%E8%BF%87%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8%E5%BA%94%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          查看协议和文件类型的默认应用Win + I -&gt; 应用 -&gt; 默认应用，按协议指定默认应用。可以看到有些程序自定义协议在里面，并且可以设置打开此协议的程序，但是并没有发现可以新增协议。只能通过注册表来解决。
+自定义浏览器协议chrome浏览器用到了自定义浏览器协议这一标准。自定义浏览器协议允许在浏览器中使用protocol://url的形式进行调用本地程序。包括在网页上拉起百度云网盘、
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-25 15:08" pubdate>
+              2021-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Windows/">Windows</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Windows/">Windows</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/" target="_self">
+          CE查找基址
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/19/CE%E6%9F%A5%E6%89%BE%E5%9F%BA%E5%9D%80/" target="_self">
+          
+          
+            
+          
+          CE官网下载https://www.cheatengine.org/downloads.php
+查找精确值先根据阳光值去First Scan，然后消耗游戏阳光值Next Scan，最后筛选出阳光值地址。
+
+查找偏移量查找偏移量和上一个地址点击Find out what accesses this address，找出什么访问了这个地址。
+
+随便点击一个汇编指令，点击More information
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-19 09:16" pubdate>
+              2021-05-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CE/">CE</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/24/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/" target="_self">
+          在线工具
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/24/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/" target="_self">
+          
+          
+            
+          
+          
+JsonExportExcel
+
+JsonFormat
+
+CompareText
+
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-24 21:57" pubdate>
+              2021-04-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7/">在线工具</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-love"></i> <a href="https://github.com/AutKevin" target="_blank" rel="nofollow noopener"><span>Aeolian</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":140,"height":300},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.7}});</script></body>
+</html>
