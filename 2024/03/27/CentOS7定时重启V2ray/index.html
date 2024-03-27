@@ -18,7 +18,7 @@
   <meta name="author" content="AUTKevin">
   <meta name="keywords" content="">
   
-  <title>Trojan搭建服务器 - AEOLIAN</title>
+  <title>CentOS7定时重启V2ray - AEOLIAN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Trojan搭建服务器">
+            <span class="h2" id="subtitle" title="CentOS7定时重启V2ray">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-02-03 13:15" pubdate>
-        2024年2月3日 下午
+      <time datetime="2024-03-27 11:48" pubdate>
+        2024年3月27日 中午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      532 字
+      198 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      2
        分钟
     </span>
   
@@ -237,47 +237,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Trojan搭建服务器</h1>
+            <h1 style="display: none">CentOS7定时重启V2ray</h1>
             
             <div class="markdown-body">
-              <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>系统：CentOS7</p>
-<p>WEB Server：Nginx</p>
-<p>域名：namecheap（付费域名）</p>
-<p>CND：Cloudflare</p>
-<h2 id="域名托管"><a href="#域名托管" class="headerlink" title="域名托管"></a>域名托管</h2><p>将域名托管给Cloudflare，更改namecheap中的nameserver为Cloudflare</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203181801819.png" srcset="/img/loading.gif" lazyload alt="image-20240203181801819"></p>
-<p>在Cloudflare中配置域名并绑定IP</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203182346573.png" srcset="/img/loading.gif" lazyload alt="image-20240203182346573"></p>
-<p>等待一段时间等到域名生效，Cloudflare变成为Active状态，且能ping通方可进行下一步。</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203182047797.png" srcset="/img/loading.gif" lazyload alt="image-20240203182047797"></p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203142152383.png" srcset="/img/loading.gif" lazyload alt="image-20240203142152383"></p>
-<h2 id="Trojan安装"><a href="#Trojan安装" class="headerlink" title="Trojan安装"></a>Trojan安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装wget命令</span><br>yum install -y wget<br><span class="hljs-comment"># 安装acme，用来申请SSL/TLS证书</span><br>curl https://get.acme.sh | sh<br><span class="hljs-comment"># 一键安装</span><br>wget -N --no-check-certificate -q -O trojan_install.sh <span class="hljs-string">&quot;https://raw.githubusercontent.com/xyz690/Trojan/master/trojan_install.sh&quot;</span> &amp;&amp; chmod +x trojan_install.sh &amp;&amp; bash trojan_install.sh<br></code></pre></td></tr></table></figure>
+              <h2 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi restart_and_log_trojan.sh<br>chmod +x restart_trojan_service.sh<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203183852476.png" srcset="/img/loading.gif" lazyload alt="image-20240203183852476"></p>
-<p>输入www域名</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203184250178.png" srcset="/img/loading.gif" lazyload alt="image-20240203184250178"></p>
-<p>自动安装证书失败</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203184526143.png" srcset="/img/loading.gif" lazyload alt="image-20240203184526143"></p>
-<p>经过手动安装证书和安装trojan2.sh等其他脚本误打误撞证书安装成功。</p>
-<p>卸载重装后成功。</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203201307049.png" srcset="/img/loading.gif" lazyload alt="image-20240203201307049"></p>
-<h3 id="手动安装证书"><a href="#手动安装证书" class="headerlink" title="手动安装证书"></a>手动安装证书</h3><p>old</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装必备软件包</span><br>yum install socat<br><span class="hljs-comment"># 安装acme.sh</span><br>curl  https://get.acme.sh | sh<br><span class="hljs-built_in">source</span> ~/.bashrc <span class="hljs-comment">#执行后无反应</span><br><br><span class="hljs-comment"># 用邮箱注册zerossl账号</span><br>acme.sh  --register-account  -m EMAIL@example.com --server zerossl<br><br><span class="hljs-comment"># 生成证书，生成的证书在~/.acme.sh/下面</span><br>acme.sh --server zerossl --issue  -d  YOURDOMAIN.COM --dns dns_cf<br><br><span class="hljs-comment">#安装证书</span><br>sudo ~/.acme.sh/acme.sh --installcert -d MYDOMAIN --fullchainpath /etc/crt/autumn.crt --keypath /etc/crt/autumn.key<br></code></pre></td></tr></table></figure>
+<p>内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 定义日志文件的路径</span><br>LOG_FILE=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/trojan_restart.log&quot;</span><br><br><span class="hljs-comment"># 检查日志文件是否存在，如果不存在，则创建它</span><br><span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>    touch <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># 记录重启服务的时间</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Restarting trojan.service at <span class="hljs-subst">$(date)</span>&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><br><span class="hljs-comment"># 重启 trojan.service 服务</span><br>sudo systemctl restart trojan.service<br><br><span class="hljs-comment"># 增加延迟以确保服务有足够的时间重启</span><br>sleep 10<br><br><span class="hljs-comment"># 记录服务状态</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Status of trojan.service after restart:&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br>sudo systemctl status trojan.service &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span> 2&gt;&amp;1<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--------------------------------------------------&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><br></code></pre></td></tr></table></figure>
 
-<p>New</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 下载acme</span><br>curl https://get.acme.sh | sh<br><span class="hljs-comment"># 生成证书</span><br>~/.acme.sh/acme.sh --issue -d <span class="hljs-variable">$your_domain</span> --nginx<br><span class="hljs-comment"># 安装证书</span><br>~/.acme.sh/acme.sh --installcert -d <span class="hljs-variable">$your_domain</span> --key-file /usr/<span class="hljs-built_in">local</span>/etc/trojan/private.key --fullchain-file /usr/<span class="hljs-built_in">local</span>/etc/trojan/cert.crt<br><span class="hljs-comment"># 证书自动升级</span><br>~/.acme.sh/acme.sh --upgrade --auto-upgrade<br></code></pre></td></tr></table></figure>
+<p><img src="/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/image-20240327131650534.png" srcset="/img/loading.gif" lazyload alt="image-20240327131650534"></p>
+<h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">crontab -e<br></code></pre></td></tr></table></figure>
 
-<h3 id="Trojan命令"><a href="#Trojan命令" class="headerlink" title="Trojan命令"></a>Trojan命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看状态</span><br>systemctl status trojan.service<br><br><span class="hljs-comment"># 查看配置文件，重点看remote_addr、remote_port、password</span><br>cat /usr/src/trojan-macos/trojan/config.json<br></code></pre></td></tr></table></figure>
+<p>在 <code>crontab</code> 文件中添加以下行以安排任务（假设在每周日和周四的晚上 11 点执行）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">0 23 * * 0,4 ~/restart_trojan_service.sh<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203201825046.png" srcset="/img/loading.gif" lazyload alt="image-20240203201825046"></p>
-<h3 id="Trojan客户端"><a href="#Trojan客户端" class="headerlink" title="Trojan客户端"></a>Trojan客户端</h3><p>安卓&amp;windows： V2rayN客户端</p>
-<p>IOS&amp;MAC： shadowrocket</p>
-<p>添加trojan服务器，输入IP、端口、密码即可</p>
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203204600537.png" srcset="/img/loading.gif" lazyload alt="image-20240203204600537"></p>
-<h2 id="其他一键安装trojan"><a href="#其他一键安装trojan" class="headerlink" title="其他一键安装trojan"></a>其他一键安装trojan</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装trojan</span><br>wget -N --no-check-certificate <span class="hljs-string">&quot;https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan1.sh&quot;</span> &amp;&amp; chmod +x trojan1.sh &amp;&amp; ./trojan1.sh<br><span class="hljs-comment"># 安装证书</span><br>wget -N --no-check-certificate <span class="hljs-string">&quot;https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan2.sh&quot;</span> &amp;&amp; chmod +x trojan2.sh &amp;&amp; ./trojan2.sh<br><span class="hljs-comment"># 最终配置</span><br>wget -N --no-check-certificate <span class="hljs-string">&quot;https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan3.sh&quot;</span> &amp;&amp; chmod +x trojan3.sh &amp;&amp; ./trojan3.sh<br><br><span class="hljs-comment">#安装bbr一键加速</span><br>wget -N --no-check-certificate <span class="hljs-string">&quot;https://github.com/ylx2016/Linux-NetSpeed/releases/download/sh/tcp.sh&quot;</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203195342737.png" srcset="/img/loading.gif" lazyload alt="image-20240203195342737"></p>
-<h2 id><a href="#" class="headerlink" title></a></h2>
             </div>
             <hr>
             <div>
@@ -296,6 +270,8 @@
                     
                       <a class="hover-with-bg" href="/tags/VPN/">VPN</a>
                     
+                      <a class="hover-with-bg" href="/tags/V2ray/">V2ray</a>
+                    
                   </div>
                 
               </div>
@@ -311,18 +287,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CentOS7定时重启V2ray</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">
-                        <span class="hidden-mobile">原神私服</span>
+                      <a href="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="hidden-mobile">Trojan搭建服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

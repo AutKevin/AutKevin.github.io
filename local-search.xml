@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>CentOS7定时重启V2ray</title>
+    <link href="/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/"/>
+    <url>/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/</url>
+    
+    <content type="html"><![CDATA[<h2 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi restart_and_log_trojan.sh<br>chmod +x restart_trojan_service.sh<br></code></pre></td></tr></table></figure><p>内容如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 定义日志文件的路径</span><br>LOG_FILE=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/trojan_restart.log&quot;</span><br><br><span class="hljs-comment"># 检查日志文件是否存在，如果不存在，则创建它</span><br><span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>    touch <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># 记录重启服务的时间</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Restarting trojan.service at <span class="hljs-subst">$(date)</span>&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><br><span class="hljs-comment"># 重启 trojan.service 服务</span><br>sudo systemctl restart trojan.service<br><br><span class="hljs-comment"># 增加延迟以确保服务有足够的时间重启</span><br>sleep 10<br><br><span class="hljs-comment"># 记录服务状态</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Status of trojan.service after restart:&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br>sudo systemctl status trojan.service &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span> 2&gt;&amp;1<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--------------------------------------------------&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$LOG_FILE</span>&quot;</span><br><br></code></pre></td></tr></table></figure><p><img src="/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/image-20240327131650534.png" alt="image-20240327131650534"></p><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">crontab -e<br></code></pre></td></tr></table></figure><p>在 <code>crontab</code> 文件中添加以下行以安排任务（假设在每周日和周四的晚上 11 点执行）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">0 23 * * 0,4 ~/restart_trojan_service.sh<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>VPN</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VPN</tag>
+      
+      <tag>V2ray</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Trojan搭建服务器</title>
     <link href="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <url>/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
