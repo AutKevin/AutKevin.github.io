@@ -98,6 +98,27 @@ curl https://get.acme.sh | sh
 # 查看状态
 systemctl status trojan.service
 
+#启动
+systemctl start trojan
+
+#重启
+systemctl restart trojan
+
+#关闭
+systemctl stop trojan
+
+#状态查询（如果有显示绿色active(running)，就表示正常运行中）
+systemctl status trojan
+
+#错误查询
+journalctl -e -u trojan.service
+
+#开机自动启动
+systemctl enable trojan
+
+#禁止开机自动启动
+systemctl disable trojan
+
 # 查看配置文件，重点看remote_addr、remote_port、password
 cat /usr/src/trojan-macos/trojan/config.json
 ```
@@ -130,4 +151,28 @@ wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/releas
 
 ![image-20240203195342737](./Trojan搭建服务器/image-20240203195342737.png)
 
-## 
+## 问题
+
+### 运行中突然code=exited, status=1/FAILURE
+
+![image-20240527143229374](./Trojan搭建服务器/image-20240527143229374.png)
+
+然后使用 journalctl -e -u trojan.service 命令查看错误
+
+```
+5月 27 02:21:04 famous-drums-2.localdomain trojan[15795]: Welcome to trojan 1.16.0
+5月 27 02:21:04 famous-drums-2.localdomain trojan[15795]: [2024-05-27 02:21:04] [FATAL] fatal: config.json: cannot open file
+5月 27 02:21:04 famous-drums-2.localdomain trojan[15795]: [2024-05-27 02:21:04] [FATAL] exiting. . .
+5月 27 02:21:04 famous-drums-2.localdomain systemd[1]: trojan.service: control process exited, code=exited status=1
+5月 27 02:21:04 famous-drums-2.localdomain trojan[5926]: [2024-05-27 02:21:04] [WARN] got signal: 15
+5月 27 02:21:04 famous-drums-2.localdomain trojan[5926]: [2024-05-27 02:21:04] [WARN] trojan service stopped
+5月 27 02:21:04 famous-drums-2.localdomain systemd[1]: Stopped trojan.
+5月 27 02:21:04 famous-drums-2.localdomain systemd[1]: Unit trojan.service entered failed state.
+5月 27 02:21:04 famous-drums-2.localdomain systemd[1]: trojan.service failed.
+5月 27 02:21:04 famous-drums-2.localdomain systemd[1]: Started trojan.
+5月 27 02:21:04 famous-drums-2.localdomain trojan[15801]: Welcome to trojan 1.16.0
+5月 27 02:21:04 famous-drums-2.localdomain trojan[15801]: [2024-05-27 02:21:04] [WARN] trojan service (server) started at 0.0.0.0:443
+```
+
+![image-20240527142946349](./Trojan搭建服务器/image-20240527142946349.png)
+
