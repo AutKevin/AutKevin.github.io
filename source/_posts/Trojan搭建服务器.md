@@ -31,34 +31,127 @@ CND：Cloudflare
 
 ![image-20240203142152383](./Trojan搭建服务器/image-20240203142152383.png)
 
-## Trojan安装
+## Trojan
+
+### 1.SSH远程连接
+
+新建ssh文件,或者直接ssh root@IP -p 22连接
 
 ```bash
-# 安装wget命令
+# 启动一个子进程
+spawn ssh root@IP -p 22
+# 当出现password:字样时
+expect "password:"  
+# 像子进程发送密码
+send "PWD" 
+# 控制权交还给用户
+interact 
+```
+
+用expect ssh文件路径执行脚本文件.
+
+### 2.安装前置命令
+
+```bash
+# 1.安装wget和tar命令
 yum install -y wget
-# 安装acme，用来申请SSL/TLS证书
+yum install -y tar
+```
+
+### 3.安装acme.sh
+
+安装acme工具，用来申请SSL/TLS证书
+
+```bash
+# 2.安装acme工具，用来申请SSL/TLS证书
 curl https://get.acme.sh | sh
-# 一键安装
+```
+
+![image-20240527205557468](./Trojan搭建服务器/image-20240527205557468.png)
+
+如果安装时提示发行证书过期,更新CA证书即可
+
+```bash
+#centos更新CA证书
+sudo yum update ca-certificates
+```
+
+
+
+![image-20240527214846969](./Trojan搭建服务器/image-20240527214846969.png)
+
+### 4.安装trojan步骤
+
+```bash
+# 3.一键安装
 wget -N --no-check-certificate -q -O trojan_install.sh "https://raw.githubusercontent.com/xyz690/Trojan/master/trojan_install.sh" && chmod +x trojan_install.sh && bash trojan_install.sh
 ```
 
 ![image-20240203183852476](./Trojan搭建服务器/image-20240203183852476.png)
 
-输入www域名
+输入www域名,自动申请证书
 
 ![image-20240203184250178](./Trojan搭建服务器/image-20240203184250178.png)
 
-自动安装证书失败
-
-![image-20240203184526143](./Trojan搭建服务器/image-20240203184526143.png)
-
-经过手动安装证书和安装trojan2.sh等其他脚本误打误撞证书安装成功。
-
-卸载重装后成功。
+等待安装成功
 
 ![image-20240203201307049](./Trojan搭建服务器/image-20240203201307049.png)
 
-### 手动安装证书
+### Trojan命令
+
+```bash
+# 查看状态
+systemctl status trojan.service
+
+#启动
+systemctl start trojan
+
+#重启
+systemctl restart trojan
+
+#关闭
+systemctl stop trojan
+
+#状态查询（如果有显示绿色active(running)，就表示正常运行中）
+systemctl status trojan
+
+#持续查看输出日志
+journalctl -u trojan -f
+
+#错误查询
+journalctl -e -u trojan.service
+
+#开机自动启动
+systemctl enable trojan
+
+#禁止开机自动启动
+systemctl disable trojan
+
+# 查看配置文件，重点看remote_addr、remote_port、password
+cat /usr/src/trojan-macos/trojan/config.json
+```
+
+![image-20240203201825046](./Trojan搭建服务器/image-20240203201825046.png)
+
+### Trojan客户端
+
+安卓&windows： V2rayN客户端
+
+IOS&MAC： shadowrocket
+
+添加trojan服务器，输入IP、端口、密码即可
+
+![image-20240203204600537](./Trojan搭建服务器/image-20240203204600537.png)
+
+## 
+
+## 手动安装证书
+
+自动安装证书失败时,需要手动安装证书
+
+![image-20240203184526143](./Trojan搭建服务器/image-20240203184526143.png)
+
+经过手动安装证书和安装trojan2.sh等其他脚本误打误撞证书安装成功。安装证书成功后需要卸载重装。
 
 old
 
@@ -92,66 +185,23 @@ curl https://get.acme.sh | sh
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ```
 
-### Trojan命令
+## 一键安装bbr加速
 
 ```bash
-# 查看状态
-systemctl status trojan.service
-
-#启动
-systemctl start trojan
-
-#重启
-systemctl restart trojan
-
-#关闭
-systemctl stop trojan
-
-#状态查询（如果有显示绿色active(running)，就表示正常运行中）
-systemctl status trojan
-
-#错误查询
-journalctl -e -u trojan.service
-
-#开机自动启动
-systemctl enable trojan
-
-#禁止开机自动启动
-systemctl disable trojan
-
-# 查看配置文件，重点看remote_addr、remote_port、password
-cat /usr/src/trojan-macos/trojan/config.json
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 ```
-
-![image-20240203201825046](./Trojan搭建服务器/image-20240203201825046.png)
-
-### Trojan客户端
-
-安卓&windows： V2rayN客户端
-
-IOS&MAC： shadowrocket
-
-添加trojan服务器，输入IP、端口、密码即可
-
-![image-20240203204600537](./Trojan搭建服务器/image-20240203204600537.png)
-
-## 其他一键安装trojan
-
-```bash
-# 安装trojan
-wget -N --no-check-certificate "https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan1.sh" && chmod +x trojan1.sh && ./trojan1.sh
-# 安装证书
-wget -N --no-check-certificate "https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan2.sh" && chmod +x trojan2.sh && ./trojan2.sh
-# 最终配置
-wget -N --no-check-certificate "https://raw.githubusercontent.com/V2RaySSR/Trojansh/master/trojan3.sh" && chmod +x trojan3.sh && ./trojan3.sh
-
-#安装bbr一键加速
-wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/releases/download/sh/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
-```
-
-![image-20240203195342737](./Trojan搭建服务器/image-20240203195342737.png)
 
 ## 问题
+
+### ssh远程连接密钥问题
+
+当出现这个问题时,说明之前的密钥相冲突,vi ~/.ssh/know_hosts,将第四行(服务器IP开头)删掉.然后再次ssh连接,用密码连接即可
+
+![image-20240527204609769](./Trojan搭建服务器/image-20240527204609769.png)
+
+curl https://get.acme.sh | sh执行时报错,无tar命令.
+
+![image-20240527204927554](./Trojan搭建服务器/image-20240527204927554.png)
 
 ### 运行中突然code=exited, status=1/FAILURE
 
@@ -176,3 +226,13 @@ wget -N --no-check-certificate "https://github.com/ylx2016/Linux-NetSpeed/releas
 
 ![image-20240527142946349](./Trojan搭建服务器/image-20240527142946349.png)
 
+持续输出日志,然后分别执行stop和start命令,发现stop时config.json: cannot open file导致的问题
+
+```bash
+#持续查看输出日志
+journalctl -u trojan -f
+```
+
+![image-20240527153723286](./Trojan搭建服务器/image-20240527153723286.png)
+
+重启几次服务器后失败,遂直接重装
