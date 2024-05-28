@@ -89,13 +89,43 @@ wget -N --no-check-certificate -q -O trojan_install.sh "https://raw.githubuserco
 
 ![image-20240203183852476](./Trojan搭建服务器/image-20240203183852476.png)
 
-输入www域名,自动申请证书
+输入www域名,自动申请证书,注意申请后的ssl证书等级
 
 ![image-20240203184250178](./Trojan搭建服务器/image-20240203184250178.png)
 
 等待安装成功
 
 ![image-20240203201307049](./Trojan搭建服务器/image-20240203201307049.png)
+
+### 5.检测服务安装是否成功
+
+### 检查服务端
+
+```bash
+#状态查询,确保服务正常运行
+systemctl status trojan
+```
+
+### 查看端口
+
+注意这里智能查看是否开放,ssl导致的服务无法使用端口依然是不能用的.
+
+```bash
+tcping google.com 443
+```
+
+### 检查ssl
+
+```bash
+#查看证书等级
+openssl s_client -connect IP:443 -showcerts
+```
+
+### 浏览器访问
+
+浏览器输入https://域名:443,看网页是否能够被访问
+
+![image-20240528091551839](./Trojan搭建服务器/image-20240528091551839.png)
 
 ### Trojan命令
 
@@ -143,7 +173,13 @@ IOS&MAC： shadowrocket
 
 ![image-20240203204600537](./Trojan搭建服务器/image-20240203204600537.png)
 
-## 
+## 验证ssl证书
+
+```bash
+openssl s_client -connect yourserver:port -showcerts
+```
+
+![image-20240528090230080](./Trojan搭建服务器/image-20240528090230080.png)
 
 ## 手动安装证书
 
@@ -152,27 +188,6 @@ IOS&MAC： shadowrocket
 ![image-20240203184526143](./Trojan搭建服务器/image-20240203184526143.png)
 
 经过手动安装证书和安装trojan2.sh等其他脚本误打误撞证书安装成功。安装证书成功后需要卸载重装。
-
-old
-
-```bash
-# 安装必备软件包
-yum install socat
-# 安装acme.sh
-curl  https://get.acme.sh | sh
-source ~/.bashrc #执行后无反应
-
-# 用邮箱注册zerossl账号
-acme.sh  --register-account  -m EMAIL@example.com --server zerossl
-
-# 生成证书，生成的证书在~/.acme.sh/下面
-acme.sh --server zerossl --issue  -d  YOURDOMAIN.COM --dns dns_cf
-
-#安装证书
-sudo ~/.acme.sh/acme.sh --installcert -d MYDOMAIN --fullchainpath /etc/crt/autumn.crt --keypath /etc/crt/autumn.key
-```
-
-New
 
 ```bash
 # 下载acme
@@ -184,6 +199,8 @@ curl https://get.acme.sh | sh
 # 证书自动升级
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ```
+
+
 
 ## 一键安装bbr加速
 
@@ -236,3 +253,13 @@ journalctl -u trojan -f
 ![image-20240527153723286](./Trojan搭建服务器/image-20240527153723286.png)
 
 重启几次服务器后失败,遂直接重装
+
+### 测试443端口sslv3 alert certificate unknown
+
+通过浏览器的https://IP:443访问时无法打开网页,日志journalctl -u trojan -f输出如下内容
+
+![image-20240528085446842](./Trojan搭建服务器/image-20240528085446842.png)
+
+说是tls版本不对,在cloudflare中吧tls版本调成1.3
+
+![image-20240528090420697](./Trojan搭建服务器/image-20240528090420697.png)
