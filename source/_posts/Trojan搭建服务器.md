@@ -99,14 +99,14 @@ wget -N --no-check-certificate -q -O trojan_install.sh "https://raw.githubuserco
 
 ### 5.检测服务安装是否成功
 
-### 检查服务端
+#### 检查服务端
 
 ```bash
 #状态查询,确保服务正常运行
 systemctl status trojan
 ```
 
-### 查看端口
+#### 查看端口
 
 注意这里智能查看是否开放,ssl导致的服务无法使用端口依然是不能用的.
 
@@ -114,14 +114,14 @@ systemctl status trojan
 tcping google.com 443
 ```
 
-### 检查ssl
+#### 检查ssl
 
 ```bash
 #查看证书等级
 openssl s_client -connect IP:443 -showcerts
 ```
 
-### 浏览器访问
+#### 浏览器访问
 
 浏览器输入https://域名:443,看网页是否能够被访问
 
