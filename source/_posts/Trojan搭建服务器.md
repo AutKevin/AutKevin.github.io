@@ -208,7 +208,7 @@ curl https://get.acme.sh | sh
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 ```
 
-## 问题
+## 安装问题
 
 ### ssh远程连接密钥问题
 
@@ -219,6 +219,18 @@ wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
 curl https://get.acme.sh | sh执行时报错,无tar命令.
 
 ![image-20240527204927554](./Trojan搭建服务器/image-20240527204927554.png)
+
+### 测试443端口sslv3 alert certificate unknown
+
+通过浏览器的https://IP:443访问时无法打开网页,日志journalctl -u trojan -f输出如下内容
+
+![image-20240528085446842](./Trojan搭建服务器/image-20240528085446842.png)
+
+说是tls版本不对,在cloudflare中吧tls版本调成1.3
+
+![image-20240528090420697](./Trojan搭建服务器/image-20240528090420697.png)
+
+## 运行异常
 
 ### 运行中突然code=exited, status=1/FAILURE
 
@@ -254,12 +266,8 @@ journalctl -u trojan -f
 
 重启几次服务器后失败,遂直接重装
 
-### 测试443端口sslv3 alert certificate unknown
+### 账号无法登陆
 
-通过浏览器的https://IP:443访问时无法打开网页,日志journalctl -u trojan -f输出如下内容
+谷歌能上去,但是登陆chatgpt等一些账号登不进去.
 
-![image-20240528085446842](./Trojan搭建服务器/image-20240528085446842.png)
-
-说是tls版本不对,在cloudflare中吧tls版本调成1.3
-
-![image-20240528090420697](./Trojan搭建服务器/image-20240528090420697.png)
+解决办法: 关闭SSL/TLS中的自动HTTPS重写.![image-20240528111714133](./Trojan搭建服务器/image-20240528111714133.png)
