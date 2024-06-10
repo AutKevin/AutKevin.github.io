@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24
+      25
        分钟
     </span>
   
@@ -246,7 +246,10 @@
 <p>CND：Cloudflare</p>
 <h2 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h2><p><a target="_blank" rel="noopener" href="https://bandwagonhost.com/aff.php?aff=62182&gid=1">Bandwagonhost</a>购买VPS服务器并记录<strong>公网IP</strong>、<strong>SSH端口号</strong>及<strong>用户名密码</strong>。</p>
 <p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027182429521.png" srcset="/img/loading.gif" lazyload alt="image-20211027182429521"></p>
-<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p><a target="_blank" rel="noopener" href="https://www.namecheap.com/">Namecheap.com</a>官网购买域名，购买后<a target="_blank" rel="noopener" href="https://www.namecheap.com/">配置域名指定到VPS的公网IP</a>（这里不配置的话，Cloudflare无法添加站点）。</p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p><a target="_blank" rel="noopener" href="https://www.namecheap.com/">Namecheap.com</a>官网购买域名，购买后先不改动DNS(此时NAMESERVERS为NameCheap BasicDNS )，<a target="_blank" rel="noopener" href="https://www.namecheap.com/">给域名绑定到VPS的公网IP</a>（这里不配置的话，Cloudflare无法添加站点）。</p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20221102230235583.png" srcset="/img/loading.gif" lazyload alt="image-20221102230235583"></p>
+<p>给域名绑定IP </p>
+<p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20221102230646518.png" srcset="/img/loading.gif" lazyload alt="image-20221102230646518"></p>
 <p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027182000562.png" srcset="/img/loading.gif" lazyload alt="image-20211027182000562"></p>
 <h2 id="Cloudflare配置"><a href="#Cloudflare配置" class="headerlink" title="Cloudflare配置"></a>Cloudflare配置</h2><h3 id="添加域名站点"><a href="#添加域名站点" class="headerlink" title="添加域名站点"></a>添加域名站点</h3><p>进入<a target="_blank" rel="noopener" href="https://www.cloudflare.com/">Cloudflare</a>官网，点击添加站点，输入申请的二级域名，Cloudflare会自动读取域名指向的公网IP并在CF上配置好A Record，这里一定要<strong>关掉Proxy</strong>，让小云朵变成灰色，不然待会TLS证书会申请失败。</p>
 <p><img src="/2021/10/15/V2ray+ws+tls+cdn%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20211027200003508.png" srcset="/img/loading.gif" lazyload alt="image-20211027200003508"></p>

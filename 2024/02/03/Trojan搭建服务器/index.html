@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="AUTKevin">
+  <meta name="keywords" content="">
+  
+  <title>Trojan搭建服务器 - AEOLIAN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"autkevin.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Aeolian</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Trojan搭建服务器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-02-03 13:15" pubdate>
+        2024年2月3日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Trojan搭建服务器</h1>
+            
+            <div class="markdown-body">
+              <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>系统：CentOS7</p>
+<p>WEB Server：Nginx</p>
+<p>域名：namecheap（付费域名）</p>
+<p>CND：Cloudflare</p>
+<h2 id="域名托管"><a href="#域名托管" class="headerlink" title="域名托管"></a>域名托管</h2><p>将域名托管给Cloudflare，更改namecheap中的nameserver为Cloudflare</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203181801819.png" srcset="/img/loading.gif" lazyload alt="image-20240203181801819"></p>
+<p>在Cloudflare中配置域名并绑定IP</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203182346573.png" srcset="/img/loading.gif" lazyload alt="image-20240203182346573"></p>
+<p>等待一段时间等到域名生效，Cloudflare变成为Active状态，且能ping通方可进行下一步。</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203182047797.png" srcset="/img/loading.gif" lazyload alt="image-20240203182047797"></p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203142152383.png" srcset="/img/loading.gif" lazyload alt="image-20240203142152383"></p>
+<h2 id="Trojan"><a href="#Trojan" class="headerlink" title="Trojan"></a>Trojan</h2><h3 id="1-SSH远程连接"><a href="#1-SSH远程连接" class="headerlink" title="1.SSH远程连接"></a>1.SSH远程连接</h3><p>新建ssh文件,或者直接ssh root@IP -p 22连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动一个子进程</span><br>spawn ssh root@IP -p 22<br><span class="hljs-comment"># 当出现password:字样时</span><br>expect <span class="hljs-string">&quot;password:&quot;</span>  <br><span class="hljs-comment"># 像子进程发送密码</span><br>send <span class="hljs-string">&quot;PWD&quot;</span> <br><span class="hljs-comment"># 控制权交还给用户</span><br>interact <br></code></pre></td></tr></table></figure>
+
+<p>用expect ssh文件路径执行脚本文件.</p>
+<h3 id="2-安装前置命令"><a href="#2-安装前置命令" class="headerlink" title="2.安装前置命令"></a>2.安装前置命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1.安装wget和tar命令</span><br>yum install -y wget<br>yum install -y tar<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-安装acme-sh"><a href="#3-安装acme-sh" class="headerlink" title="3.安装acme.sh"></a>3.安装acme.sh</h3><p>安装acme工具，用来申请SSL/TLS证书</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 2.安装acme工具，用来申请SSL/TLS证书</span><br>curl https://get.acme.sh | sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527205557468.png" srcset="/img/loading.gif" lazyload alt="image-20240527205557468"></p>
+<p>如果安装时提示发行证书过期,更新CA证书即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#centos更新CA证书</span><br>sudo yum update ca-certificates<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527214846969.png" srcset="/img/loading.gif" lazyload alt="image-20240527214846969"></p>
+<h3 id="4-安装trojan步骤"><a href="#4-安装trojan步骤" class="headerlink" title="4.安装trojan步骤"></a>4.安装trojan步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 3.一键安装</span><br>wget -N --no-check-certificate -q -O trojan_install.sh <span class="hljs-string">&quot;https://raw.githubusercontent.com/xyz690/Trojan/master/trojan_install.sh&quot;</span> &amp;&amp; chmod +x trojan_install.sh &amp;&amp; bash trojan_install.sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203183852476.png" srcset="/img/loading.gif" lazyload alt="image-20240203183852476"></p>
+<p>输入www域名,自动申请证书,注意申请后的ssl证书等级</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203184250178.png" srcset="/img/loading.gif" lazyload alt="image-20240203184250178"></p>
+<p>等待安装成功</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203201307049.png" srcset="/img/loading.gif" lazyload alt="image-20240203201307049"></p>
+<h3 id="5-检测服务安装是否成功"><a href="#5-检测服务安装是否成功" class="headerlink" title="5.检测服务安装是否成功"></a>5.检测服务安装是否成功</h3><h4 id="检查服务端"><a href="#检查服务端" class="headerlink" title="检查服务端"></a>检查服务端</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#状态查询,确保服务正常运行</span><br>systemctl status trojan<br></code></pre></td></tr></table></figure>
+
+<h4 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h4><p>注意这里智能查看是否开放,ssl导致的服务无法使用端口依然是不能用的.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcping google.com 443<br></code></pre></td></tr></table></figure>
+
+<h4 id="检查ssl"><a href="#检查ssl" class="headerlink" title="检查ssl"></a>检查ssl</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看证书等级</span><br>openssl s_client -connect IP:443 -showcerts<br></code></pre></td></tr></table></figure>
+
+<h4 id="浏览器访问"><a href="#浏览器访问" class="headerlink" title="浏览器访问"></a>浏览器访问</h4><p>浏览器输入https://域名:443,看网页是否能够被访问</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528091551839.png" srcset="/img/loading.gif" lazyload alt="image-20240528091551839"></p>
+<h3 id="Trojan命令"><a href="#Trojan命令" class="headerlink" title="Trojan命令"></a>Trojan命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看状态</span><br>systemctl status trojan.service<br><br><span class="hljs-comment">#启动</span><br>systemctl start trojan<br><br><span class="hljs-comment">#重启</span><br>systemctl restart trojan<br><br><span class="hljs-comment">#关闭</span><br>systemctl stop trojan<br><br><span class="hljs-comment">#状态查询（如果有显示绿色active(running)，就表示正常运行中）</span><br>systemctl status trojan<br><br><span class="hljs-comment">#持续查看输出日志</span><br>journalctl -u trojan -f<br><br><span class="hljs-comment">#错误查询</span><br>journalctl -e -u trojan.service<br><br><span class="hljs-comment">#开机自动启动</span><br>systemctl <span class="hljs-built_in">enable</span> trojan<br><br><span class="hljs-comment">#禁止开机自动启动</span><br>systemctl <span class="hljs-built_in">disable</span> trojan<br><br><span class="hljs-comment"># 查看配置文件，重点看remote_addr、remote_port、password</span><br>cat /usr/src/trojan-macos/trojan/config.json<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203201825046.png" srcset="/img/loading.gif" lazyload alt="image-20240203201825046"></p>
+<h3 id="Trojan客户端"><a href="#Trojan客户端" class="headerlink" title="Trojan客户端"></a>Trojan客户端</h3><p>安卓&amp;windows： V2rayN客户端</p>
+<p>IOS&amp;MAC： shadowrocket</p>
+<p>添加trojan服务器，输入IP、端口、密码即可</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203204600537.png" srcset="/img/loading.gif" lazyload alt="image-20240203204600537"></p>
+<h2 id="验证ssl证书"><a href="#验证ssl证书" class="headerlink" title="验证ssl证书"></a>验证ssl证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openssl s_client -connect yourserver:port -showcerts<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528090230080.png" srcset="/img/loading.gif" lazyload alt="image-20240528090230080"></p>
+<h2 id="手动安装证书"><a href="#手动安装证书" class="headerlink" title="手动安装证书"></a>手动安装证书</h2><p>自动安装证书失败时,需要手动安装证书</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240203184526143.png" srcset="/img/loading.gif" lazyload alt="image-20240203184526143"></p>
+<p>经过手动安装证书和安装trojan2.sh等其他脚本误打误撞证书安装成功。安装证书成功后需要卸载重装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 下载acme</span><br>curl https://get.acme.sh | sh<br><span class="hljs-comment"># 生成证书</span><br>~/.acme.sh/acme.sh --issue -d <span class="hljs-variable">$your_domain</span> --nginx<br><span class="hljs-comment"># 安装证书</span><br>~/.acme.sh/acme.sh --installcert -d <span class="hljs-variable">$your_domain</span> --key-file /usr/<span class="hljs-built_in">local</span>/etc/trojan/private.key --fullchain-file /usr/<span class="hljs-built_in">local</span>/etc/trojan/cert.crt<br><span class="hljs-comment"># 证书自动升级</span><br>~/.acme.sh/acme.sh --upgrade --auto-upgrade<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="一键安装bbr加速"><a href="#一键安装bbr加速" class="headerlink" title="一键安装bbr加速"></a>一键安装bbr加速</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装问题"><a href="#安装问题" class="headerlink" title="安装问题"></a>安装问题</h2><h3 id="ssh远程连接密钥问题"><a href="#ssh远程连接密钥问题" class="headerlink" title="ssh远程连接密钥问题"></a>ssh远程连接密钥问题</h3><p>当出现这个问题时,说明之前的密钥相冲突,vi ~/.ssh/know_hosts,将第四行(服务器IP开头)删掉.然后再次ssh连接,用密码连接即可</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527204609769.png" srcset="/img/loading.gif" lazyload alt="image-20240527204609769"></p>
+<p>curl <a target="_blank" rel="noopener" href="https://get.acme.sh/">https://get.acme.sh</a> | sh执行时报错,无tar命令.</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527204927554.png" srcset="/img/loading.gif" lazyload alt="image-20240527204927554"></p>
+<h3 id="测试443端口sslv3-alert-certificate-unknown"><a href="#测试443端口sslv3-alert-certificate-unknown" class="headerlink" title="测试443端口sslv3 alert certificate unknown"></a>测试443端口sslv3 alert certificate unknown</h3><p>通过浏览器的<a href="https://IP:443访问时无法打开网页,日志journalctl">https://IP:443访问时无法打开网页,日志journalctl</a> -u trojan -f输出如下内容</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528085446842.png" srcset="/img/loading.gif" lazyload alt="image-20240528085446842"></p>
+<p>说是tls版本不对,在cloudflare中吧tls版本调成1.3</p>
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528090420697.png" srcset="/img/loading.gif" lazyload alt="image-20240528090420697"></p>
+<h2 id="运行异常"><a href="#运行异常" class="headerlink" title="运行异常"></a>运行异常</h2><h3 id="运行中突然code-exited-status-1-FAILURE"><a href="#运行中突然code-exited-status-1-FAILURE" class="headerlink" title="运行中突然code=exited, status=1/FAILURE"></a>运行中突然code=exited, status=1/FAILURE</h3><p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527143229374.png" srcset="/img/loading.gif" lazyload alt="image-20240527143229374"></p>
+<p>然后使用 journalctl -e -u trojan.service 命令查看错误</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[15795]</span>: Welcome to trojan <span class="hljs-number">1.16</span>.<span class="hljs-number">0</span><br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[15795]</span>: <span class="hljs-selector-attr">[2024-05-27 02:21:04]</span> <span class="hljs-selector-attr">[FATAL]</span> fatal: config<span class="hljs-selector-class">.json</span>: cannot open file<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[15795]</span>: <span class="hljs-selector-attr">[2024-05-27 02:21:04]</span> <span class="hljs-selector-attr">[FATAL]</span> exiting. . .<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> systemd<span class="hljs-selector-attr">[1]</span>: trojan<span class="hljs-selector-class">.service</span>: control process exited, code=exited status=<span class="hljs-number">1</span><br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[5926]</span>: <span class="hljs-selector-attr">[2024-05-27 02:21:04]</span> <span class="hljs-selector-attr">[WARN]</span> got signal: <span class="hljs-number">15</span><br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[5926]</span>: <span class="hljs-selector-attr">[2024-05-27 02:21:04]</span> <span class="hljs-selector-attr">[WARN]</span> trojan service stopped<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> systemd<span class="hljs-selector-attr">[1]</span>: Stopped trojan.<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> systemd<span class="hljs-selector-attr">[1]</span>: Unit trojan<span class="hljs-selector-class">.service</span> entered failed state.<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> systemd<span class="hljs-selector-attr">[1]</span>: trojan<span class="hljs-selector-class">.service</span> failed.<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> systemd<span class="hljs-selector-attr">[1]</span>: Started trojan.<br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[15801]</span>: Welcome to trojan <span class="hljs-number">1.16</span>.<span class="hljs-number">0</span><br><span class="hljs-number">5</span>月 <span class="hljs-number">27</span> <span class="hljs-number">02</span>:<span class="hljs-number">21</span>:<span class="hljs-number">04</span> famous-drums-<span class="hljs-number">2</span><span class="hljs-selector-class">.localdomain</span> trojan<span class="hljs-selector-attr">[15801]</span>: <span class="hljs-selector-attr">[2024-05-27 02:21:04]</span> <span class="hljs-selector-attr">[WARN]</span> trojan service (server) started at <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">443</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527142946349.png" srcset="/img/loading.gif" lazyload alt="image-20240527142946349"></p>
+<p>持续输出日志,然后分别执行stop和start命令,发现stop时config.json: cannot open file导致的问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#持续查看输出日志</span><br>journalctl -u trojan -f<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240527153723286.png" srcset="/img/loading.gif" lazyload alt="image-20240527153723286"></p>
+<p>重启几次服务器后失败,遂直接重装</p>
+<h3 id="账号无法登陆"><a href="#账号无法登陆" class="headerlink" title="账号无法登陆"></a>账号无法登陆</h3><p>谷歌能上去,但是登陆chatgpt等一些账号登不进去.</p>
+<p>解决办法: 关闭SSL/TLS中的自动HTTPS重写.<img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528111714133.png" srcset="/img/loading.gif" lazyload alt="image-20240528111714133"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/VPN/">VPN</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/VPN/">VPN</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/03/CS1-6%E9%80%8F%E8%A7%86%E8%BE%85%E5%8A%A9/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CS1.6透视辅助</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/24/%E5%8E%9F%E7%A5%9E%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">
+                        <span class="hidden-mobile">原神私服</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-love"></i> <a href="https://github.com/AutKevin" target="_blank" rel="nofollow noopener"><span>Aeolian</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":140,"height":300},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.7}});</script></body>
+</html>
