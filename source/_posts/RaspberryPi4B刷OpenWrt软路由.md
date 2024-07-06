@@ -39,7 +39,7 @@ Micro SD卡
 
 ### balenaEtcher烧录
 
-打开[balenaEtcher](https://etcher.balena.io/)软件，选择固件（压缩包先解压immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img）和SD卡分区。
+打开[balenaEtcher](https://etcher.balena.io/)软件，选择[固件](https://github.com/SuLingGG/OpenWrt-Rpi/releases/download/bcm27xx-bcm2711/immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img.gz)（压缩包先解压为immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img）和SD卡分区。
 
 ![image-20240610213427019](RaspberryPi4B刷OpenWrt软路由/image-20240610213427019.png)
 
@@ -75,4 +75,20 @@ Micro SD卡
 
 ![image-20240610221246893](RaspberryPi4B刷OpenWrt软路由/image-20240610221246893.png)
 
-## 配置OpenClash 
+## 配置PassWall
+
+在服务器中添加节点
+
+![image-20240706181316822](RaspberryPi4B刷OpenWrt软路由/image-20240706181316822.png)
+
+配置节点并测试
+
+![image-20240706181518207](RaspberryPi4B刷OpenWrt软路由/image-20240706181518207.png)
+
+局域网内其他设备网络配置
+
+![image-20240706184018341](RaspberryPi4B刷OpenWrt软路由/image-20240706184018341.png)
+
+测试
+
+![image-20240706184136846](RaspberryPi4B刷OpenWrt软路由/image-20240706184136846.png)
