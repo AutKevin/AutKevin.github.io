@@ -271,3 +271,27 @@ journalctl -u trojan -f
 谷歌能上去,但是登陆chatgpt等一些账号登不进去.
 
 解决办法: 关闭SSL/TLS中的自动HTTPS重写.![image-20240528111714133](./Trojan搭建服务器/image-20240528111714133.png)
+
+### 证书过期SSL handshake failed: sslv3 alert certificate unknown
+
+```bash
+#查看状态
+systemctl status trojan.service
+#查看日志
+journalctl -e -u trojan.service
+#查看证书状态
+openssl s_client -connect www.***.com:443 -showcerts
+```
+
+查看证书显示Verify return code: 10 (certificate has expired)
+
+![image-20241217093329623](./Trojan搭建服务器/image-20241217093329623.png)
+
+```bash
+#修复证书
+./trojan_install.sh
+#输入之前绑定的域名
+www.***.com
+```
+
+![image-20241217095603207](./Trojan搭建服务器/image-20241217095603207.png)
