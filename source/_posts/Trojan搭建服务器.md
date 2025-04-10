@@ -125,6 +125,13 @@ openssl s_client -connect IP:443 -showcerts
 
 浏览器输入https://域名:443,看网页是否能够被访问
 
+```bash
+#页面所在位置
+/usr/share/nginx/html
+```
+
+
+
 ![image-20240528091551839](./Trojan搭建服务器/image-20240528091551839.png)
 
 ### Trojan命令
@@ -271,6 +278,32 @@ journalctl -u trojan -f
 谷歌能上去,但是登陆chatgpt等一些账号登不进去.
 
 解决办法: 关闭SSL/TLS中的自动HTTPS重写.![image-20240528111714133](./Trojan搭建服务器/image-20240528111714133.png)
+
+### root无法登录
+
+ssh使用默认端口22，遭受大量密码尝试达到上限导致。
+
+```bash
+#重置次数root用户即可重新登录,重置后
+pam_tally2 -r -u root
+#新建一个root权限的用户，防止root再被锁，但是22端口还是一直在被攻击
+sudo useradd -m -G wheel -s /bin/bash USERNAME && sudo passwd USERNAME
+
+#修改 SSH 配置文件，找到Port 22，修改为其他端口例如2222
+sudo vi /etc/ssh/sshd_config
+#开放新端口
+sudo firewall-cmd --permanent --add-port=2222/tcp
+#重新加载防火墙
+sudo firewall-cmd --reload
+#重新启动SSH服务
+sudo systemctl restart sshd
+#测试新端口
+ssh -p 2222 username@hostname_or_ip
+```
+
+
+
+![image-20241217143253284](./Trojan搭建服务器/image-20241217143253284.png)
 
 ### 证书过期SSL handshake failed: sslv3 alert certificate unknown
 
