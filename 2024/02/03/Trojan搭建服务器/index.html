@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.4k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      20
        分钟
     </span>
   
@@ -282,6 +282,10 @@
 <h4 id="检查ssl"><a href="#检查ssl" class="headerlink" title="检查ssl"></a>检查ssl</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看证书等级</span><br>openssl s_client -connect IP:443 -showcerts<br></code></pre></td></tr></table></figure>
 
 <h4 id="浏览器访问"><a href="#浏览器访问" class="headerlink" title="浏览器访问"></a>浏览器访问</h4><p>浏览器输入https://域名:443,看网页是否能够被访问</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#页面所在位置</span><br>/usr/share/nginx/html<br></code></pre></td></tr></table></figure>
+
+
+
 <p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528091551839.png" srcset="/img/loading.gif" lazyload alt="image-20240528091551839"></p>
 <h3 id="Trojan命令"><a href="#Trojan命令" class="headerlink" title="Trojan命令"></a>Trojan命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看状态</span><br>systemctl status trojan.service<br><br><span class="hljs-comment">#启动</span><br>systemctl start trojan<br><br><span class="hljs-comment">#重启</span><br>systemctl restart trojan<br><br><span class="hljs-comment">#关闭</span><br>systemctl stop trojan<br><br><span class="hljs-comment">#状态查询（如果有显示绿色active(running)，就表示正常运行中）</span><br>systemctl status trojan<br><br><span class="hljs-comment">#持续查看输出日志</span><br>journalctl -u trojan -f<br><br><span class="hljs-comment">#错误查询</span><br>journalctl -e -u trojan.service<br><br><span class="hljs-comment">#开机自动启动</span><br>systemctl <span class="hljs-built_in">enable</span> trojan<br><br><span class="hljs-comment">#禁止开机自动启动</span><br>systemctl <span class="hljs-built_in">disable</span> trojan<br><br><span class="hljs-comment"># 查看配置文件，重点看remote_addr、remote_port、password</span><br>cat /usr/src/trojan-macos/trojan/config.json<br></code></pre></td></tr></table></figure>
 
@@ -322,6 +326,12 @@
 <p>重启几次服务器后失败,遂直接重装</p>
 <h3 id="账号无法登陆"><a href="#账号无法登陆" class="headerlink" title="账号无法登陆"></a>账号无法登陆</h3><p>谷歌能上去,但是登陆chatgpt等一些账号登不进去.</p>
 <p>解决办法: 关闭SSL/TLS中的自动HTTPS重写.<img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20240528111714133.png" srcset="/img/loading.gif" lazyload alt="image-20240528111714133"></p>
+<h3 id="root无法登录"><a href="#root无法登录" class="headerlink" title="root无法登录"></a>root无法登录</h3><p>ssh使用默认端口22，遭受大量密码尝试达到上限导致。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#重置次数root用户即可重新登录,重置后</span><br>pam_tally2 -r -u root<br><span class="hljs-comment">#新建一个root权限的用户，防止root再被锁，但是22端口还是一直在被攻击</span><br>sudo useradd -m -G wheel -s /bin/bash USERNAME &amp;&amp; sudo passwd USERNAME<br><br><span class="hljs-comment">#修改 SSH 配置文件，找到Port 22，修改为其他端口例如2222</span><br>sudo vi /etc/ssh/sshd_config<br><span class="hljs-comment">#开放新端口</span><br>sudo firewall-cmd --permanent --add-port=2222/tcp<br><span class="hljs-comment">#重新加载防火墙</span><br>sudo firewall-cmd --reload<br><span class="hljs-comment">#重新启动SSH服务</span><br>sudo systemctl restart sshd<br><span class="hljs-comment">#测试新端口</span><br>ssh -p 2222 username@hostname_or_ip<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/02/03/Trojan%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/image-20241217143253284.png" srcset="/img/loading.gif" lazyload alt="image-20241217143253284"></p>
 <h3 id="证书过期SSL-handshake-failed-sslv3-alert-certificate-unknown"><a href="#证书过期SSL-handshake-failed-sslv3-alert-certificate-unknown" class="headerlink" title="证书过期SSL handshake failed: sslv3 alert certificate unknown"></a>证书过期SSL handshake failed: sslv3 alert certificate unknown</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看状态</span><br>systemctl status trojan.service<br><span class="hljs-comment">#查看日志</span><br>journalctl -e -u trojan.service<br><span class="hljs-comment">#查看证书状态</span><br>openssl s_client -connect www.***.com:443 -showcerts<br></code></pre></td></tr></table></figure>
 
 <p>查看证书显示Verify return code: 10 (certificate has expired)</p>

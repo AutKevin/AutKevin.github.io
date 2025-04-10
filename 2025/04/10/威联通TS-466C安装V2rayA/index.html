@@ -18,7 +18,7 @@
   <meta name="author" content="AUTKevin">
   <meta name="keywords" content="">
   
-  <title>RaspberryPi4B刷OpenWrt软路由 - AEOLIAN</title>
+  <title>威联通TS-466C安装V2rayA - AEOLIAN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="RaspberryPi4B刷OpenWrt软路由">
+            <span class="h2" id="subtitle" title="威联通TS-466C安装V2rayA">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-06-10 21:17" pubdate>
-        2024年6月10日 晚上
+      <time datetime="2025-04-10 09:57" pubdate>
+        2025年4月10日 上午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      376 字
+      703 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      8
        分钟
     </span>
   
@@ -237,55 +237,70 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RaspberryPi4B刷OpenWrt软路由</h1>
+            <h1 style="display: none">威联通TS-466C安装V2rayA</h1>
             
             <div class="markdown-body">
-              <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><p>RaspberryPi4B</p>
-<p>Micro SD卡</p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><p>烧录工具:  <a target="_blank" rel="noopener" href="https://etcher.balena.io/">balenaEtcher</a></p>
-<p>固件: <a target="_blank" rel="noopener" href="https://openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWrt</a>官方固件(注意:官方固件没有插件,需要自己安装,可以刷其他的集成了trojan的OpenWrt版本)</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610212352721.png" srcset="/img/loading.gif" lazyload alt="image-20240610212352721"></p>
-<h2 id="烧录SD卡"><a href="#烧录SD卡" class="headerlink" title="烧录SD卡"></a>烧录SD卡</h2><h3 id="SD卡格式化"><a href="#SD卡格式化" class="headerlink" title="SD卡格式化"></a>SD卡格式化</h3><p>在计算机管理中将SD卡的卷全部删除。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610212733929.png" srcset="/img/loading.gif" lazyload alt="image-20240610212733929"></p>
-<p>新建卷</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610214006420.png" srcset="/img/loading.gif" lazyload alt="image-20240610214006420"></p>
-<p>格式化一下，确保能正常格式化！</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610214041383.png" srcset="/img/loading.gif" lazyload alt="image-20240610214041383"></p>
-<h3 id="balenaEtcher烧录"><a href="#balenaEtcher烧录" class="headerlink" title="balenaEtcher烧录"></a>balenaEtcher烧录</h3><p>打开<a target="_blank" rel="noopener" href="https://etcher.balena.io/">balenaEtcher</a>软件，选择<a target="_blank" rel="noopener" href="https://github.com/SuLingGG/OpenWrt-Rpi/releases/download/bcm27xx-bcm2711/immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img.gz">固件</a>（压缩包先解压为immortalwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img）和SD卡分区。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610213427019.png" srcset="/img/loading.gif" lazyload alt="image-20240610213427019"></p>
-<p>烧录完成（烧录失败先格式化SD卡确保SD卡能正常格式化）,如果第一次烧录弹出无法格式化的弹框，把U盘拔下来重插把刚才提示无法格式化的盘符手动格式化,然后再次烧录。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610215005556.png" srcset="/img/loading.gif" lazyload alt="image-20240610215005556"></p>
-<h3 id="测试刷机是否成功"><a href="#测试刷机是否成功" class="headerlink" title="测试刷机是否成功"></a>测试刷机是否成功</h3><p>树莓派连接上电源、网线、HDMI线看看是否启动成功。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610215529828.png" srcset="/img/loading.gif" lazyload alt="image-20240610215529828"></p>
-<h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><p>查看树莓派IP，插上键盘，用ifconfig命令查看ip地址，树莓派IP的lan口名称为br-lan，IP为192.168.1.1</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610215747665.png" srcset="/img/loading.gif" lazyload alt="image-20240610215747665"></p>
-<p>将电脑的IP改为和树莓派同一个网段。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610220004001.png" srcset="/img/loading.gif" lazyload alt="image-20240610220004001"></p>
-<p>浏览器输入树莓派的IP，直接访问OpenWrt的管理界面。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610220229295.png" srcset="/img/loading.gif" lazyload alt="image-20240610220229295"></p>
-<p>设置树莓派的IP地址</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610221602195.png" srcset="/img/loading.gif" lazyload alt="image-20240610221602195"></p>
-<p>再次查看树莓派IP,发现已经更改过来.把电脑的IP也切位之前的DHCP,通过路由器下的地址访问。</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240610221246893.png" srcset="/img/loading.gif" lazyload alt="image-20240610221246893"></p>
-<h2 id="配置PassWall"><a href="#配置PassWall" class="headerlink" title="配置PassWall"></a>配置PassWall</h2><p>在服务器中添加节点</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240706181316822.png" srcset="/img/loading.gif" lazyload alt="image-20240706181316822"></p>
-<p>配置节点并测试</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240706181518207.png" srcset="/img/loading.gif" lazyload alt="image-20240706181518207"></p>
-<p>局域网内其他设备网络配置</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240706184018341.png" srcset="/img/loading.gif" lazyload alt="image-20240706184018341"></p>
-<p>测试</p>
-<p><img src="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/image-20240706184136846.png" srcset="/img/loading.gif" lazyload alt="image-20240706184136846"></p>
+              <h2 id="Docker直接安装V2raya"><a href="#Docker直接安装V2raya" class="headerlink" title="Docker直接安装V2raya"></a>Docker直接安装V2raya</h2><p>官网： <a target="_blank" rel="noopener" href="https://v2raya.org/">https://v2raya.org</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#获取最新版镜像</span><br>docker pull mzz2017/v2raya<br><span class="hljs-comment">#停止现有版本容器并移除容器</span><br>docker container stop v2raya<br>docker container rm v2raya<br><br><span class="hljs-comment">#运行容器</span><br>docker run -d \<br>  --restart=always \<br>  --privileged \<br>  --network=host \<br>  --name v2raya \<br>  -e V2RAYA_LOG_FILE=/tmp/v2raya.log \<br>  -e V2RAYA_V2RAY_BIN=/usr/<span class="hljs-built_in">local</span>/bin/v2ray \<br>  -e V2RAYA_NFTABLES_SUPPORT=off \<br>  -e IPTABLES_MODE=legacy \<br>  -v /lib/modules:/lib/modules:ro \<br>  -v /etc/resolv.conf:/etc/resolv.conf \<br>  -v /etc/v2raya:/etc/v2raya \<br>  mzz2017/v2raya<br><br><span class="hljs-comment">#查看状态</span><br>docker container stats v2raya<br></code></pre></td></tr></table></figure>
+
+<p>安装完之后端口为2017，通过<a href="http://IP:2017端口访问。">http://IP:2017端口访问。</a></p>
+<h2 id="Container-Station安装V2rayA"><a href="#Container-Station安装V2rayA" class="headerlink" title="Container Station安装V2rayA"></a>Container Station安装V2rayA</h2><h3 id="新建容器"><a href="#新建容器" class="headerlink" title="新建容器"></a>新建容器</h3><p>镜像为Docker Hub的“mzz2017/v2raya:latest”</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410102422886.png" srcset="/img/loading.gif" lazyload alt="image-20250410102422886"></p>
+<h3 id="配置容器"><a href="#配置容器" class="headerlink" title="配置容器"></a>配置容器</h3><p>配置好网络和主机端口</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410102831610.png" srcset="/img/loading.gif" lazyload alt="image-20250410102831610"></p>
+<h3 id="确认测试"><a href="#确认测试" class="headerlink" title="确认测试"></a>确认测试</h3><p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410102947206.png" srcset="/img/loading.gif" lazyload alt="image-20250410102947206"></p>
+<p>创建完成后复制端口转发</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410103241915.png" srcset="/img/loading.gif" lazyload alt="image-20250410103241915"></p>
+<h3 id="创建管理员账号密码"><a href="#创建管理员账号密码" class="headerlink" title="创建管理员账号密码"></a>创建管理员账号密码</h3><p>复制进去进入V2raya管理员创建界面，如果忘记密码可以使用重置密码命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#v2raya命令重置密码</span><br>sudo v2raya --reset-password<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410103321456.png" srcset="/img/loading.gif" lazyload alt="image-20250410103321456"></p>
+<h3 id="创建节点并启动"><a href="#创建节点并启动" class="headerlink" title="创建节点并启动"></a>创建节点并启动</h3><p>登陆后创建节点-》连接节点-》启动。</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410104325175.png" srcset="/img/loading.gif" lazyload alt="image-20250410104325175"></p>
+<p>启动后由粉红色变为蓝色表示成功。</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410104508264.png" srcset="/img/loading.gif" lazyload alt="image-20250410104508264"></p>
+<h3 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h3><p>默认情况下 v2rayA 会通过核心开放 20170(socks5), 20171(http), 20172(带分流规则的http) 端口。</p>
+<p>如果是需要为局域网中的其他机器提供代理，在设置中打开“局域网共享”，并检查防火墙开放情况。</p>
+<h4 id="透明代理"><a href="#透明代理" class="headerlink" title="透明代理"></a>透明代理</h4><p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/tproxy.png" srcset="/img/loading.gif" lazyload alt="透明代理"></p>
+<p>这种方法是 v2rayA 推荐的方法。它相比于其他方法具有诸多优势，v2rayA 可以一键开启透明代理，为<strong>几乎所有程序</strong>提供代理服务。</p>
+<p>在设置中选择透明代理的分流方式，以及实现方式，然后保存即可。</p>
+<p>注意，如需选择 GFWList，需要下载对应的规则库，请点击右上角的更新以完成下载。</p>
+<h4 id="系统代理"><a href="#系统代理" class="headerlink" title="系统代理"></a>系统代理</h4><p>系统代理可为<strong>主动支持代理的程序</strong>提供代理服务。在不同的桌面环境中设置的位置不尽相同，请通过搜索引擎自行搜索。</p>
+<h4 id="SwitchyOmega"><a href="#SwitchyOmega" class="headerlink" title="SwitchyOmega"></a>SwitchyOmega</h4><p>SwitchyOmega 等浏览器插件可为<strong>浏览器</strong>提供代理服务。具体方法请通过搜索引擎自行搜索。</p>
+<h2 id="Container-Station使用代理"><a href="#Container-Station使用代理" class="headerlink" title="Container Station使用代理"></a>Container Station使用代理</h2><p>编辑container-station的run-docker.sh脚本，添加代理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编辑脚本文件</span><br>vi /share/CACHEDEV1_DATA/.qpkg/container-station/script/run-docker.sh<br><br><span class="hljs-comment"># 在倒数第二行添加如下配置</span><br><span class="hljs-comment"># docker设置代理</span><br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://server:port&quot;</span><br><span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://server:port&quot;</span><br><span class="hljs-built_in">export</span> no_proxy= <span class="hljs-string">&quot;localhost,127.0.0.0/8,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8&quot;</span><br><br><span class="hljs-comment"># 重启container station生效</span><br>/etc/init.d/container-station.sh restart<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410111243700.png" srcset="/img/loading.gif" lazyload alt="image-20250410111243700"></p>
+<h3 id="使用后依然无法访问docker-hub"><a href="#使用后依然无法访问docker-hub" class="headerlink" title="使用后依然无法访问docker hub"></a>使用后依然无法访问docker hub</h3><p>在docker中又添加了一个桥接模式的网络</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410113233977.png" srcset="/img/loading.gif" lazyload alt="image-20250410113233977"></p>
+<p>测试这两个网络，发现端口都是通的。</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410113313920.png" srcset="/img/loading.gif" lazyload alt="image-20250410113313920"></p>
+<p>通过curl命令测试发现也是通的。那问题就出在container station</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410114324662.png" srcset="/img/loading.gif" lazyload alt="image-20250410114324662"></p>
+<p>经历了几次界面重启和命令重启</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410115551478.png" srcset="/img/loading.gif" lazyload alt="image-20250410115551478"></p>
+<p>最后终于成功</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410115632457.png" srcset="/img/loading.gif" lazyload alt="image-20250410115632457"></p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/NAS/">NAS</a>
+                    
+                  </div>
+                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/RaspberryPi/">RaspberryPi</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/">伺服器</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NAS/">NAS</a>
                     
                   </div>
                 
@@ -302,18 +317,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">威联通TS-466C安装V2rayA</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/27/CentOS7%E5%AE%9A%E6%97%B6%E9%87%8D%E5%90%AFV2ray/">
-                        <span class="hidden-mobile">CentOS7定时重启V2ray</span>
+                      <a href="/2024/06/10/RaspberryPi4B%E5%88%B7OpenWrt%E8%BD%AF%E8%B7%AF%E7%94%B1/">
+                        <span class="hidden-mobile">RaspberryPi4B刷OpenWrt软路由</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
