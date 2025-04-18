@@ -28,7 +28,7 @@ docker run -d \
   -e IPTABLES_MODE=legacy \
   -v /lib/modules:/lib/modules:ro \
   -v /etc/resolv.conf:/etc/resolv.conf \
-  -v /etc/v2raya:/etc/v2raya \
+  -v /share/Container/v2raya:/etc/v2raya \
   mzz2017/v2raya
 
 #查看状态
