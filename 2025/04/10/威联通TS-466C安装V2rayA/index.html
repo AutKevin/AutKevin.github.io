@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      703 字
+      704 字
     </span>
   
 
@@ -241,7 +241,7 @@
             
             <div class="markdown-body">
               <h2 id="Docker直接安装V2raya"><a href="#Docker直接安装V2raya" class="headerlink" title="Docker直接安装V2raya"></a>Docker直接安装V2raya</h2><p>官网： <a target="_blank" rel="noopener" href="https://v2raya.org/">https://v2raya.org</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#获取最新版镜像</span><br>docker pull mzz2017/v2raya<br><span class="hljs-comment">#停止现有版本容器并移除容器</span><br>docker container stop v2raya<br>docker container rm v2raya<br><br><span class="hljs-comment">#运行容器</span><br>docker run -d \<br>  --restart=always \<br>  --privileged \<br>  --network=host \<br>  --name v2raya \<br>  -e V2RAYA_LOG_FILE=/tmp/v2raya.log \<br>  -e V2RAYA_V2RAY_BIN=/usr/<span class="hljs-built_in">local</span>/bin/v2ray \<br>  -e V2RAYA_NFTABLES_SUPPORT=off \<br>  -e IPTABLES_MODE=legacy \<br>  -v /lib/modules:/lib/modules:ro \<br>  -v /etc/resolv.conf:/etc/resolv.conf \<br>  -v /etc/v2raya:/etc/v2raya \<br>  mzz2017/v2raya<br><br><span class="hljs-comment">#查看状态</span><br>docker container stats v2raya<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#获取最新版镜像</span><br>docker pull mzz2017/v2raya<br><span class="hljs-comment">#停止现有版本容器并移除容器</span><br>docker container stop v2raya<br>docker container rm v2raya<br><br><span class="hljs-comment">#运行容器</span><br>docker run -d \<br>  --restart=always \<br>  --privileged \<br>  --network=host \<br>  --name v2raya \<br>  -e V2RAYA_LOG_FILE=/tmp/v2raya.log \<br>  -e V2RAYA_V2RAY_BIN=/usr/<span class="hljs-built_in">local</span>/bin/v2ray \<br>  -e V2RAYA_NFTABLES_SUPPORT=off \<br>  -e IPTABLES_MODE=legacy \<br>  -v /lib/modules:/lib/modules:ro \<br>  -v /etc/resolv.conf:/etc/resolv.conf \<br>  -v /share/Container/v2raya:/etc/v2raya \<br>  mzz2017/v2raya<br><br><span class="hljs-comment">#查看状态</span><br>docker container stats v2raya<br></code></pre></td></tr></table></figure>
 
 <p>安装完之后端口为2017，通过<a href="http://IP:2017端口访问。">http://IP:2017端口访问。</a></p>
 <h2 id="Container-Station安装V2rayA"><a href="#Container-Station安装V2rayA" class="headerlink" title="Container Station安装V2rayA"></a>Container Station安装V2rayA</h2><h3 id="新建容器"><a href="#新建容器" class="headerlink" title="新建容器"></a>新建容器</h3><p>镜像为Docker Hub的“mzz2017/v2raya:latest”</p>
@@ -316,6 +316,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/04/11/JellyFin/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JellyFin搭建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
