@@ -93,6 +93,37 @@ fiora（即时聊天）
 
 Perlite（知识库）
 
+## 下载雷
+
+### qBittorrent
+
+```bash
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai # 你的时区
+      - UMASK_SET=022
+      - WEBUI_PORT=28081 # 将此处修改成你欲使用的 WEB 管理平台端口 
+    volumes:
+      - /share/Container/qbittorrent/config:/config # 绝对路径请修改为自己的config文件夹
+      - /share/downloads:/downloads # 绝对路径请修改为自己的downloads文件夹
+    ports:
+      # 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。
+      - 26881:26881 
+      - 26881:26881/udp
+      # 此处WEB UI 目标端口与内部端口务必保证相同，见问题1
+      - 28081:28081
+    restart: unless-stopped
+```
+
+用户名密码在容器日志里面显示
+
+
+
 ## 音乐类
 
 ### xiaomusic
@@ -161,6 +192,79 @@ teemii（在线漫画下载和管理）
 ### Plex
 
 onelist（用于 alist 的影视刮削工具）
+
+### 动漫AutoBangumi
+
+官网:https://www.autobangumi.org/home/
+
+#### docker cli部署
+
+```bash
+docker run -d \
+  --name=AutoBangumi \
+  -v /share/Container/AutoBangumi/config:/app/config \
+  -v /share/Container/AutoBangumi/config:/app/data \
+  -p 27892:7892 \
+  -e TZ=Asia/Shanghai \
+  -e PUID=$(id -u) \
+  -e PGID=$(id -g) \
+  -e UMASK=022 \
+  --network=bridge \
+  --dns=8.8.8.8 \
+  --restart unless-stopped \
+  ghcr.io/estrellaxd/auto_bangumi:latest
+```
+
+#### Docker-compose 部署
+
+```YML
+version: "3.8"
+
+services:
+  AutoBangumi:
+    image: "ghcr.io/estrellaxd/auto_bangumi:latest"
+    container_name: AutoBangumi
+    volumes:
+      - /share/Container/AutoBangumi/config:/app/config
+      - /share/Container/AutoBangumi/data:/app/data
+    ports:
+      - "27892:7892"
+    network_mode: bridge
+    restart: unless-stopped
+    dns:
+      - 223.5.5.5
+    environment:
+      - TZ=Asia/Shanghai
+      - PGID=$(id -g)
+      - PUID=$(id -u)
+      - UMASK=022
+```
+
+默认用户名密码admin/adminadmin
+
+### 动漫ani-rss
+
+```YML
+version: "3"
+services:
+  ani-rss:
+    container_name: ani-rss
+    volumes:
+      - /share/Container/ani-rss/config:/config
+      - /share/video/animate/:/Media
+    ports:
+      - 27789:7789
+    environment:
+      - PORT=7789
+      - CONFIG=/config
+      - TZ=Asia/Shanghai
+    restart: always
+    image: wushuo894/ani-rss
+```
+
+admin/admin
+
+
 
 ## 书籍
 
