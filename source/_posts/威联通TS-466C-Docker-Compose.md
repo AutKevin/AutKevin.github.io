@@ -317,6 +317,74 @@ transformer-explainer（大模型可视化）
 
 one-api（大模型 API 中间件）
 
+独角兽发卡
+
+```bash
+version: "3"
+services:
+faka:
+    image:hkccr.ccs.tencentyun.com/apocalypsor/dujiaoka:latest
+    environment:
+      -INSTALL=true
+    volumes:
+      -./env.conf:/dujiaoka/.env
+      -./uploads:/dujiaoka/public/uploads
+    ports:
+      -56789:80
+
+db:
+    image:mariadb:focal
+    environment:
+      -MYSQL_ROOT_PASSWORD=你的root密码
+    volumes:
+      -./data:/var/lib/mysql
+
+redis:
+    image:redis:alpine
+    volumes:
+      - ./redis:/data
+```
+
+
+
+## 羊毛类
+
+### 青龙面板
+
+```bash
+docker pull whyour/qinglong:debian
+```
+
+![image-20250424133913395](./威联通TS-466C-Docker-Compose/image-20250424133913395.png)
+
+> 1.依赖管理添加脚本运行环境，需要先在系统设置中添加镜像NodeJs（镜像https://registry.npmmirror.com）、Python(镜像https://pypi.tuna.tsinghua.edu.cn/simple)、Linux
+>
+> 环境管理添加脚本使用的Cookie变量
+>
+> 面板 → 订阅管理中添加脚本仓库
+
+#### 京东京豆
+
+在订阅管理-》创建订阅中直接复制在名称中。
+
+![image-20250424140254873](./威联通TS-466C-Docker-Compose/image-20250424140254873.png)
+
+```bash
+#Faker集合仓库
+ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|ZooFaker_Necklace"
+
+```
+
+##### 获取cookie
+
+alook` 浏览器里面输入京东官网 `m.jd.com，点击`右上角的登录`或者`右下角的未登录`，进入登录页面，使用手机接收短信的方式进行登录；点击浏览器下面的`三条杠（菜单）`；点击 `工具箱` --> `开发者工具` --> `Cookies` --> `拷贝`；Cookies中的 pt_key 和pt_pin的字段复制下来。
+
+记住用`Alook`获取cookies后千万不要在`Alook`上退出京东账号，否则cookies会失效
+
+青龙面板-》环境变量中新增JD_COOKIE
+
+![image-20250424142315068](./威联通TS-466C-Docker-Compose/image-20250424142315068.png)
+
 
 
 ## 其他
