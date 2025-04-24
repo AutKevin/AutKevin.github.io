@@ -111,6 +111,7 @@ services:
     volumes:
       - /share/Container/qbittorrent/config:/config # 绝对路径请修改为自己的config文件夹
       - /share/downloads:/downloads # 绝对路径请修改为自己的downloads文件夹
+      - /share/video:/video
     ports:
       # 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。
       - 26881:26881 
@@ -121,6 +122,10 @@ services:
 ```
 
 用户名密码在容器日志里面显示
+
+**天雪动漫高清论坛**：资源方面以高清动漫资源为主，下载方面以PT下载为主、网盘分享为辅，网站基于Discuz构建。
+**U2动漫花园**：国内最为知名的动漫PT站,动漫资源很全，发布速度很快。
+**M-Team**：以特色资源(限制级内容)为主的PT站点
 
 
 
