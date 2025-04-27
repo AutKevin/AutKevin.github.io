@@ -7,11 +7,36 @@ tags: [NAS]
 
 ## 注册PT站账号
 
+
+| 序号 | 名称 | 网址 | 类型 | 特色说明 |
+| :--: | :-- | :--- | :-- | :-- |
+| 1 | The Pirate Bay | [https://thepiratebay.org](https://thepiratebay.org) | 综合资源 | 世界最老牌之一，资源全面，少量中文 |
+| 2 | RARBG | [https://rarbg.to](https://rarbg.to) | 综合资源 | 电影、剧集质量高，字幕资源丰富（部分支持中文） |
+| 3 | YTS | [https://yts.mx](https://yts.mx) | 电影专用 | 小体积高清电影，部分电影自带中英双语字幕 |
+| 4 | 1337X | [https://1337x.to](https://1337x.to) | 综合资源 | 动漫区、剧集区资源丰富，部分中文种子 |
+| 5 | Rutracker | [https://rutracker.org](https://rutracker.org) | 综合资源 | 俄语站但资源海量，含大量音乐、软件和中文漫画 |
+| 6 | LimeTorrents | [https://limetorrents.info](https://limetorrents.info) | 综合资源 | 更新迅速，部分冷门中文资源可挖掘 |
+| 7 | EZTV | [https://eztv.re](https://eztv.re) | 电视剧专用 | 主打欧美剧，需搭配字幕组资源 |
+| 8 | TorrentDownloads | [https://www.torrentdownloads.me?ref=codernav.com](https://www.torrentdownloads.me?ref=codernav.com) | 综合资源 | 适合找冷门、旧版中文软件资源 |
+| 9 | IPTorrents | [https://www.iptorrents.com?ref=codernav.com](https://www.iptorrents.com?ref=codernav.com) | 综合资源 | 会员制，速度快，有中文剧集区 |
+| 10 | Bibliotik | [https://bibliotik.org](https://bibliotik.org) | 电子书专用 | 高质量电子书，少量中文电子书资源 |
+| 11 | Nyaa | [https://nyaa.si?ref=codernav.com](https://nyaa.si?ref=codernav.com) | 动漫资源 | 超大量日漫、港漫、中文汉化资源 |
+| 12 | Torrent9 | [https://www.torrent9.vip](https://www.torrent9.vip) | 综合资源 | 法语站，适合搜少见的欧美电影 |
+| 13 | FitGirl Repacks | [https://fitgirl-repacks.site?ref=codernav.com](https://fitgirl-repacks.site?ref=codernav.com) | 游戏专用 | 极致压缩的PC大作，部分支持简中安装包 |
+| 14 | Zooqle | [https://zooqle.com](https://zooqle.com) | 综合资源 | 支持多条件筛选，可精准找中文字幕电影 |
+| 15 | Magnetdl | [https://magnetdl.com?ref=codernav.com](https://magnetdl.com?ref=codernav.com) | 磁力链接 | 纯磁力站，便于高速下载 |
+| 16 | Arenabg | [https://arenabg.com](https://arenabg.com) | 综合资源 | 保加利亚站，资源更新稳定 |
+| 17 | Torlock | [https://torlock.com](https://torlock.com) | 综合资源 | 500万真实种子验证，部分中文电影 |
+| 18 | Pcgamestorrents | [https://pcgamestorrents.com?ref=codernav.com](https://pcgamestorrents.com?ref=codernav.com) | 游戏专用 | PC单机游戏丰富，有部分繁中版资源 |
+| 19 | Torrentgalaxy | [https://torrentgalaxy.to](https://torrentgalaxy.to) | 综合资源 | 新兴站点，用户活跃，有中文电影区 |
+
+
 1. **选择PT站**
 
     选择你想注册的PT站点（例如：PTHub、BTSky等）。每个PT站可能有不同的注册方式，通常PT站都是私密的，需要通过邀请码或申请来获得账号。
 
-2. **注册流程**
+
+1. **注册流程**
 
    - 访问目标PT站的官网。
 

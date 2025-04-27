@@ -93,7 +93,7 @@ fiora（即时聊天）
 
 Perlite（知识库）
 
-## 下载雷
+## 下载类
 
 ### qBittorrent
 
@@ -109,9 +109,9 @@ services:
       - UMASK_SET=022
       - WEBUI_PORT=28081 # 将此处修改成你欲使用的 WEB 管理平台端口 
     volumes:
-      - /share/Container/qbittorrent/config:/config # 绝对路径请修改为自己的config文件夹
-      - /share/downloads:/downloads # 绝对路径请修改为自己的downloads文件夹
-      - /share/video:/video
+      - /share/Container/qbittorrent/config:/config  #绝对路径请修改为自己的config文件夹
+      - /share/downloads:/downloads  #绝对路径请修改为自己的downloads文件夹
+      - /share/video:/video  #视频的路径也挂载进去
     ports:
       # 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。
       - 26881:26881 
