@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="AUTKevin">
+  <meta name="keywords" content="">
+  
+  <title>威联通TS-466C Docker Compose - AEOLIAN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"autkevin.github.io","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Aeolian</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="威联通TS-466C Docker Compose">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2025-04-18 15:50" pubdate>
+        2025年4月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">威联通TS-466C Docker Compose</h1>
+            
+            <div class="markdown-body">
+              <h2 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h2><h3 id="DDNS-GO"><a href="#DDNS-GO" class="headerlink" title="DDNS-GO"></a>DDNS-GO</h3><p>DDNS-GO是一款支持包含阿里云、腾讯云、华为云、Cloudflare等16个DNS解析商的<strong>动态域名解析工具</strong>，支持将安装了DDNS-GO设备的公网IPv4、IPv6定时自动绑定到自定义的域名上。</p>
+<h3 id="OneNav"><a href="#OneNav" class="headerlink" title="OneNav"></a>OneNav</h3><p>OneNav是开源的书签管理工具，支持导入chrome、firefox、edge等主流的浏览器数据，拥有账号功能，可以对不同浏览器的书签进行集中管理，方便多设备用户的使用。</p>
+<h3 id="Vaultwarden"><a href="#Vaultwarden" class="headerlink" title="Vaultwarden"></a>Vaultwarden</h3><p>Vaultwarden是一款知名的开源密码管理工具，拥有网页、APP、浏览器插件等多种形式支持，可以自动生成密码、回填账号密码、管理账号密码、管理2FA等功能。</p>
+<h3 id="HomeAssistant"><a href="#HomeAssistant" class="headerlink" title="HomeAssistant"></a>HomeAssistant</h3><p>大名鼎鼎的HA智能中枢，在小米开放了官方HA插件以后，HA在国内的易用性也越来越好，搭配各式各样的UI、模板、插件，我们可以将手机、平板等代替中枢网关，实现对智能家居的一键管理，创建各式各样的智能化任务。</p>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><h2 id="家庭照片管理类"><a href="#家庭照片管理类" class="headerlink" title="家庭照片管理类"></a>家庭照片管理类</h2><p>lomorage（全平台自托管照片管理）</p>
+<p>immich（开源家庭相册管理）</p>
+<p>photostruct（家庭照片管理工具）</p>
+<p>photoview（瀑布流相册管理）</p>
+<p>ente（端到端加密相册管理）</p>
+<h2 id="个人学习类"><a href="#个人学习类" class="headerlink" title="个人学习类"></a>个人学习类</h2><p>language-tool（语言在线校验）</p>
+<p>memos（碎片化知识记忆、笔记）</p>
+<p>habitica（用游戏的方式养成习惯）</p>
+<p>traggo（以时间轴为核心的时间管理）</p>
+<p>Reference（包含数据库、前端、后端等）‍</p>
+<h2 id="办公团队协作类"><a href="#办公团队协作类" class="headerlink" title="办公团队协作类"></a>办公团队协作类</h2><p>推荐 vikunja、affine、showdoc、heimdallr</p>
+<p>erpnext（开源 erp 系统）</p>
+<p>wbo（简易在线白板绘图）</p>
+<p>o2oa（OA 系统）</p>
+<p>panka（项目管理）</p>
+<p>our shopping list（todo 工具）</p>
+<p>twenty（开源 CRM 项目）</p>
+<p>bookstack（知识库）</p>
+<p>cloper（调研工具）</p>
+<p>huntly（RSS 集成）</p>
+<p>kimai（个人时间管理）</p>
+<p>snipe-it（IT 设备管理）</p>
+<p>vikunja（项目管理）</p>
+<p>univer（文档）</p>
+<p>iToP（IT 服务管理）</p>
+<p>affine（白板、文档）</p>
+<p>heimdallr（消息推送）</p>
+<p>Superset（BI 数仓系统）</p>
+<p>showdoc（知识库）</p>
+<p>fiora（即时聊天）</p>
+<p>Perlite（知识库）</p>
+<h2 id="下载雷"><a href="#下载雷" class="headerlink" title="下载雷"></a>下载雷</h2><h3 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">services:<br>  qbittorrent:<br>    image: linuxserver/qbittorrent<br>    container_name: qbittorrent<br>    environment:<br>      - PUID=1000<br>      - PGID=1000<br>      - TZ=Asia/Shanghai <span class="hljs-comment"># 你的时区</span><br>      - UMASK_SET=022<br>      - WEBUI_PORT=28081 <span class="hljs-comment"># 将此处修改成你欲使用的 WEB 管理平台端口 </span><br>    volumes:<br>      - /share/Container/qbittorrent/config:/config <span class="hljs-comment"># 绝对路径请修改为自己的config文件夹</span><br>      - /share/downloads:/downloads <span class="hljs-comment"># 绝对路径请修改为自己的downloads文件夹</span><br>      - /share/video:/video<br>    ports:<br>      <span class="hljs-comment"># 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。</span><br>      - 26881:26881 <br>      - 26881:26881/udp<br>      <span class="hljs-comment"># 此处WEB UI 目标端口与内部端口务必保证相同，见问题1</span><br>      - 28081:28081<br>    restart: unless-stopped<br></code></pre></td></tr></table></figure>
+
+<p>用户名密码在容器日志里面显示</p>
+<p><strong>天雪动漫高清论坛</strong>：资源方面以高清动漫资源为主，下载方面以PT下载为主、网盘分享为辅，网站基于Discuz构建。<br><strong>U2动漫花园</strong>：国内最为知名的动漫PT站,动漫资源很全，发布速度很快。<br><strong>M-Team</strong>：以特色资源(限制级内容)为主的PT站点</p>
+<h2 id="音乐类"><a href="#音乐类" class="headerlink" title="音乐类"></a>音乐类</h2><h3 id="xiaomusic"><a href="#xiaomusic" class="headerlink" title="xiaomusic"></a>xiaomusic</h3><p>官网：<a target="_blank" rel="noopener" href="https://github.com/hanxi/xiaomusic">https://github.com/hanxi/xiaomusic</a></p>
+<p>支持小米音响</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">xiaomusic:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">hanxi/xiaomusic</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">xiaomusic</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">58090</span><span class="hljs-string">:8090</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-attr">XIAOMUSIC_PUBLIC_PORT:</span> <span class="hljs-number">58090</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/Multimedia/music:/app/music</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/Container/xiaomusic/conf:/app/conf</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Navidrome-Music-tag-Web"><a href="#Navidrome-Music-tag-Web" class="headerlink" title="Navidrome / Music-tag-Web"></a>Navidrome / Music-tag-Web</h3><p>Navidrome是目前docker中最完善的音乐媒体项目，搭配音流APP可以实现不亚于网易云的收听体验。结合music-tag-web这个强大的音乐元数据刮削工具，可以根据歌曲名字从互联网侧刮削几乎所有的音乐封面、歌词、歌手、专辑等信息，让音乐库打造的更完整。</p>
+<h2 id="漫画"><a href="#漫画" class="headerlink" title="漫画"></a>漫画</h2><h3 id="Komga-Bungumi"><a href="#Komga-Bungumi" class="headerlink" title="Komga/Bungumi"></a>Komga/Bungumi</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.3&#x27;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">komga:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">gotson/komga</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">komga</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">bind</span><br>        <span class="hljs-attr">source:</span> <span class="hljs-string">/share/Container/komga/config</span><br>        <span class="hljs-attr">target:</span> <span class="hljs-string">/config</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">bind</span><br>        <span class="hljs-attr">source:</span> <span class="hljs-string">/share/Container/komga/data</span><br>        <span class="hljs-attr">target:</span> <span class="hljs-string">/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">bind</span><br>        <span class="hljs-attr">source:</span> <span class="hljs-string">/etc/localtime</span><br>        <span class="hljs-attr">target:</span> <span class="hljs-string">/etc/localtime</span><br>        <span class="hljs-attr">read_only:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">25600</span><span class="hljs-string">:25600</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br></code></pre></td></tr></table></figure>
+
+<p>完成度极高的一款漫画自托管库，搭配Bungumi可以实现漫画、轻小说、番的元数据刮削，是继海报墙之后，漫画/轻小说文库墙的一套解决方案。</p>
+<p>teemii（在线漫画下载和管理）</p>
+<h2 id="影视"><a href="#影视" class="headerlink" title="影视"></a>影视</h2><h3 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h3><h3 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h3><h3 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h3><p>onelist（用于 alist 的影视刮削工具）</p>
+<h3 id="动漫AutoBangumi"><a href="#动漫AutoBangumi" class="headerlink" title="动漫AutoBangumi"></a>动漫AutoBangumi</h3><p>官网:<a target="_blank" rel="noopener" href="https://www.autobangumi.org/home/">https://www.autobangumi.org/home/</a></p>
+<h4 id="docker-cli部署"><a href="#docker-cli部署" class="headerlink" title="docker cli部署"></a>docker cli部署</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>  --name=AutoBangumi \<br>  -v /share/Container/AutoBangumi/config:/app/config \<br>  -v /share/Container/AutoBangumi/config:/app/data \<br>  -p 27892:7892 \<br>  -e TZ=Asia/Shanghai \<br>  -e PUID=$(id -u) \<br>  -e PGID=$(id -g) \<br>  -e UMASK=022 \<br>  --network=bridge \<br>  --dns=8.8.8.8 \<br>  --restart unless-stopped \<br>  ghcr.io/estrellaxd/auto_bangumi:latest<br></code></pre></td></tr></table></figure>
+
+<h4 id="Docker-compose-部署"><a href="#Docker-compose-部署" class="headerlink" title="Docker-compose 部署"></a>Docker-compose 部署</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs YML"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3.8&quot;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">AutoBangumi:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">&quot;ghcr.io/estrellaxd/auto_bangumi:latest&quot;</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">AutoBangumi</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/Container/AutoBangumi/config:/app/config</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/Container/AutoBangumi/data:/app/data</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;27892:7892&quot;</span><br>    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">bridge</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">dns:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">223.5</span><span class="hljs-number">.5</span><span class="hljs-number">.5</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">TZ=Asia/Shanghai</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">PGID=$(id</span> <span class="hljs-string">-g)</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">PUID=$(id</span> <span class="hljs-string">-u)</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">UMASK=022</span><br></code></pre></td></tr></table></figure>
+
+<p>默认用户名密码admin/adminadmin</p>
+<h3 id="动漫ani-rss"><a href="#动漫ani-rss" class="headerlink" title="动漫ani-rss"></a>动漫ani-rss</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs YML"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3&quot;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">ani-rss:</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">ani-rss</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/Container/ani-rss/config:/config</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/share/video/animate/:/Media</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">27789</span><span class="hljs-string">:7789</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">PORT=7789</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">CONFIG=/config</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">TZ=Asia/Shanghai</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">wushuo894/ani-rss</span><br></code></pre></td></tr></table></figure>
+
+<p>admin/admin</p>
+<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><h3 id="TaleBook"><a href="#TaleBook" class="headerlink" title="TaleBook"></a>TaleBook</h3><p>TaleBook是一款书籍管理工具，它基于calibre项目构建，具备书籍管理、在线阅读与推送、用户管理、SSO登录、从百度/豆瓣拉取书籍信息等功能。</p>
+<h3 id="Audibookshelf"><a href="#Audibookshelf" class="headerlink" title="Audibookshelf"></a>Audibookshelf</h3><p>Audiobookshelf是一款自托管的有声读物和播客服务器，包含web端和app端应用。<br>双端的浏览记录完全同步，是很不错的一款有声书系统。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>calibre-web（图书管理）</p>
+<h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><p>宝塔（运维面板）</p>
+<p>1panel（运维面板）</p>
+<p>Excalidraw（在线绘图工具）</p>
+<p>WordPress（博客框架）</p>
+<p>Gitlab（私人代码库）</p>
+<p>Exsi（虚拟机管理）</p>
+<p>Uptime Kuma（服务状态监控）</p>
+<p>Frps/Frpc（内网穿透）</p>
+<p>Vaultwarden（密码管理）</p>
+<h2 id="AI-与生产力工具"><a href="#AI-与生产力工具" class="headerlink" title="AI 与生产力工具"></a>AI 与生产力工具</h2><p>2024 年 AI 技术大爆发，云端 AI 服务也能本地部署，AI 与生产力紧密融合！?</p>
+<p>Open-WebUI（类 ChatGPT 工具）</p>
+<p>Dify（生成式 AI 检索框架）</p>
+<p>quivr（基于 AI 的第二大脑）</p>
+<p>gpt_academic（学术大模型）</p>
+<p>transformer-explainer（大模型可视化）</p>
+<p>one-api（大模型 API 中间件）</p>
+<p>独角兽发卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash">version: <span class="hljs-string">&quot;3&quot;</span><br>services:<br>faka:<br>    image:hkccr.ccs.tencentyun.com/apocalypsor/dujiaoka:latest<br>    environment:<br>      -INSTALL=<span class="hljs-literal">true</span><br>    volumes:<br>      -./env.conf:/dujiaoka/.env<br>      -./uploads:/dujiaoka/public/uploads<br>    ports:<br>      -56789:80<br><br>db:<br>    image:mariadb:focal<br>    environment:<br>      -MYSQL_ROOT_PASSWORD=你的root密码<br>    volumes:<br>      -./data:/var/lib/mysql<br><br>redis:<br>    image:redis:alpine<br>    volumes:<br>      - ./redis:/data<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="羊毛类"><a href="#羊毛类" class="headerlink" title="羊毛类"></a>羊毛类</h2><h3 id="青龙面板"><a href="#青龙面板" class="headerlink" title="青龙面板"></a>青龙面板</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull whyour/qinglong:debian<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/04/18/%E5%A8%81%E8%81%94%E9%80%9ATS-466C-Docker-Compose/image-20250424133913395.png" srcset="/img/loading.gif" lazyload alt="image-20250424133913395"></p>
+<blockquote>
+<p>1.依赖管理添加脚本运行环境，需要先在系统设置中添加镜像NodeJs（镜像<a target="_blank" rel="noopener" href="https://registry.npmmirror.com)、python(镜像https//pypi.tuna.tsinghua.edu.cn/simple)%E3%80%81Linux">https://registry.npmmirror.com）、Python(镜像https://pypi.tuna.tsinghua.edu.cn/simple)、Linux</a></p>
+<p>环境管理添加脚本使用的Cookie变量</p>
+<p>面板 → 订阅管理中添加脚本仓库</p>
+</blockquote>
+<h4 id="京东京豆"><a href="#京东京豆" class="headerlink" title="京东京豆"></a>京东京豆</h4><p>在订阅管理-》创建订阅中直接复制在名称中。</p>
+<p><img src="/2025/04/18/%E5%A8%81%E8%81%94%E9%80%9ATS-466C-Docker-Compose/image-20250424140254873.png" srcset="/img/loading.gif" lazyload alt="image-20250424140254873"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#Faker集合仓库</span><br>ql repo https://github.com/shufflewzc/faker2.git <span class="hljs-string">&quot;jd_|jx_|getJDCookie&quot;</span> <span class="hljs-string">&quot;activity|backUp&quot;</span> <span class="hljs-string">&quot;^jd[^_]|USER|ZooFaker_Necklace&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="获取cookie"><a href="#获取cookie" class="headerlink" title="获取cookie"></a>获取cookie</h5><p>alook<code>浏览器里面输入京东官网</code>m.jd.com，点击<code>右上角的登录</code>或者<code>右下角的未登录</code>，进入登录页面，使用手机接收短信的方式进行登录；点击浏览器下面的<code>三条杠（菜单）</code>；点击 <code>工具箱</code> –&gt; <code>开发者工具</code> –&gt; <code>Cookies</code> –&gt; <code>拷贝</code>；Cookies中的 pt_key 和pt_pin的字段复制下来。</p>
+<p>记住用<code>Alook</code>获取cookies后千万不要在<code>Alook</code>上退出京东账号，否则cookies会失效</p>
+<p>青龙面板-》环境变量中新增JD_COOKIE</p>
+<p><img src="/2025/04/18/%E5%A8%81%E8%81%94%E9%80%9ATS-466C-Docker-Compose/image-20250424142315068.png" srcset="/img/loading.gif" lazyload alt="image-20250424142315068"></p>
+<h2 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h2><p>joplin记日记；kanboard管理任务；chromium浏览器；homebox管理物品；openspeedtest测速</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/NAS/">NAS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/NAS/">NAS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/26/PT%E7%AB%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PT站</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/11/JellyFin/">
+                        <span class="hidden-mobile">JellyFin搭建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-love"></i> <a href="https://github.com/AutKevin" target="_blank" rel="nofollow noopener"><span>Aeolian</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":140,"height":300},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.7}});</script></body>
+</html>
