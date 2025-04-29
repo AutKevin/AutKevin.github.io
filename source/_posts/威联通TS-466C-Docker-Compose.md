@@ -103,8 +103,8 @@ services:
     image: linuxserver/qbittorrent
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1000  #使用docker所在操作系统的用户id，在威联通通过id 用户名查看uid和gid
+      - PGID=1000  #使用docker所在操作系统的用户组id，在威联通通过id 用户名查看uid和gid
       - TZ=Asia/Shanghai # 你的时区
       - UMASK_SET=022
       - WEBUI_PORT=28081 # 将此处修改成你欲使用的 WEB 管理平台端口 
@@ -116,10 +116,34 @@ services:
       # 要使用的映射下载端口与内部下载端口，可保持默认，安装完成后在管理页面仍然可以改成其他端口。
       - 26881:26881 
       - 26881:26881/udp
-      # 此处WEB UI 目标端口与内部端口务必保证相同，见问题1
+      # 此处WEB UI目标端口与docker容器内部端口保证相同
       - 28081:28081
     restart: unless-stopped
 ```
+
+docker cli部署
+
+```bash
+docker run -d \
+  -e PUID=$(id -u) \
+  -e PGID=$(id -g) \
+  -e TZ=Asia/Shanghai \
+  -e UMASK_SET=022 \
+  -e WEBUI_PORT=28081 \
+  -v /share/Container/qbittorrent/config:/config \
+  -v /share/downloads:/downloads \
+  -v /share/video:/video \
+  -p 26881:26881 \
+  -p 26881:26881/udp \
+  -p 28081:28081 \
+  --name=qbittorrent \
+  --restart unless-stopped \
+  linuxserver/qbittorrent
+```
+
+如果无法下载，查看docker exec qbittorrent ps aux使用是什么用户运行服务，然后docker exec -it qbittorrent bash进入容器，id 用户名查看uid和gid是否和宿主机的一致。
+
+
 
 用户名密码在容器日志里面显示
 
@@ -211,8 +235,8 @@ docker run -d \
   -v /share/Container/AutoBangumi/config:/app/data \
   -p 27892:7892 \
   -e TZ=Asia/Shanghai \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
+  -e PUID=$(id -u) \  #使用当前的用户id
+  -e PGID=$(id -g) \  #使用当前的用户组
   -e UMASK=022 \
   --network=bridge \
   --dns=8.8.8.8 \
