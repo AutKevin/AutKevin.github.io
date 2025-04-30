@@ -29,8 +29,13 @@ tags: [NAS]
 | 17 | Torlock | [https://torlock.com](https://torlock.com) | 综合资源 | 500万真实种子验证，部分中文电影 |
 | 18 | Pcgamestorrents | [https://pcgamestorrents.com?ref=codernav.com](https://pcgamestorrents.com?ref=codernav.com) | 游戏专用 | PC单机游戏丰富，有部分繁中版资源 |
 | 19 | Torrentgalaxy | [https://torrentgalaxy.to](https://torrentgalaxy.to) | 综合资源 | 新兴站点，用户活跃，有中文电影区 |
-
-
+| 20 | NicePT | 老师 | XXX | 
+| 21 | AVGV | 艾薇网 | XXX | 
+| 22 | HDbd | 伊甸园 | XXX | 
+| 23 | mteam | 馒头 | 影视、XXX、音乐 | 
+| 24 | hdsky | 天空 | 影视 | 
+| 25 | chdbits | 彩虹岛 | 影视 | 
+				
 1. **选择PT站**
 
     选择你想注册的PT站点（例如：PTHub、BTSky等）。每个PT站可能有不同的注册方式，通常PT站都是私密的，需要通过邀请码或申请来获得账号。
