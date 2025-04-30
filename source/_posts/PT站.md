@@ -58,7 +58,45 @@ tags: [NAS]
 
 ![image-20250426140732703](PT站/image-20250426140732703.png)
 
-## Docker安装transmission 
+## Docker安装下载器
+
+File Station中新建video和downloads文件夹，新建的文件夹所有权限开放。
+
+![image-20250430152013142](./PT站/image-20250430152013142.png)
+
+### qbittorrent安装
+
+```bash
+docker run -d \
+  -e PUID=$(id -u) \
+  -e PGID=$(id -g) \
+  -e TZ=Asia/Shanghai \
+  -e UMASK_SET=022 \
+  -e WEBUI_PORT=28081 \
+  -v /share/Container/qbittorrent/config:/config \
+  -v /share/downloads:/downloads \
+  -v /share/video:/video \
+  -p 26881:26881 \
+  -p 26881:26881/udp \
+  -p 28081:28081 \
+  --name=qbittorrent \
+  --restart unless-stopped \
+  linuxserver/qbittorrent:5.1.0-libtorrentv1
+```
+
+如果无法下载，查看docker exec qbittorrent ps aux使用是什么用户运行服务，然后docker exec -it qbittorrent bash进入容器，id 用户名查看uid和gid是否和宿主机的一致。注意新建的文件夹一定要是用File Station新建共享文件夹downloads和video。然后通过ssh在share下面查看ll是否有down和video的软连接。
+
+文件夹设置成功后，这里显示的是文件夹所在卷的剩余存储空间。
+
+![image-20250430152433358](./PT站/image-20250430152433358.png)
+
+设置Web DAV访问downloads
+
+![image-20250430152744571](./PT站/image-20250430152744571.png)
+
+
+
+### transmission安装
 
 ```bash
 #制作配置文件并赋予权限
