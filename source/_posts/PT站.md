@@ -29,7 +29,12 @@ tags: [NAS]
 | 17 | Torlock | [https://torlock.com](https://torlock.com) | 综合资源 | 500万真实种子验证，部分中文电影 |
 | 18 | Pcgamestorrents | [https://pcgamestorrents.com?ref=codernav.com](https://pcgamestorrents.com?ref=codernav.com) | 游戏专用 | PC单机游戏丰富，有部分繁中版资源 |
 | 19 | Torrentgalaxy | [https://torrentgalaxy.to](https://torrentgalaxy.to) | 综合资源 | 新兴站点，用户活跃，有中文电影区 |
-
+| 20 | NicePT | 老师 | XXX |
+| 21 | AVGV | 艾薇网 | XXX |
+| 22 | HDbd | 伊甸园 | XXX |
+| 23 | mteam | 馒头 | 影视、XXX、音乐 |
+| 24 | hdsky | 天空 | 影视 |
+| 25 | chdbits | 彩虹岛 | 影视 |
 
 1. **选择PT站**
 
@@ -58,10 +63,45 @@ tags: [NAS]
 
 ![image-20250426140732703](PT站/image-20250426140732703.png)
 
-## PT下载器安装
+## Docker安装下载器
 
-### Docker安装transmission 
+File Station中新建video和downloads文件夹，新建的文件夹所有权限开放。
 
+![image-20250430152013142](./PT站/image-20250430152013142.png)
+
+### qbittorrent安装
+
+```bash
+docker run -d \
+  -e PUID=$(id -u) \
+  -e PGID=$(id -g) \
+  -e TZ=Asia/Shanghai \
+  -e UMASK_SET=022 \
+  -e WEBUI_PORT=28081 \
+  -v /share/Container/qbittorrent/config:/config \
+  -v /share/downloads:/downloads \
+  -v /share/video:/video \
+  -p 26881:26881 \
+  -p 26881:26881/udp \
+  -p 28081:28081 \
+  --name=qbittorrent \
+  --restart unless-stopped \
+  linuxserver/qbittorrent:5.1.0-libtorrentv1
+```
+
+如果无法下载，查看docker exec qbittorrent ps aux使用是什么用户运行服务，然后docker exec -it qbittorrent bash进入容器，id 用户名查看uid和gid是否和宿主机的一致。注意新建的文件夹一定要是用File Station新建共享文件夹downloads和video。然后通过ssh在share下面查看ll是否有down和video的软连接。
+
+文件夹设置成功后，这里显示的是文件夹所在卷的剩余存储空间。
+
+![image-20250430152433358](./PT站/image-20250430152433358.png)
+
+设置Web DAV访问downloads
+
+![image-20250430152744571](./PT站/image-20250430152744571.png)
+
+
+
+### transmission安装
 ```bash
 #制作配置文件并赋予权限
 mkdir -p /share/Container/Transmission/config
@@ -93,16 +133,6 @@ docker logs transmission
 ```
 
 ![image-20250426164545113](PT站/image-20250426164545113.png)
-
-### Docker安装qbittorrent
-
-```bash
-
-```
-
-
-
-
 
 ## 制作种子并接入PT站
 
