@@ -138,7 +138,8 @@ docker run -d \
   -p 28081:28081 \
   --name=qbittorrent \
   --restart unless-stopped \
-  linuxserver/qbittorrent
+  linuxserver/qbittorrent:5.1.0-libtorrentv1
+
 ```
 
 如果无法下载，查看docker exec qbittorrent ps aux使用是什么用户运行服务，然后docker exec -it qbittorrent bash进入容器，id 用户名查看uid和gid是否和宿主机的一致。

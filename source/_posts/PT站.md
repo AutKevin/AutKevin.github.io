@@ -58,7 +58,9 @@ tags: [NAS]
 
 ![image-20250426140732703](PT站/image-20250426140732703.png)
 
-## Docker安装transmission 
+## PT下载器安装
+
+### Docker安装transmission 
 
 ```bash
 #制作配置文件并赋予权限
@@ -91,6 +93,14 @@ docker logs transmission
 ```
 
 ![image-20250426164545113](PT站/image-20250426164545113.png)
+
+### Docker安装qbittorrent
+
+```bash
+
+```
+
+
 
 
 
@@ -133,5 +143,7 @@ docker logs transmission
 6. 从PT站下载种子，然后放在做种视频或文件夹的同级目录，注意：一定是同级！。
 
 ![image-20250426190055677](PT站/image-20250426190055677.png)
+
+### 3. PT站核查
 
 去PT站查看![image-20250426190206510](PT站/image-20250426190206510.png)
