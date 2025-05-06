@@ -11,6 +11,15 @@ tags: [NAS]
 
 DDNS-GO是一款支持包含阿里云、腾讯云、华为云、Cloudflare等16个DNS解析商的**动态域名解析工具**，支持将安装了DDNS-GO设备的公网IPv4、IPv6定时自动绑定到自定义的域名上。
 
+```bash
+docker run -d \
+  --name ddns-go \
+  --restart=unless-stopped \
+  -p 19876:9876 \
+  -v /share/Container/ddns-go:/root \
+  jeessy/ddns-go
+```
+
 ### OneNav
 
 OneNav是开源的书签管理工具，支持导入chrome、firefox、edge等主流的浏览器数据，拥有账号功能，可以对不同浏览器的书签进行集中管理，方便多设备用户的使用。
