@@ -177,3 +177,16 @@ docker logs transmission
 ### 3. PT站核查
 
 去PT站查看![image-20250426190206510](PT站/image-20250426190206510.png)
+
+## IYUU工具
+
+```bash
+docker run -d \
+  --name IYUUPlus \
+  -p 28787:8787 \
+  -v /share/Container/IYUU:/IYUU \
+  --restart unless-stopped \
+  iyuucn/iyuuplus:latest
+```
+
+设置完数据库和账号密码之后

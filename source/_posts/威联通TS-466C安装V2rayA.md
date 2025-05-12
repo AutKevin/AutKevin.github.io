@@ -136,6 +136,12 @@ export no_proxy= "localhost,127.0.0.0/8,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8"
 
 通过curl命令测试发现也是通的。那问题就出在container station
 
+```bash
+export http_proxy="http://10.10.10.21:20171"
+export https_proxy="http://10.10.10.21:20171"
+curl https://twitter.com
+```
+
 ![image-20250410114324662](./威联通TS-466C安装V2rayA/image-20250410114324662.png)
 
 经历了几次界面重启和命令重启
