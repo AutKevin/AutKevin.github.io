@@ -245,6 +245,24 @@ docker restart 39718f35477f
 
 ### JellyFin
 
+```bash
+docker run -d \
+  --name=jellyfin \
+  --restart unless-stopped \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e HTTP_PROXY=http://10.10.10.195:17890 \
+  -e HTTPS_PROXY=http://0.10.10.195:17890 \
+  -e TZ=Asia/Shanghai \
+  -p 28096:8096 \
+  -v /share/Container/jellyfin/config:/config \
+  -v /share/Container/jellyfin/cache:/cache \
+  -v /share/video:/media \
+  nyanmisaka/jellyfin:latest
+```
+
+
+
 #### 创建容器
 
 创建时在存储中可以挂载video，在环境中设置代理http_proxy和https_proxy
