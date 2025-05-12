@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      704 字
+      1.4k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      19
        分钟
     </span>
   
@@ -281,6 +281,56 @@
 <p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410115551478.png" srcset="/img/loading.gif" lazyload alt="image-20250410115551478"></p>
 <p>最后终于成功</p>
 <p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410115632457.png" srcset="/img/loading.gif" lazyload alt="image-20250410115632457"></p>
+<h2 id="Docker安装Clash-Meta"><a href="#Docker安装Clash-Meta" class="headerlink" title="Docker安装Clash Meta"></a>Docker安装Clash Meta</h2><p><a target="_blank" rel="noopener" href="https://github.com/MetaCubeX/mihomo/tree/Meta">MetaCubeX</a></p>
+<p>/share/Container/clash/</p>
+<p>├── config.yaml    # Clash 配置文件</p>
+<p>└── ui/        # 可选：Yacd 面板</p>
+<h3 id="config-yaml"><a href="#config-yaml" class="headerlink" title="config.yaml"></a><strong>config.yaml</strong></h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">mixed-port:</span> <span class="hljs-number">7890</span><br><span class="hljs-attr">socks-port:</span> <span class="hljs-number">7891</span><br><span class="hljs-attr">allow-lan:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">bind-address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><br><span class="hljs-attr">mode:</span> <span class="hljs-string">rule</span><br><span class="hljs-attr">log-level:</span> <span class="hljs-string">info</span><br><span class="hljs-attr">external-controller:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">:9090</span><br><br><span class="hljs-attr">dns:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">listen:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">:1053</span><br>  <span class="hljs-attr">ipv6:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">enhanced-mode:</span> <span class="hljs-string">fake-ip</span><br>  <span class="hljs-attr">nameservers:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">1.1</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">8.8</span><span class="hljs-number">.8</span><span class="hljs-number">.8</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">tls://dns.google</span><br><br><span class="hljs-attr">proxies:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Trojan-HK&quot;</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">trojan</span><br>    <span class="hljs-attr">server:</span> <span class="hljs-string">hk.example.com</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">443</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">your_password_1</span><br>    <span class="hljs-attr">sni:</span> <span class="hljs-string">hk.example.com</span><br>    <span class="hljs-attr">skip-cert-verify:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">udp:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Trojan-JP&quot;</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">trojan</span><br>    <span class="hljs-attr">server:</span> <span class="hljs-string">jp.example.net</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">443</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">your_password_2</span><br>    <span class="hljs-attr">sni:</span> <span class="hljs-string">jp.example.net</span><br>    <span class="hljs-attr">skip-cert-verify:</span> <span class="hljs-literal">false</span><br>    <span class="hljs-attr">udp:</span> <span class="hljs-literal">true</span><br><br><span class="hljs-attr">proxy-groups:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;🚀 节点选择&quot;</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">select</span><br>    <span class="hljs-attr">proxies:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;Trojan-HK&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;Trojan-JP&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">DIRECT</span><br><br><span class="hljs-attr">rules:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">DOMAIN-SUFFIX,google.com,🚀</span> <span class="hljs-string">节点选择</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">DOMAIN-SUFFIX,github.com,🚀</span> <span class="hljs-string">节点选择</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">DOMAIN-SUFFIX,youtube.com,🚀</span> <span class="hljs-string">节点选择</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">GEOIP,CN,DIRECT</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">MATCH,🚀</span> <span class="hljs-string">节点选择</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="启动-Clash-Meta-容器"><a href="#启动-Clash-Meta-容器" class="headerlink" title="启动 Clash Meta 容器"></a>启动 Clash Meta 容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>  --name clash \<br>  -v /share/Container/clash:/root/.config/mihomo \<br>  -p 17890:7890 \<br>  -p 17891:7891 \<br>  -p 19090:9090 \<br>  -p 11053:1053/udp \<br>  --restart unless-stopped \<br>  metacubex/mihomo:v1.19.7<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若之前已运行 clash 容器，先执行：</p>
+<p>docker stop clash &amp;&amp; docker rm clash</p>
+</blockquote>
+<h3 id="使用-curl-验证代理可用性"><a href="#使用-curl-验证代理可用性" class="headerlink" title="使用 curl 验证代理可用性"></a>使用 curl 验证代理可用性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#HTTP 测试（NAS 本机）</span><br>curl -x http://127.0.0.1:17890 https://api.ipify.org<br><span class="hljs-comment">#SOCKS5 测试（NAS 本机）</span><br>curl --socks5 127.0.0.1:17891 https://httpbin.org/ip<br><span class="hljs-comment">#远程设备测试（LAN 设备）</span><br>curl -x http://&lt;NAS内网IP&gt;:17890 https://ip.sb<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若返回 IP 为代理出口（非中国 IP），即配置成功。</p>
+</blockquote>
+<p>如果显示Failed to connect to 127.0.0.1 port 17890 after 0 ms: Couldn’t connect to server</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512113231630.png" srcset="/img/loading.gif" lazyload alt="image-20250512113231630"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看日志</span><br>docker logs clash<br></code></pre></td></tr></table></figure>
+
+<p>查看日志，把日志放到chatgpt中检查是否有问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看挂载后的实际文件内容</span><br>docker <span class="hljs-built_in">exec</span> -it clash cat /root/.config/clash/config.yaml<br></code></pre></td></tr></table></figure>
+
+<p>检查挂载后的实际文件内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看容器内监听的端口及host是否为0.0.0.0</span><br>docker <span class="hljs-built_in">exec</span> -it clash netstat -tulnp | grep 7890<br></code></pre></td></tr></table></figure>
+
+<p>检查服务是否重新监听在0.0.0.0，发现无论怎么重启都是监听127.0.0.1，说明bind-address: 0.0.0.0没有生效</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512120002635.png" srcset="/img/loading.gif" lazyload alt="image-20250512120002635"></p>
+<p>经过检测容器中的目录不是/root/.config/clash，而是/root/.config/mihomo，删除重新安装即可解决</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512133029032.png" srcset="/img/loading.gif" lazyload alt="image-20250512133029032"></p>
+<h3 id="🎁-可选：部署-Yacd-控制面板"><a href="#🎁-可选：部署-Yacd-控制面板" class="headerlink" title="🎁 可选：部署 Yacd 控制面板"></a>🎁 可选：部署 Yacd 控制面板</h3><p>可以手动下载 <a target="_blank" rel="noopener" href="https://github.com/haishanh/yacd/releases">Yacd UI</a> 文件到 /share/Container/clash/ui/，tar -xvf yacd.tar.xz –strip-components=1解压发现可以访问。不下载也可以，会自动下载METACUBE（XD）</p>
+<p>/share/Container/clash/</p>
+<p>├── config.yaml       # 主配置</p>
+<p>├── ui/           # Web UI 静态文件目录，ui下面要有<strong>index.html</strong></p>
+<p>│  ├── index.html</p>
+<p>│  ├── static/</p>
+<p>│  └── …</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi /share/Container/clash/config.yaml<br><span class="hljs-comment">#allow-lan: true后面添加如下内容</span><br>external-ui: dashboard<br>secret: <span class="hljs-string">&quot;Password&quot;</span><br><span class="hljs-comment">#默认把 / 映射到 UI，而不是 API</span><br>external-ui-name: <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-comment">#重启,自动下载到dashboard</span><br>docker restart clash<br></code></pre></td></tr></table></figure>
+
+<p>访问面板：http://<NAS-IP>:19090/ui</NAS-IP></p>
+<p>自动下载的METACUBE UI版本</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512165128902.png" srcset="/img/loading.gif" lazyload alt="image-20250512165128902"></p>
+<p>手动配置的Yacd版本</p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512162827396.png" srcset="/img/loading.gif" lazyload alt="image-20250512162827396"></p>
+<h3 id="报错：can’t-initial-GeoIP-can’t-download-MMDB"><a href="#报错：can’t-initial-GeoIP-can’t-download-MMDB" class="headerlink" title="报错：can’t initial GeoIP: can’t download MMDB"></a>报错：can’t initial GeoIP: can’t download MMDB</h3><p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512135536473.png" srcset="/img/loading.gif" lazyload alt="image-20250512135536473"></p>
+<p>手动下载 Country.mmdb 并挂载到容器中，避免它在启动时尝试联网去拉：</p>
+<p>geoid.metadb: </p>
+<p>Country.mmdb: <a target="_blank" rel="noopener" href="https://github.moeyy.xyz/https://github.com/Dreamacro/maxmind-geoip/raw/release/Country.mmdb">https://github.moeyy.xyz/https://github.com/Dreamacro/maxmind-geoip/raw/release/Country.mmdb</a></p>
+<p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250512141835286.png" srcset="/img/loading.gif" lazyload alt="image-20250512141835286"></p>
 
             </div>
             <hr>
