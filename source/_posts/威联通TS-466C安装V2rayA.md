@@ -151,3 +151,184 @@ curl https://twitter.com
 最后终于成功
 
 ![image-20250410115632457](./威联通TS-466C安装V2rayA/image-20250410115632457.png)
+
+## Docker安装Clash Meta
+
+[MetaCubeX](https://github.com/MetaCubeX/mihomo/tree/Meta)
+
+
+
+/share/Container/clash/
+
+├── config.yaml    # Clash 配置文件
+
+└── ui/        # 可选：Yacd 面板
+
+### **config.yaml** 
+
+```yaml
+mixed-port: 7890
+socks-port: 7891
+allow-lan: true
+bind-address: 0.0.0.0
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: fake-ip
+  nameservers:
+    - 1.1.1.1
+    - 8.8.8.8
+    - tls://dns.google
+
+proxies:
+  - name: "Trojan-HK"
+    type: trojan
+    server: hk.example.com
+    port: 443
+    password: your_password_1
+    sni: hk.example.com
+    skip-cert-verify: false
+    udp: true
+
+  - name: "Trojan-JP"
+    type: trojan
+    server: jp.example.net
+    port: 443
+    password: your_password_2
+    sni: jp.example.net
+    skip-cert-verify: false
+    udp: true
+
+proxy-groups:
+  - name: "🚀 节点选择"
+    type: select
+    proxies:
+      - "Trojan-HK"
+      - "Trojan-JP"
+      - DIRECT
+
+rules:
+  - DOMAIN-SUFFIX,google.com,🚀 节点选择
+  - DOMAIN-SUFFIX,github.com,🚀 节点选择
+  - DOMAIN-SUFFIX,youtube.com,🚀 节点选择
+  - GEOIP,CN,DIRECT
+  - MATCH,🚀 节点选择
+```
+
+### 启动 Clash Meta 容器
+
+```bash
+docker run -d \
+  --name clash \
+  -v /share/Container/clash:/root/.config/mihomo \
+  -p 17890:7890 \
+  -p 17891:7891 \
+  -p 19090:9090 \
+  -p 11053:1053/udp \
+  --restart unless-stopped \
+  metacubex/mihomo:v1.19.7
+```
+
+> 若之前已运行 clash 容器，先执行：
+>
+> docker stop clash && docker rm clash
+
+### 使用 curl 验证代理可用性
+
+```bash
+#HTTP 测试（NAS 本机）
+curl -x http://127.0.0.1:17890 https://api.ipify.org
+#SOCKS5 测试（NAS 本机）
+curl --socks5 127.0.0.1:17891 https://httpbin.org/ip
+#远程设备测试（LAN 设备）
+curl -x http://<NAS内网IP>:17890 https://ip.sb
+```
+
+> 若返回 IP 为代理出口（非中国 IP），即配置成功。
+
+如果显示Failed to connect to 127.0.0.1 port 17890 after 0 ms: Couldn't connect to server
+
+![image-20250512113231630](./威联通TS-466C安装V2rayA/image-20250512113231630.png)
+
+```bash
+#查看日志
+docker logs clash
+```
+
+查看日志，把日志放到chatgpt中检查是否有问题。
+
+```bash
+#查看挂载后的实际文件内容
+docker exec -it clash cat /root/.config/clash/config.yaml
+```
+
+检查挂载后的实际文件内容
+
+```bash
+#查看容器内监听的端口及host是否为0.0.0.0
+docker exec -it clash netstat -tulnp | grep 7890
+```
+
+检查服务是否重新监听在0.0.0.0，发现无论怎么重启都是监听127.0.0.1，说明bind-address: 0.0.0.0没有生效
+
+![image-20250512120002635](./威联通TS-466C安装V2rayA/image-20250512120002635.png)
+
+经过检测容器中的目录不是/root/.config/clash，而是/root/.config/mihomo，删除重新安装即可解决
+
+![image-20250512133029032](./威联通TS-466C安装V2rayA/image-20250512133029032.png)
+
+### 🎁 可选：部署 Yacd 控制面板
+
+可以手动下载 [Yacd UI](https://github.com/haishanh/yacd/releases) 文件到 /share/Container/clash/ui/，tar -xvf yacd.tar.xz --strip-components=1解压发现可以访问。不下载也可以，会自动下载METACUBE（XD）
+
+/share/Container/clash/
+
+├── config.yaml       # 主配置
+
+├── ui/           # Web UI 静态文件目录，ui下面要有**index.html**
+
+│  ├── index.html
+
+│  ├── static/
+
+│  └── ...
+
+```bash
+vi /share/Container/clash/config.yaml
+#allow-lan: true后面添加如下内容
+external-ui: dashboard
+secret: "Password"
+#默认把 / 映射到 UI，而不是 API
+external-ui-name: ""
+
+#重启,自动下载到dashboard
+docker restart clash
+```
+
+访问面板：http://<NAS-IP>:19090/ui
+
+自动下载的METACUBE UI版本
+
+![image-20250512165128902](./威联通TS-466C安装V2rayA/image-20250512165128902.png)
+
+手动配置的Yacd版本
+
+![image-20250512162827396](./威联通TS-466C安装V2rayA/image-20250512162827396.png)
+
+### 报错：can't initial GeoIP: can't download MMDB
+
+![image-20250512135536473](./威联通TS-466C安装V2rayA/image-20250512135536473.png)
+
+手动下载 Country.mmdb 并挂载到容器中，避免它在启动时尝试联网去拉：
+
+geoid.metadb: 
+
+Country.mmdb: https://github.moeyy.xyz/https://github.com/Dreamacro/maxmind-geoip/raw/release/Country.mmdb
+
+![image-20250512141835286](./威联通TS-466C安装V2rayA/image-20250512141835286.png)
+
