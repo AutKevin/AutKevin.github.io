@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.2k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      28
        分钟
     </span>
   
@@ -240,7 +240,17 @@
             <h1 style="display: none">威联通TS-466C Docker Compose</h1>
             
             <div class="markdown-body">
-              <h2 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h2><h3 id="DDNS-GO"><a href="#DDNS-GO" class="headerlink" title="DDNS-GO"></a>DDNS-GO</h3><p>DDNS-GO是一款支持包含阿里云、腾讯云、华为云、Cloudflare等16个DNS解析商的<strong>动态域名解析工具</strong>，支持将安装了DDNS-GO设备的公网IPv4、IPv6定时自动绑定到自定义的域名上。</p>
+              <h2 id="Docker管理类"><a href="#Docker管理类" class="headerlink" title="Docker管理类"></a>Docker管理类</h2><h3 id="portainer"><a href="#portainer" class="headerlink" title="portainer"></a>portainer</h3><p>Docker的Web 管理面板</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#创建数据卷,Docker提供的持久化存储机制，容器删了数据还在</span><br>docker volume create portainer_data<br>docker run -d -p 19000:9000 -p 19443:9443 \<br>  --name portainer \<br>  --restart=always \<br>  -v /var/run/docker.sock:/var/run/docker.sock \<br>  -v portainer_data:/data \<br>  portainer/portainer-ce:latest<br></code></pre></td></tr></table></figure>
+
+<h3 id="dockge"><a href="#dockge" class="headerlink" title="dockge"></a>dockge</h3><p>专注于 <strong>管理 docker-compose 项目的轻量 Web 管理面板</strong>，尤其适合那些有多个服务（例如 Nginx、NAS、下载器、面板类应用）的小型或家庭服务器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>  --name dockge \<br>  -p 15001:5001 \<br>  -v /var/run/docker.sock:/var/run/docker.sock \<br>  -v /share/Container/dockge/data:/app/data \<br>  -v /share/Container/dockge/stacks:/opt/stacks \<br>  --restart=always \<br>  louislam/dockge:latest<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h2><h3 id="DDNS-GO"><a href="#DDNS-GO" class="headerlink" title="DDNS-GO"></a>DDNS-GO</h3><p>DDNS-GO是一款支持包含阿里云、腾讯云、华为云、Cloudflare等16个DNS解析商的<strong>动态域名解析工具</strong>，支持将安装了DDNS-GO设备的公网IPv4、IPv6定时自动绑定到自定义的域名上。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>  --name ddns-go \<br>  --restart=unless-stopped \<br>  -p 19876:9876 \<br>  -v /share/Container/ddns-go:/root \<br>  jeessy/ddns-go<br></code></pre></td></tr></table></figure>
 
 <h3 id="OneNav"><a href="#OneNav" class="headerlink" title="OneNav"></a>OneNav</h3><p>OneNav是开源的书签管理工具，支持导入chrome、firefox、edge等主流的浏览器数据，拥有账号功能，可以对不同浏览器的书签进行集中管理，方便多设备用户的使用。</p>
@@ -389,7 +399,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/11/JellyFin/">
+                      <a href="/2025/04/11/JellyFin%E6%90%AD%E5%BB%BA/">
                         <span class="hidden-mobile">JellyFin搭建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
