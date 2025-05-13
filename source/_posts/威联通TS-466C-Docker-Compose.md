@@ -5,6 +5,42 @@ categories: NAS
 tags: [NAS]
 ---
 
+## Docker管理类
+
+### portainer
+
+Docker的Web 管理面板
+
+````bash
+#创建数据卷,Docker提供的持久化存储机制，容器删了数据还在
+docker volume create portainer_data
+docker run -d -p 19000:9000 -p 19443:9443 \
+  --name portainer \
+  --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data \
+  portainer/portainer-ce:latest
+````
+
+### dockge
+
+专注于 **管理 docker-compose 项目的轻量 Web 管理面板**，尤其适合那些有多个服务（例如 Nginx、NAS、下载器、面板类应用）的小型或家庭服务器。
+
+```bash
+docker run -d \
+  --name dockge \
+  -p 15001:5001 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /share/Container/dockge/data:/app/data \
+  -v /share/Container/dockge/stacks:/opt/stacks \
+  --restart=always \
+  louislam/dockge:latest
+```
+
+
+
+
+
 ## 常用类
 
 ### DDNS-GO
