@@ -276,6 +276,8 @@
 <p>测试这两个网络，发现端口都是通的。</p>
 <p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410113313920.png" srcset="/img/loading.gif" lazyload alt="image-20250410113313920"></p>
 <p>通过curl命令测试发现也是通的。那问题就出在container station</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://10.10.10.21:20171&quot;</span><br><span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://10.10.10.21:20171&quot;</span><br>curl https://twitter.com<br></code></pre></td></tr></table></figure>
+
 <p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410114324662.png" srcset="/img/loading.gif" lazyload alt="image-20250410114324662"></p>
 <p>经历了几次界面重启和命令重启</p>
 <p><img src="/2025/04/10/%E5%A8%81%E8%81%94%E9%80%9ATS-466C%E5%AE%89%E8%A3%85V2rayA/image-20250410115551478.png" srcset="/img/loading.gif" lazyload alt="image-20250410115551478"></p>
@@ -367,7 +369,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/11/JellyFin/">
+                      <a href="/2025/04/11/JellyFin%E6%90%AD%E5%BB%BA/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JellyFin搭建</span>
                         <span class="visible-mobile">上一篇</span>
