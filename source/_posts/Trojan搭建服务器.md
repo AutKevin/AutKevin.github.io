@@ -343,3 +343,13 @@ www.***.com
 一请求就显示SSL handshake failed: wrong version number，结果最后发现是客户端的协议忘记选了。。。分享下协议URL即可看到协议的内容是否正确。
 
 ![image-20250523142947380](./Trojan搭建服务器/image-20250523142947380.png)
+
+## 线路判断
+
+通过traceroute查看IP，或者通过在线[traceroute.php](https://tools.ipip.net/traceroute.php)，查看IP节点
+
+![image-20250523153602805](./Trojan搭建服务器/image-20250523153602805.png)
+
+​	![image-20250523154005177](./Trojan搭建服务器/image-20250523154005177.png)
+
+![image-20250523154150516](./Trojan搭建服务器/image-20250523154150516.png)
