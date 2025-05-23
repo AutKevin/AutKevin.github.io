@@ -25,6 +25,10 @@ CND：Cloudflare
 
 ![image-20240203182346573](./Trojan搭建服务器/image-20240203182346573.png)
 
+如果是三级域名，则选择Type为A，Name为前缀(第三级)即可。
+
+![image-20250523113011846](./Trojan搭建服务器/image-20250523113011846.png)
+
 等待一段时间等到域名生效，Cloudflare变成为Active状态，且能ping通方可进行下一步。
 
 ![image-20240203182047797](./Trojan搭建服务器/image-20240203182047797.png)
