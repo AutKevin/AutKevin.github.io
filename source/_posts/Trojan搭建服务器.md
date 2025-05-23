@@ -170,6 +170,9 @@ systemctl disable trojan
 
 # 查看配置文件，重点看remote_addr、remote_port、password
 cat /usr/src/trojan-macos/trojan/config.json
+# 查看进程使用的哪个配置文件
+ps -ef|grep trojan
+cat /usr/src/trojan/server.conf
 ```
 
 ![image-20240203201825046](./Trojan搭建服务器/image-20240203201825046.png)
@@ -332,3 +335,11 @@ www.***.com
 ```
 
 ![image-20241217095603207](./Trojan搭建服务器/image-20241217095603207.png)
+
+### SSL handshake failed: wrong version number
+
+![image-20250523141713454](./Trojan搭建服务器/image-20250523141713454.png)
+
+一请求就显示SSL handshake failed: wrong version number，结果最后发现是客户端的协议忘记选了。。。分享下协议URL即可看到协议的内容是否正确。
+
+![image-20250523142947380](./Trojan搭建服务器/image-20250523142947380.png)
