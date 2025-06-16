@@ -177,6 +177,66 @@ cat /usr/src/trojan/server.conf
 
 ![image-20240203201825046](./Trojan搭建服务器/image-20240203201825046.png)
 
+#### 添加修改密码
+
+```bash
+# 查看进程使用的哪个配置文件
+ps -ef|grep trojan
+cat /usr/src/trojan/server.conf
+```
+
+![image-20250616134950461](./Trojan搭建服务器/image-20250616134950461-0052992.png)
+
+修改配置文件
+
+```json
+{
+    "run_type": "server",
+    "local_addr": "0.0.0.0",
+    "local_port": 443,
+    "remote_addr": "127.0.0.1",
+    "remote_port": 80,
+    "password": [
+        #密码之间用逗号分隔,一般装完默认会有一个
+        "Password1",
+        "Password2"
+    ],
+    "log_level": 1,
+    "ssl": {
+        "cert": "/usr/src/trojan-cert/fullchain.cer",
+        "key": "/usr/src/trojan-cert/private.key",
+        "key_password": "",
+        "cipher_tls13":"TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384",
+"prefer_server_cipher": true,
+        "alpn": [
+            "http/1.1"
+        ],
+        "reuse_session": true,
+        "session_ticket": false,
+        "session_timeout": 600,
+        "plain_http_response": "",
+        "curves": "",
+        "dhparam": ""
+    },
+    "tcp": {
+        "no_delay": true,
+        "keep_alive": true,
+        "fast_open": false,
+        "fast_open_qlen": 20
+    },
+    "mysql": {
+        "enabled": false,
+        "server_addr": "127.0.0.1",
+        "server_port": 3306,
+        "database": "trojan",
+        "username": "trojan",
+        "password": ""
+    }
+}
+```
+
+
+
 ### Trojan客户端
 
 安卓&windows： V2rayN客户端
@@ -194,6 +254,8 @@ openssl s_client -connect yourserver:port -showcerts
 ```
 
 ![image-20240528090230080](./Trojan搭建服务器/image-20240528090230080.png)
+
+### 
 
 ## 手动安装证书
 
